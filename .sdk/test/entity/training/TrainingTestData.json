@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "training": {
+      "TRAINING00": {
+        "cat_id": "CAT01",
+        "duration": "s47",
+        "id": "TRAINING00",
+        "note": "s49",
+        "success": true,
+        "timestamp": "s4b",
+        "type": "s4c"
+      },
+      "TRAINING01": {
+        "cat_id": "CAT01",
+        "duration": "s8d",
+        "id": "TRAINING01",
+        "note": "s8f",
+        "success": true,
+        "timestamp": "s91",
+        "type": "s92"
+      },
+      "TRAINING02": {
+        "cat_id": "CAT01",
+        "duration": "sd3",
+        "id": "TRAINING02",
+        "note": "sd5",
+        "success": true,
+        "timestamp": "sd7",
+        "type": "sd8"
+      }
+    }
+  },
+  "new": {
+    "training": {
+      "training_ref01": {
+        "cat_id": "CAT01",
+        "duration": "s119",
+        "note": "s11b",
+        "success": true,
+        "timestamp": "s11d",
+        "type": "s11e"
+      }
+    }
+  }
+}

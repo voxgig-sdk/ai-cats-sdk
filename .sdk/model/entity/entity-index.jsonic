@@ -1,0 +1,7 @@
+# Entity Models
+
+@"cat.jsonic"
+@"cat_image.jsonic"
+@"health.jsonic"
+@"interaction.jsonic"
+@"training.jsonic"

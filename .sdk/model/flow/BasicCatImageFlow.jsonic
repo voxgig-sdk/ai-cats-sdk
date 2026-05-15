@@ -1,0 +1,28 @@
+# BasicCatImageFlow
+
+main: kit: flow: BasicCatImageFlow:
+{
+  entity: "cat_image",
+  kind: "basic",
+  name: "BasicCatImageFlow",
+  step: [
+    {
+      input: {
+        ref: "cat_image_ref01",
+        srcdatavar: "cat_image_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-cat_image_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCatImageFlow"
+}

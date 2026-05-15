@@ -1,0 +1,639 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ai-cats API",
+    "description": "The ai-cats API provides access to various functionalities related to AI and cat management, offering features such as training, health monitoring, and interaction tracking. Users can utilize this API to integrate intelligent cat care solutions into their applications.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://ai-cats.net/api-doc"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://ai-cats.net/api",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/cats/random": {
+      "get": {
+        "summary": "Get random AI-generated cat image",
+        "description": "Returns a random AI-generated cat image",
+        "operationId": "getRandomCat",
+        "tags": [
+          "Cats"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with cat image",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatImage"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cats/{id}": {
+      "get": {
+        "summary": "Get specific cat by ID",
+        "description": "Returns a specific AI-generated cat image by its ID",
+        "operationId": "getCatById",
+        "tags": [
+          "Cats"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier of the cat",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with cat image",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatImage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cat not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cats/health": {
+      "get": {
+        "summary": "Get cat health data",
+        "description": "Returns health monitoring data for cats",
+        "operationId": "getCatHealth",
+        "tags": [
+          "Health"
+        ],
+        "parameters": [
+          {
+            "name": "catId",
+            "in": "query",
+            "required": false,
+            "description": "Optional cat ID to filter health data",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with health data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthData"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Record cat health data",
+        "description": "Records new health monitoring data for a cat",
+        "operationId": "recordCatHealth",
+        "tags": [
+          "Health"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HealthDataInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Health data successfully recorded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/training": {
+      "get": {
+        "summary": "Get training sessions",
+        "description": "Returns a list of cat training sessions",
+        "operationId": "getTrainingSessions",
+        "tags": [
+          "Training"
+        ],
+        "parameters": [
+          {
+            "name": "catId",
+            "in": "query",
+            "required": false,
+            "description": "Filter by cat ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Number of results to return",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with training sessions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TrainingSession"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create training session",
+        "description": "Creates a new training session for a cat",
+        "operationId": "createTrainingSession",
+        "tags": [
+          "Training"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrainingSessionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Training session successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrainingSession"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interactions": {
+      "get": {
+        "summary": "Get interaction tracking data",
+        "description": "Returns interaction tracking data for cats",
+        "operationId": "getInteractions",
+        "tags": [
+          "Interactions"
+        ],
+        "parameters": [
+          {
+            "name": "catId",
+            "in": "query",
+            "required": false,
+            "description": "Filter by cat ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": false,
+            "description": "Start date for filtering interactions",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": false,
+            "description": "End date for filtering interactions",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with interaction data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Interaction"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Record cat interaction",
+        "description": "Records a new interaction with a cat",
+        "operationId": "recordInteraction",
+        "tags": [
+          "Interactions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InteractionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Interaction successfully recorded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Interaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CatImage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the cat image"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL of the AI-generated cat image"
+          },
+          "width": {
+            "type": "integer",
+            "description": "Width of the image in pixels"
+          },
+          "height": {
+            "type": "integer",
+            "description": "Height of the image in pixels"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the image was generated"
+          }
+        }
+      },
+      "HealthData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the health record"
+          },
+          "catId": {
+            "type": "string",
+            "description": "ID of the cat"
+          },
+          "weight": {
+            "type": "number",
+            "format": "float",
+            "description": "Weight of the cat in kg"
+          },
+          "temperature": {
+            "type": "number",
+            "format": "float",
+            "description": "Body temperature in Celsius"
+          },
+          "heartRate": {
+            "type": "integer",
+            "description": "Heart rate in beats per minute"
+          },
+          "activityLevel": {
+            "type": "string",
+            "enum": [
+              "low",
+              "moderate",
+              "high"
+            ],
+            "description": "Activity level of the cat"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the health data was recorded"
+          }
+        }
+      },
+      "HealthDataInput": {
+        "type": "object",
+        "required": [
+          "catId",
+          "weight"
+        ],
+        "properties": {
+          "catId": {
+            "type": "string",
+            "description": "ID of the cat"
+          },
+          "weight": {
+            "type": "number",
+            "format": "float",
+            "description": "Weight of the cat in kg"
+          },
+          "temperature": {
+            "type": "number",
+            "format": "float",
+            "description": "Body temperature in Celsius"
+          },
+          "heartRate": {
+            "type": "integer",
+            "description": "Heart rate in beats per minute"
+          },
+          "activityLevel": {
+            "type": "string",
+            "enum": [
+              "low",
+              "moderate",
+              "high"
+            ],
+            "description": "Activity level of the cat"
+          }
+        }
+      },
+      "TrainingSession": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the training session"
+          },
+          "catId": {
+            "type": "string",
+            "description": "ID of the cat"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of training session"
+          },
+          "duration": {
+            "type": "integer",
+            "description": "Duration of the session in minutes"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "Whether the training was successful"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about the training session"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the training session occurred"
+          }
+        }
+      },
+      "TrainingSessionInput": {
+        "type": "object",
+        "required": [
+          "catId",
+          "type",
+          "duration"
+        ],
+        "properties": {
+          "catId": {
+            "type": "string",
+            "description": "ID of the cat"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of training session"
+          },
+          "duration": {
+            "type": "integer",
+            "description": "Duration of the session in minutes"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "Whether the training was successful"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about the training session"
+          }
+        }
+      },
+      "Interaction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the interaction"
+          },
+          "catId": {
+            "type": "string",
+            "description": "ID of the cat"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "play",
+              "feeding",
+              "grooming",
+              "medical"
+            ],
+            "description": "Type of interaction"
+          },
+          "duration": {
+            "type": "integer",
+            "description": "Duration of the interaction in minutes"
+          },
+          "quality": {
+            "type": "string",
+            "enum": [
+              "poor",
+              "fair",
+              "good",
+              "excellent"
+            ],
+            "description": "Quality rating of the interaction"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about the interaction"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the interaction occurred"
+          }
+        }
+      },
+      "InteractionInput": {
+        "type": "object",
+        "required": [
+          "catId",
+          "type"
+        ],
+        "properties": {
+          "catId": {
+            "type": "string",
+            "description": "ID of the cat"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "play",
+              "feeding",
+              "grooming",
+              "medical"
+            ],
+            "description": "Type of interaction"
+          },
+          "duration": {
+            "type": "integer",
+            "description": "Duration of the interaction in minutes"
+          },
+          "quality": {
+            "type": "string",
+            "enum": [
+              "poor",
+              "fair",
+              "good",
+              "excellent"
+            ],
+            "description": "Quality rating of the interaction"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about the interaction"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Cats",
+      "description": "Operations related to AI-generated cat images"
+    },
+    {
+      "name": "Health",
+      "description": "Health monitoring operations for cats"
+    },
+    {
+      "name": "Training",
+      "description": "Training session management operations"
+    },
+    {
+      "name": "Interactions",
+      "description": "Interaction tracking operations"
+    }
+  ]
+}

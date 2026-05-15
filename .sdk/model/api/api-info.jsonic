@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://ai-cats.net/api-doc"
+      }
+      description: "The ai-cats API provides access to various functionalities related to AI and cat management, offering features such as training, health monitoring, and interaction tracking. Users can utilize this API to integrate intelligent cat care solutions into their applications."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://ai-cats.net/api"
+        }
+      ]
+      title: "ai-cats API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

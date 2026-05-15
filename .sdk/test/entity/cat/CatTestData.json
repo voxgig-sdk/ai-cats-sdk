@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "cat": {
+      "CAT00": {
+        "created_at": "s32",
+        "height": "s33",
+        "id": "CAT00",
+        "url": "s35",
+        "width": "s36"
+      },
+      "CAT01": {
+        "created_at": "s64",
+        "height": "s65",
+        "id": "CAT01",
+        "url": "s67",
+        "width": "s68"
+      },
+      "CAT02": {
+        "created_at": "s96",
+        "height": "s97",
+        "id": "CAT02",
+        "url": "s99",
+        "width": "s9a"
+      }
+    }
+  },
+  "new": {
+    "cat": {
+      "cat_ref01": {
+        "created_at": "sc8",
+        "height": "sc9",
+        "url": "scb",
+        "width": "scc"
+      }
+    }
+  }
+}

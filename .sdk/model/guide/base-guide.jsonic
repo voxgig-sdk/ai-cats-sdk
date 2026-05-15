@@ -1,0 +1,41 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 5
+  metrics: count: path: 5
+  metrics: count: method: 8
+
+  entity: cat: {
+    path: "/cats/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: cat_image: {
+    path: "/cats/random": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: health: {
+    path: "/cats/health": {
+      op: create: method: *POST
+      op: load: method: *GET
+    }
+  }
+
+  entity: interaction: {
+    path: "/interactions": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+  }
+
+  entity: training: {
+    path: "/training": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+  }
+
+}

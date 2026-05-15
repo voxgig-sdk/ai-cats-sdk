@@ -1,0 +1,37 @@
+<?php
+declare(strict_types=1);
+
+// AiCats SDK base feature
+
+class AiCatsBaseFeature
+{
+    public string $version;
+    public string $name;
+    public bool $active;
+
+    public function __construct()
+    {
+        $this->version = '0.0.1';
+        $this->name = 'base';
+        $this->active = true;
+    }
+
+    public function get_version(): string { return $this->version; }
+    public function get_name(): string { return $this->name; }
+    public function get_active(): bool { return $this->active; }
+
+    public function init(AiCatsContext $ctx, array $options): void {}
+    public function PostConstruct(AiCatsContext $ctx): void {}
+    public function PostConstructEntity(AiCatsContext $ctx): void {}
+    public function SetData(AiCatsContext $ctx): void {}
+    public function GetData(AiCatsContext $ctx): void {}
+    public function GetMatch(AiCatsContext $ctx): void {}
+    public function SetMatch(AiCatsContext $ctx): void {}
+    public function PrePoint(AiCatsContext $ctx): void {}
+    public function PreSpec(AiCatsContext $ctx): void {}
+    public function PreRequest(AiCatsContext $ctx): void {}
+    public function PreResponse(AiCatsContext $ctx): void {}
+    public function PreResult(AiCatsContext $ctx): void {}
+    public function PreDone(AiCatsContext $ctx): void {}
+    public function PreUnexpected(AiCatsContext $ctx): void {}
+}

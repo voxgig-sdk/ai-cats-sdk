@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "health": {
+      "HEALTH00": {
+        "activity_level": "s46",
+        "cat_id": "CAT01",
+        "heart_rate": "s48",
+        "id": "HEALTH00",
+        "temperature": 74,
+        "timestamp": "s4b",
+        "weight": 76
+      },
+      "HEALTH01": {
+        "activity_level": "s8c",
+        "cat_id": "CAT01",
+        "heart_rate": "s8e",
+        "id": "HEALTH01",
+        "temperature": 144,
+        "timestamp": "s91",
+        "weight": 146
+      },
+      "HEALTH02": {
+        "activity_level": "sd2",
+        "cat_id": "CAT01",
+        "heart_rate": "sd4",
+        "id": "HEALTH02",
+        "temperature": 214,
+        "timestamp": "sd7",
+        "weight": 216
+      }
+    }
+  },
+  "new": {
+    "health": {
+      "health_ref01": {
+        "activity_level": "s118",
+        "cat_id": "CAT01",
+        "heart_rate": "s11a",
+        "temperature": 284,
+        "timestamp": "s11d",
+        "weight": 286
+      }
+    }
+  }
+}
