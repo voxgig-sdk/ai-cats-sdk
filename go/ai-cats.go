@@ -1,10 +1,10 @@
 package voxgigaicatssdk
 
 import (
-	"github.com/voxgig-sdk/ai-cats-sdk/core"
-	"github.com/voxgig-sdk/ai-cats-sdk/entity"
-	"github.com/voxgig-sdk/ai-cats-sdk/feature"
-	_ "github.com/voxgig-sdk/ai-cats-sdk/utility"
+	"github.com/voxgig-sdk/ai-cats-sdk/go/core"
+	"github.com/voxgig-sdk/ai-cats-sdk/go/entity"
+	"github.com/voxgig-sdk/ai-cats-sdk/go/feature"
+	_ "github.com/voxgig-sdk/ai-cats-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

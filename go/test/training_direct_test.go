@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/ai-cats-sdk"
-	"github.com/voxgig-sdk/ai-cats-sdk/core"
+	sdk "github.com/voxgig-sdk/ai-cats-sdk/go"
+	"github.com/voxgig-sdk/ai-cats-sdk/go/core"
 )
 
 func TestTrainingDirect(t *testing.T) {

@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/ai-cats-sdk"
-	"github.com/voxgig-sdk/ai-cats-sdk/core"
+	sdk "github.com/voxgig-sdk/ai-cats-sdk/go"
+	"github.com/voxgig-sdk/ai-cats-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/ai-cats-sdk/go/utility/struct"
 )
 
 func TestCatEntity(t *testing.T) {

@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/ai-cats-sdk/core"
+	"github.com/voxgig-sdk/ai-cats-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/ai-cats-sdk/go/utility/struct"
 )
 
 type CatImageEntity struct {
