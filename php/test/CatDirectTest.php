@@ -77,14 +77,12 @@ function cat_direct_setup($mockres)
     $env = Runner::env_override([
         "AICATS_TEST_CAT_ENTID" => [],
         "AICATS_TEST_LIVE" => "FALSE",
-        "AICATS_APIKEY" => "NONE",
     ]);
 
     $live = $env["AICATS_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["AICATS_APIKEY"],
         ];
         $client = new AiCatsSDK($merged_opts);
         return [

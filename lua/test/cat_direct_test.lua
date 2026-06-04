@@ -72,14 +72,12 @@ function cat_direct_setup(mockres)
   local env = runner.env_override({
     ["AICATS_TEST_CAT_ENTID"] = {},
     ["AICATS_TEST_LIVE"] = "FALSE",
-    ["AICATS_APIKEY"] = "NONE",
   })
 
   local live = env["AICATS_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["AICATS_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

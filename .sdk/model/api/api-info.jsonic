@@ -16,8 +16,29 @@ main: {
       ]
       title: "ai-cats API"
       version: "1.0.0"
+      tagline: "Fetch, search, and find similar AI-generated cat images via a public HTTP API"
+      homepage: "https://ai-cats.net/"
+      docs_url: "https://ai-cats.net/api"
+      about_md: `[ai-cats](https://ai-cats.net/) is a free service that publishes AI-generated cat images (and videos) and exposes them through a small HTTP API at \`https://ai-cats.net/api\`. The community catalogue entry is on [Free Public APIs](https://freepublicapis.com/ai-cats-api).
+
+What you can do with the API:
+
+- Fetch a random cat image
+- Look up a specific cat image by ID
+- Find visually similar cat images
+- Search the image collection with query parameters and get search completion suggestions
+- List available themes and count images per theme
+- Retrieve metadata for a given cat image
+
+The API appears to be public and unauthenticated. CORS is enabled on some endpoints (notably theme listing and counts) and not on others. No license or rate-limit policy is published; observed response times are well under a second.`
+      entity_desc: {
+        cat: "A single cat record identifiable by ID, used for lookup and as the unit of search results."
+        cat_image: "An AI-generated cat image with metadata, retrievable randomly, by ID, by similarity, or via search."
+        health: "Service-health information exposed by the API (the public catalogue tracks reliability and response times)."
+        interaction: "Tracking of interactions with cat images, such as similarity matching and search completion suggestions."
+        training: "Training-related grouping for the AI side of the service; no specific public endpoints are documented."
+      }
+      auth: false
     }
   }
-}
-
 }

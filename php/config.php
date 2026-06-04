@@ -20,9 +20,6 @@ class AiCatsConfig
             ],
             "options" => [
                 "base" => "https://ai-cats.net/api",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
