@@ -1,6 +1,11 @@
 # AiCats TypeScript SDK
 
-The TypeScript SDK for the AiCats API. Provides a type-safe, entity-oriented interface with full async/await support.
+
+
+The TypeScript SDK for the AiCats API — a type-safe, entity-oriented client with full async/await support.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -17,7 +22,9 @@ loading a specific record.
 ```ts
 import { AiCatsSDK } from 'ai-cats'
 
-const client = new AiCatsSDK({})
+const client = new AiCatsSDK({
+  apikey: process.env.AI-CATS_APIKEY,
+})
 ```
 
 ### 3. Load a cat
@@ -80,7 +87,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new AiCatsSDK()
+const client = new AiCatsSDK({ apikey: '...' })
 const testClient = client.tester()
 ```
 
@@ -116,6 +123,7 @@ const logger = {
 }
 
 const client = new AiCatsSDK({
+  apikey: '...',
   extend: [logger],
 })
 ```
@@ -126,6 +134,7 @@ Create a `.env.local` file at the project root:
 
 ```
 AI-CATS_TEST_LIVE=TRUE
+AI-CATS_APIKEY=<your-key>
 ```
 
 Then run:
@@ -143,6 +152,7 @@ cd ts && npm test
 
 ```ts
 new AiCatsSDK(options?: {
+  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -153,6 +163,7 @@ new AiCatsSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

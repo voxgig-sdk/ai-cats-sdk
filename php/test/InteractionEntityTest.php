@@ -93,6 +93,7 @@ function interaction_basic_setup($extra)
         "AICATS_TEST_INTERACTION_ENTID" => $idmap,
         "AICATS_TEST_LIVE" => "FALSE",
         "AICATS_TEST_EXPLAIN" => "FALSE",
+        "AICATS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -104,6 +105,7 @@ function interaction_basic_setup($extra)
     if ($env["AICATS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
+                "apikey" => $env["AICATS_APIKEY"],
             ],
             $extra ?? [],
         ]);

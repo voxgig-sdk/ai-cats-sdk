@@ -99,12 +99,14 @@ func healthDirectSetup(mockres any) *healthDirectSetupResult {
 	env := envOverride(map[string]any{
 		"AICATS_TEST_HEALTH_ENTID": map[string]any{},
 		"AICATS_TEST_LIVE":    "FALSE",
+		"AICATS_APIKEY":       "NONE",
 	})
 
 	live := env["AICATS_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["AICATS_APIKEY"],
 		}
 		client := sdk.NewAiCatsSDK(mergedOpts)
 

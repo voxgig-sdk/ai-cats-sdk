@@ -120,6 +120,7 @@ function basicSetup(extra?: any) {
     'AI_CATS_TEST_HEALTH_ENTID': idmap,
     'AI_CATS_TEST_LIVE': 'FALSE',
     'AI_CATS_TEST_EXPLAIN': 'FALSE',
+    'AI_CATS_APIKEY': 'NONE',
   })
 
   idmap = env['AI_CATS_TEST_HEALTH_ENTID']
@@ -129,6 +130,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new AiCatsSDK(merge([
       {
+        apikey: env.AI_CATS_APIKEY,
       },
       extra
     ]))

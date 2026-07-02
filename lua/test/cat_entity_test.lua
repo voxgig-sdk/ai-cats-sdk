@@ -95,6 +95,7 @@ function cat_basic_setup(extra)
     ["AICATS_TEST_CAT_ENTID"] = idmap,
     ["AICATS_TEST_LIVE"] = "FALSE",
     ["AICATS_TEST_EXPLAIN"] = "FALSE",
+    ["AICATS_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -106,6 +107,7 @@ function cat_basic_setup(extra)
   if env["AICATS_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["AICATS_APIKEY"],
       },
       extra or {},
     })

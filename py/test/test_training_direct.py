@@ -61,12 +61,14 @@ def _training_direct_setup(mockres):
     env = runner.env_override({
         "AICATS_TEST_TRAINING_ENTID": {},
         "AICATS_TEST_LIVE": "FALSE",
+        "AICATS_APIKEY": "NONE",
     })
 
     live = env.get("AICATS_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("AICATS_APIKEY"),
         }
         client = AiCatsSDK(merged_opts)
         return {

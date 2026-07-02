@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -120,7 +120,7 @@ local cat = client:Cat(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Cat(nil):load({ id = "cat_id" }, nil)
+local result, err = client:Cat():load({ id = "cat_id" })
 ```
 
 ### Common Methods
@@ -176,7 +176,7 @@ local cat_image = client:CatImage(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:CatImage(nil):load({ id = "cat_image_id" }, nil)
+local result, err = client:CatImage():load({ id = "cat_image_id" })
 ```
 
 ### Common Methods
@@ -246,8 +246,8 @@ local health = client:Health(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Health(nil):create({
-}, nil)
+local result, err = client:Health():create({
+})
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -255,7 +255,7 @@ local result, err = client:Health(nil):create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Health(nil):load({ id = "health_id" }, nil)
+local result, err = client:Health():load({ id = "health_id" })
 ```
 
 ### Common Methods
@@ -325,10 +325,10 @@ local interaction = client:Interaction(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Interaction(nil):create({
+local result, err = client:Interaction():create({
   cat_id = --[[ `$STRING` ]],
   type = --[[ `$STRING` ]],
-}, nil)
+})
 ```
 
 #### `list(reqmatch, ctrl) -> any, err`
@@ -336,7 +336,7 @@ local result, err = client:Interaction(nil):create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Interaction(nil):list(nil, nil)
+local results, err = client:Interaction():list()
 ```
 
 ### Common Methods
@@ -406,11 +406,11 @@ local training = client:Training(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Training(nil):create({
+local result, err = client:Training():create({
   cat_id = --[[ `$STRING` ]],
   duration = --[[ `$INTEGER` ]],
   type = --[[ `$STRING` ]],
-}, nil)
+})
 ```
 
 #### `list(reqmatch, ctrl) -> any, err`
@@ -418,7 +418,7 @@ local result, err = client:Training(nil):create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Training(nil):list(nil, nil)
+local results, err = client:Training():list()
 ```
 
 ### Common Methods

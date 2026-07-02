@@ -20,6 +20,9 @@ class AiCatsConfig
             ],
             "options" => [
                 "base" => "https://ai-cats.net/api",
+                "auth" => [
+                    "prefix" => "Bearer",
+                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -35,56 +38,58 @@ class AiCatsConfig
         'cat' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'created_at',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'height',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 1,
             ],
             [
+              'active' => true,
               'name' => 'id',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 2,
             ],
             [
+              'active' => true,
               'name' => 'url',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 3,
             ],
             [
+              'active' => true,
               'name' => 'width',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 4,
             ],
           ],
           'name' => 'cat',
           'op' => [
             'load' => [
+              'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
+                  'active' => true,
                   'args' => [
                     'params' => [
                       [
+                        'active' => true,
                         'kind' => 'param',
                         'name' => 'id',
                         'orig' => 'id',
                         'reqd' => true,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                     ],
                   ],
@@ -103,11 +108,9 @@ class AiCatsConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'load',
             ],
           ],
@@ -118,64 +121,64 @@ class AiCatsConfig
         'cat_image' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'created_at',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'height',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 1,
             ],
             [
+              'active' => true,
               'name' => 'id',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 2,
             ],
             [
+              'active' => true,
               'name' => 'url',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 3,
             ],
             [
+              'active' => true,
               'name' => 'width',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 4,
             ],
           ],
           'name' => 'cat_image',
           'op' => [
             'load' => [
+              'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'GET',
                   'orig' => '/cats/random',
                   'parts' => [
                     'cats',
                     'random',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'load',
             ],
           ],
@@ -186,13 +189,14 @@ class AiCatsConfig
         'health' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'activity_level',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'cat_id',
               'op' => [
                 'create' => [
@@ -202,38 +206,38 @@ class AiCatsConfig
               ],
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 1,
             ],
             [
+              'active' => true,
               'name' => 'heart_rate',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 2,
             ],
             [
+              'active' => true,
               'name' => 'id',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 3,
             ],
             [
+              'active' => true,
               'name' => 'temperature',
               'req' => false,
               'type' => '`$NUMBER`',
-              'active' => true,
               'index$' => 4,
             ],
             [
+              'active' => true,
               'name' => 'timestamp',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 5,
             ],
             [
+              'active' => true,
               'name' => 'weight',
               'op' => [
                 'create' => [
@@ -243,48 +247,49 @@ class AiCatsConfig
               ],
               'req' => false,
               'type' => '`$NUMBER`',
-              'active' => true,
               'index$' => 6,
             ],
           ],
           'name' => 'health',
           'op' => [
             'create' => [
+              'input' => 'data',
               'name' => 'create',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'POST',
                   'orig' => '/cats/health',
                   'parts' => [
                     'cats',
                     'health',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'create',
             ],
             'load' => [
+              'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
+                  'active' => true,
                   'args' => [
                     'query' => [
                       [
+                        'active' => true,
                         'kind' => 'query',
                         'name' => 'cat_id',
                         'orig' => 'cat_id',
                         'reqd' => false,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                     ],
                   ],
@@ -303,11 +308,9 @@ class AiCatsConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'load',
             ],
           ],
@@ -318,6 +321,7 @@ class AiCatsConfig
         'interaction' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'cat_id',
               'op' => [
                 'list' => [
@@ -327,45 +331,45 @@ class AiCatsConfig
               ],
               'req' => true,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'duration',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 1,
             ],
             [
+              'active' => true,
               'name' => 'id',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 2,
             ],
             [
+              'active' => true,
               'name' => 'note',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 3,
             ],
             [
+              'active' => true,
               'name' => 'quality',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 4,
             ],
             [
+              'active' => true,
               'name' => 'timestamp',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 5,
             ],
             [
+              'active' => true,
               'name' => 'type',
               'op' => [
                 'list' => [
@@ -375,63 +379,64 @@ class AiCatsConfig
               ],
               'req' => true,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 6,
             ],
           ],
           'name' => 'interaction',
           'op' => [
             'create' => [
+              'input' => 'data',
               'name' => 'create',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'POST',
                   'orig' => '/interactions',
                   'parts' => [
                     'interactions',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'create',
             ],
             'list' => [
+              'input' => 'data',
               'name' => 'list',
               'points' => [
                 [
+                  'active' => true,
                   'args' => [
                     'query' => [
                       [
+                        'active' => true,
                         'kind' => 'query',
                         'name' => 'cat_id',
                         'orig' => 'cat_id',
                         'reqd' => false,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                       [
+                        'active' => true,
                         'kind' => 'query',
                         'name' => 'end_date',
                         'orig' => 'end_date',
                         'reqd' => false,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                       [
+                        'active' => true,
                         'kind' => 'query',
                         'name' => 'start_date',
                         'orig' => 'start_date',
                         'reqd' => false,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                     ],
                   ],
@@ -451,11 +456,9 @@ class AiCatsConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'list',
             ],
           ],
@@ -466,6 +469,7 @@ class AiCatsConfig
         'training' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'cat_id',
               'op' => [
                 'list' => [
@@ -475,10 +479,10 @@ class AiCatsConfig
               ],
               'req' => true,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'duration',
               'op' => [
                 'list' => [
@@ -488,38 +492,38 @@ class AiCatsConfig
               ],
               'req' => true,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 1,
             ],
             [
+              'active' => true,
               'name' => 'id',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 2,
             ],
             [
+              'active' => true,
               'name' => 'note',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 3,
             ],
             [
+              'active' => true,
               'name' => 'success',
               'req' => false,
               'type' => '`$BOOLEAN`',
-              'active' => true,
               'index$' => 4,
             ],
             [
+              'active' => true,
               'name' => 'timestamp',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 5,
             ],
             [
+              'active' => true,
               'name' => 'type',
               'op' => [
                 'list' => [
@@ -529,56 +533,57 @@ class AiCatsConfig
               ],
               'req' => true,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 6,
             ],
           ],
           'name' => 'training',
           'op' => [
             'create' => [
+              'input' => 'data',
               'name' => 'create',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'POST',
                   'orig' => '/training',
                   'parts' => [
                     'training',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'create',
             ],
             'list' => [
+              'input' => 'data',
               'name' => 'list',
               'points' => [
                 [
+                  'active' => true,
                   'args' => [
                     'query' => [
                       [
+                        'active' => true,
                         'kind' => 'query',
                         'name' => 'cat_id',
                         'orig' => 'cat_id',
                         'reqd' => false,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                       [
+                        'active' => true,
                         'example' => 10,
                         'kind' => 'query',
                         'name' => 'limit',
                         'orig' => 'limit',
                         'reqd' => false,
                         'type' => '`$INTEGER`',
-                        'active' => true,
                       ],
                     ],
                   ],
@@ -597,11 +602,9 @@ class AiCatsConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'list',
             ],
           ],

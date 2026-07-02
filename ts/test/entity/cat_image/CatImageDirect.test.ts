@@ -74,12 +74,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'AICATS_TEST_CAT_IMAGE_ENTID': {},
     'AICATS_TEST_LIVE': 'FALSE',
+    'AICATS_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.AICATS_TEST_LIVE
 
   if (live) {
     const client = new AiCatsSDK({
+      apikey: env.AICATS_APIKEY,
     })
 
     let idmap: any = env['AICATS_TEST_CAT_IMAGE_ENTID']

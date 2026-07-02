@@ -1,23 +1,8 @@
 # AiCats SDK
 
-Fetch, search, and find similar AI-generated cat images via a public HTTP API
+ai-cats API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About ai-cats API
-
-[ai-cats](https://ai-cats.net/) is a free service that publishes AI-generated cat images (and videos) and exposes them through a small HTTP API at `https://ai-cats.net/api`. The community catalogue entry is on [Free Public APIs](https://freepublicapis.com/ai-cats-api).
-
-What you can do with the API:
-
-- Fetch a random cat image
-- Look up a specific cat image by ID
-- Find visually similar cat images
-- Search the image collection with query parameters and get search completion suggestions
-- List available themes and count images per theme
-- Retrieve metadata for a given cat image
-
-The API appears to be public and unauthenticated. CORS is enabled on some endpoints (notably theme listing and counts) and not on others. No license or rate-limit policy is published; observed response times are well under a second.
 
 ## Try it
 
@@ -51,27 +36,31 @@ gem install ai-cats-sdk
 luarocks install ai-cats-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { AiCatsSDK } from 'ai-cats'
 
-const client = new AiCatsSDK({})
+const client = new AiCatsSDK({
+  apikey: process.env.AI-CATS_APIKEY,
+})
 
+// Load cat data
+const cat = await client.Cat().load({})
+console.log(cat.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -101,11 +90,11 @@ The API exposes 5 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Cat** | A single cat record identifiable by ID, used for lookup and as the unit of search results. | `/cats/{id}` |
-| **CatImage** | An AI-generated cat image with metadata, retrievable randomly, by ID, by similarity, or via search. | `/cats/random` |
-| **Health** | Service-health information exposed by the API (the public catalogue tracks reliability and response times). | `/cats/health` |
-| **Interaction** | Tracking of interactions with cat images, such as similarity matching and search completion suggestions. | `/interactions` |
-| **Training** | Training-related grouping for the AI side of the service; no specific public endpoints are documented. | `/training` |
+| **Cat** |  | `/cats/{id}` |
+| **CatImage** |  | `/cats/random` |
+| **Health** |  | `/cats/health` |
+| **Interaction** |  | `/interactions` |
+| **Training** |  | `/training` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -115,15 +104,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from aicats_sdk import AiCatsSDK
 
-client = AiCatsSDK({})
+client = AiCatsSDK({
+    "apikey": os.environ.get("AI-CATS_APIKEY"),
+})
 
 
 # Load a specific cat
-cat, err = client.Cat(None).load(
-    {"id": "example_id"}, None
-)
+cat, err = client.Cat().load({"id": "example_id"})
+print(cat)
 ```
 
 ### PHP
@@ -132,13 +123,14 @@ cat, err = client.Cat(None).load(
 <?php
 require_once 'aicats_sdk.php';
 
-$client = new AiCatsSDK([]);
+$client = new AiCatsSDK([
+    "apikey" => getenv("AI-CATS_APIKEY"),
+]);
 
 
 // Load a specific cat
-[$cat, $err] = $client->Cat(null)->load(
-    ["id" => "example_id"], null
-);
+[$cat, $err] = $client->Cat()->load(["id" => "example_id"]);
+print_r($cat);
 ```
 
 ### Golang
@@ -146,8 +138,13 @@ $client = new AiCatsSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/ai-cats-sdk/go"
 
-client := sdk.NewAiCatsSDK(map[string]any{})
+client := sdk.NewAiCatsSDK(map[string]any{
+    "apikey": os.Getenv("AI-CATS_APIKEY"),
+})
 
+// Load cat data
+cat, err := client.Cat(nil).Load(map[string]any{}, nil)
+fmt.Println(cat)
 ```
 
 ### Ruby
@@ -155,13 +152,14 @@ client := sdk.NewAiCatsSDK(map[string]any{})
 ```ruby
 require_relative "AiCats_sdk"
 
-client = AiCatsSDK.new({})
+client = AiCatsSDK.new({
+  "apikey" => ENV["AI-CATS_APIKEY"],
+})
 
 
 # Load a specific cat
-cat, err = client.Cat(nil).load(
-  { "id" => "example_id" }, nil
-)
+cat, err = client.Cat().load({ "id" => "example_id" })
+puts cat
 ```
 
 ### Lua
@@ -169,13 +167,14 @@ cat, err = client.Cat(nil).load(
 ```lua
 local sdk = require("ai-cats_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("AI-CATS_APIKEY"),
+})
 
 
 -- Load a specific cat
-local cat, err = client:Cat(nil):load(
-  { id = "example_id" }, nil
-)
+local cat, err = client:Cat():load({ id = "example_id" })
+print(cat)
 ```
 
 ## Unit testing in offline mode
@@ -194,25 +193,21 @@ const result = await client.Cat().load({ id: 'test01' })
 ### Python
 
 ```python
-client = AiCatsSDK.test(None, None)
-result, err = client.Cat(None).load(
-    {"id": "test01"}, None
-)
+client = AiCatsSDK.test()
+result, err = client.Cat().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = AiCatsSDK::test(null, null);
-[$result, $err] = $client->Cat(null)->load(
-    ["id" => "test01"], null
-);
+$client = AiCatsSDK::test();
+[$result, $err] = $client->Cat()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Cat(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -221,19 +216,15 @@ result, err := client.Cat(nil).Load(
 ### Ruby
 
 ```ruby
-client = AiCatsSDK.test(nil, nil)
-result, err = client.Cat(nil).load(
-  { "id" => "test01" }, nil
-)
+client = AiCatsSDK.test
+result, err = client.Cat().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Cat(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Cat():load({ id = "test01" })
 ```
 
 ## How it works
@@ -337,11 +328,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the ai-cats API
-
-- Upstream: [https://ai-cats.net/](https://ai-cats.net/)
-- API docs: [https://ai-cats.net/api](https://ai-cats.net/api)
 
 ---
 
