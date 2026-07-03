@@ -1,8 +1,17 @@
 {
   "name": "voxgig-sdk/ai-cats",
-  "description": "AiCats SDK for PHP",
+  "description": "Unofficial generated PHP SDK for the ai-cats public API. Not affiliated with or endorsed by the upstream API provider.",
   "type": "library",
+  "keywords": ["voxgig", "sdk", "generated-sdk", "openapi", "api-client", "ai-cats"],
+  "homepage": "https://github.com/voxgig-sdk/ai-cats-sdk",
   "license": "MIT",
+  "authors": [
+    { "name": "Voxgig", "homepage": "https://voxgig.com" }
+  ],
+  "support": {
+    "issues": "https://github.com/voxgig-sdk/ai-cats-sdk/issues",
+    "source": "https://github.com/voxgig-sdk/ai-cats-sdk"
+  },
   "minimum-stability": "stable",
   "require": {
     "php": ">=8.2"

@@ -10,13 +10,13 @@ The Ruby SDK for the AiCats API — an entity-oriented client using idiomatic Ru
 
 ## Install
 ```bash
-gem install ai-cats-sdk
+gem install voxgig-sdk-ai-cats
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "ai-cats-sdk"
+gem "voxgig-sdk-ai-cats"
 ```
 
 Then run:

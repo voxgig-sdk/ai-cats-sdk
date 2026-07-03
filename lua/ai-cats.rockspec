@@ -8,12 +8,14 @@ source = {
   dir = "ai-cats-sdk/lua"
 }
 description = {
-  summary = "AiCats SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the ai-cats public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/ai-cats-sdk",
+  issues_url = "https://github.com/voxgig-sdk/ai-cats-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "ai-cats" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {

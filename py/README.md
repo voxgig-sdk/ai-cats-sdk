@@ -10,7 +10,7 @@ The Python SDK for the AiCats API — an entity-oriented client following Python
 
 ## Install
 ```bash
-pip install ai-cats-sdk
+pip install voxgig-sdk-ai-cats
 ```
 
 Or install from source:

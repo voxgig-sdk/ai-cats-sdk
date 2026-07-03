@@ -10,7 +10,7 @@ The Lua SDK for the AiCats API — an entity-oriented client using Lua conventio
 
 ## Install
 ```bash
-luarocks install ai-cats-sdk
+luarocks install voxgig-sdk-ai-cats
 ```
 
 If the module is not yet published, add the source directory to

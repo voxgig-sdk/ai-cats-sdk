@@ -10,7 +10,7 @@ The PHP SDK for the AiCats API — an entity-oriented client using PHP conventio
 
 ## Install
 ```bash
-composer require voxgig/ai-cats-sdk
+composer require voxgig-sdk/ai-cats
 ```
 
 

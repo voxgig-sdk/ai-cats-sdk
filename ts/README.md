@@ -10,7 +10,7 @@ The TypeScript SDK for the AiCats API — a type-safe, entity-oriented client wi
 
 ## Install
 ```bash
-npm install ai-cats
+npm install @voxgig-sdk/ai-cats
 ```
 ## Tutorial: your first API call
 
