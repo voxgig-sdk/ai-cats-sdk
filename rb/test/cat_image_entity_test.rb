@@ -44,8 +44,7 @@ class CatImageEntityTest < Minitest::Test
     cat_image_ref01_match_dt0 = {
       "id" => cat_image_ref01_data["id"],
     }
-    cat_image_ref01_data_dt0_loaded, err = cat_image_ref01_ent.load(cat_image_ref01_match_dt0, nil)
-    assert_nil err
+    cat_image_ref01_data_dt0_loaded = cat_image_ref01_ent.load(cat_image_ref01_match_dt0, nil)
     cat_image_ref01_data_dt0_load_result = Helpers.to_map(cat_image_ref01_data_dt0_loaded)
     assert !cat_image_ref01_data_dt0_load_result.nil?
     assert_equal cat_image_ref01_data_dt0_load_result["id"], cat_image_ref01_data["id"]
@@ -86,7 +85,6 @@ def cat_image_basic_setup(extra)
     "AICATS_TEST_CAT_IMAGE_ENTID" => idmap,
     "AICATS_TEST_LIVE" => "FALSE",
     "AICATS_TEST_EXPLAIN" => "FALSE",
-    "AICATS_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -98,7 +96,6 @@ def cat_image_basic_setup(extra)
   if env["AICATS_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["AICATS_APIKEY"],
       },
       extra || {},
     ])

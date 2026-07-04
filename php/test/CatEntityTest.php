@@ -51,8 +51,7 @@ class CatEntityTest extends TestCase
         $cat_ref01_match_dt0 = [
             "id" => $cat_ref01_data["id"],
         ];
-        [$cat_ref01_data_dt0_loaded, $err] = $cat_ref01_ent->load($cat_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $cat_ref01_data_dt0_loaded = $cat_ref01_ent->load($cat_ref01_match_dt0, null);
         $cat_ref01_data_dt0_load_result = Helpers::to_map($cat_ref01_data_dt0_loaded);
         $this->assertNotNull($cat_ref01_data_dt0_load_result);
         $this->assertEquals($cat_ref01_data_dt0_load_result["id"], $cat_ref01_data["id"]);
@@ -89,7 +88,6 @@ function cat_basic_setup($extra)
         "AICATS_TEST_CAT_ENTID" => $idmap,
         "AICATS_TEST_LIVE" => "FALSE",
         "AICATS_TEST_EXPLAIN" => "FALSE",
-        "AICATS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -101,7 +99,6 @@ function cat_basic_setup($extra)
     if ($env["AICATS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["AICATS_APIKEY"],
             ],
             $extra ?? [],
         ]);

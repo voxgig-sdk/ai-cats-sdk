@@ -6,6 +6,8 @@ import { HealthEntity } from './entity/HealthEntity'
 import { InteractionEntity } from './entity/InteractionEntity'
 import { TrainingEntity } from './entity/TrainingEntity'
 
+export type * from './AiCatsTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -206,30 +208,70 @@ class AiCatsSDK {
 
 
 
+  _cat?: CatEntity
+
+  // Idiomatic facade: `client.cat.list()` / `client.cat.load({ id })`.
+  get cat(): CatEntity {
+    return (this._cat ??= new CatEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.cat` instead. */
   Cat(data?: any) {
     const self = this
     return new CatEntity(self,data)
   }
 
 
+  _cat_image?: CatImageEntity
+
+  // Idiomatic facade: `client.cat_image.list()` / `client.cat_image.load({ id })`.
+  get cat_image(): CatImageEntity {
+    return (this._cat_image ??= new CatImageEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.cat_image` instead. */
   CatImage(data?: any) {
     const self = this
     return new CatImageEntity(self,data)
   }
 
 
+  _health?: HealthEntity
+
+  // Idiomatic facade: `client.health.list()` / `client.health.load({ id })`.
+  get health(): HealthEntity {
+    return (this._health ??= new HealthEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.health` instead. */
   Health(data?: any) {
     const self = this
     return new HealthEntity(self,data)
   }
 
 
+  _interaction?: InteractionEntity
+
+  // Idiomatic facade: `client.interaction.list()` / `client.interaction.load({ id })`.
+  get interaction(): InteractionEntity {
+    return (this._interaction ??= new InteractionEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.interaction` instead. */
   Interaction(data?: any) {
     const self = this
     return new InteractionEntity(self,data)
   }
 
 
+  _training?: TrainingEntity
+
+  // Idiomatic facade: `client.training.list()` / `client.training.load({ id })`.
+  get training(): TrainingEntity {
+    return (this._training ??= new TrainingEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.training` instead. */
   Training(data?: any) {
     const self = this
     return new TrainingEntity(self,data)

@@ -245,26 +245,41 @@ func (sdk *AiCatsSDK) Direct(fetchargs map[string]any) (map[string]any, error) {
 }
 
 
+// Cat returns a Cat entity bound to this client.
+// Idiomatic usage: client.Cat(nil).List(nil, nil) or
+// client.Cat(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AiCatsSDK) Cat(data map[string]any) AiCatsEntity {
 	return NewCatEntityFunc(sdk, data)
 }
 
 
+// CatImage returns a CatImage entity bound to this client.
+// Idiomatic usage: client.CatImage(nil).List(nil, nil) or
+// client.CatImage(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AiCatsSDK) CatImage(data map[string]any) AiCatsEntity {
 	return NewCatImageEntityFunc(sdk, data)
 }
 
 
+// Health returns a Health entity bound to this client.
+// Idiomatic usage: client.Health(nil).List(nil, nil) or
+// client.Health(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AiCatsSDK) Health(data map[string]any) AiCatsEntity {
 	return NewHealthEntityFunc(sdk, data)
 }
 
 
+// Interaction returns a Interaction entity bound to this client.
+// Idiomatic usage: client.Interaction(nil).List(nil, nil) or
+// client.Interaction(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AiCatsSDK) Interaction(data map[string]any) AiCatsEntity {
 	return NewInteractionEntityFunc(sdk, data)
 }
 
 
+// Training returns a Training entity bound to this client.
+// Idiomatic usage: client.Training(nil).List(nil, nil) or
+// client.Training(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AiCatsSDK) Training(data map[string]any) AiCatsEntity {
 	return NewTrainingEntityFunc(sdk, data)
 }

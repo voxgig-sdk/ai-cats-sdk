@@ -44,17 +44,14 @@ class TestTrainingEntity:
         training_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.training"), "training_ref01"))
 
-        training_ref01_data_result, err = training_ref01_ent.create(training_ref01_data, None)
-        assert err is None
-        training_ref01_data = helpers.to_map(training_ref01_data_result)
+        training_ref01_data = helpers.to_map(training_ref01_ent.create(training_ref01_data, None))
         assert training_ref01_data is not None
         assert training_ref01_data["id"] is not None
 
         # LIST
         training_ref01_match = {}
 
-        training_ref01_list_result, err = training_ref01_ent.list(training_ref01_match, None)
-        assert err is None
+        training_ref01_list_result = training_ref01_ent.list(training_ref01_match, None)
         assert isinstance(training_ref01_list_result, list)
 
         found_item = vs.select(
@@ -100,7 +97,6 @@ def _training_basic_setup(extra):
         "AICATS_TEST_TRAINING_ENTID": idmap,
         "AICATS_TEST_LIVE": "FALSE",
         "AICATS_TEST_EXPLAIN": "FALSE",
-        "AICATS_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -111,7 +107,6 @@ def _training_basic_setup(extra):
     if env.get("AICATS_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("AICATS_APIKEY"),
             },
             extra or {},
         ])

@@ -43,8 +43,7 @@ class HealthEntityTest extends TestCase
         $health_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.health"), "health_ref01"));
 
-        [$health_ref01_data_result, $err] = $health_ref01_ent->create($health_ref01_data, null);
-        $this->assertNull($err);
+        $health_ref01_data_result = $health_ref01_ent->create($health_ref01_data, null);
         $health_ref01_data = Helpers::to_map($health_ref01_data_result);
         $this->assertNotNull($health_ref01_data);
         $this->assertNotNull($health_ref01_data["id"]);
@@ -53,8 +52,7 @@ class HealthEntityTest extends TestCase
         $health_ref01_match_dt0 = [
             "id" => $health_ref01_data["id"],
         ];
-        [$health_ref01_data_dt0_loaded, $err] = $health_ref01_ent->load($health_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $health_ref01_data_dt0_loaded = $health_ref01_ent->load($health_ref01_match_dt0, null);
         $health_ref01_data_dt0_load_result = Helpers::to_map($health_ref01_data_dt0_loaded);
         $this->assertNotNull($health_ref01_data_dt0_load_result);
         $this->assertEquals($health_ref01_data_dt0_load_result["id"], $health_ref01_data["id"]);
@@ -91,7 +89,6 @@ function health_basic_setup($extra)
         "AICATS_TEST_HEALTH_ENTID" => $idmap,
         "AICATS_TEST_LIVE" => "FALSE",
         "AICATS_TEST_EXPLAIN" => "FALSE",
-        "AICATS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -103,7 +100,6 @@ function health_basic_setup($extra)
     if ($env["AICATS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["AICATS_APIKEY"],
             ],
             $extra ?? [],
         ]);

@@ -15,9 +15,6 @@ module AiCatsConfig
       },
       "options" => {
         "base" => "https://ai-cats.net/api",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -85,6 +82,7 @@ module AiCatsConfig
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },

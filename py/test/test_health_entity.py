@@ -44,9 +44,7 @@ class TestHealthEntity:
         health_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.health"), "health_ref01"))
 
-        health_ref01_data_result, err = health_ref01_ent.create(health_ref01_data, None)
-        assert err is None
-        health_ref01_data = helpers.to_map(health_ref01_data_result)
+        health_ref01_data = helpers.to_map(health_ref01_ent.create(health_ref01_data, None))
         assert health_ref01_data is not None
         assert health_ref01_data["id"] is not None
 
@@ -54,8 +52,7 @@ class TestHealthEntity:
         health_ref01_match_dt0 = {
             "id": health_ref01_data["id"],
         }
-        health_ref01_data_dt0_loaded, err = health_ref01_ent.load(health_ref01_match_dt0, None)
-        assert err is None
+        health_ref01_data_dt0_loaded = health_ref01_ent.load(health_ref01_match_dt0, None)
         health_ref01_data_dt0_load_result = helpers.to_map(health_ref01_data_dt0_loaded)
         assert health_ref01_data_dt0_load_result is not None
         assert health_ref01_data_dt0_load_result["id"] == health_ref01_data["id"]
@@ -98,7 +95,6 @@ def _health_basic_setup(extra):
         "AICATS_TEST_HEALTH_ENTID": idmap,
         "AICATS_TEST_LIVE": "FALSE",
         "AICATS_TEST_EXPLAIN": "FALSE",
-        "AICATS_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -109,7 +105,6 @@ def _health_basic_setup(extra):
     if env.get("AICATS_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("AICATS_APIKEY"),
             },
             extra or {},
         ])

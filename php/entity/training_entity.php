@@ -55,6 +55,9 @@ class TrainingEntity
         return new TrainingEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Training|array $args Training data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class TrainingEntity
         }
     }
 
+    /**
+     * @return Training|array The current Training data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Training fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class TrainingEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Training fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -86,7 +98,16 @@ class TrainingEntity
     
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List Training items matching the given filter.
+     *
+     * @param TrainingListMatch|array|null $reqmatch Match filter (any subset
+     *   of Training fields) as an assoc-array; TrainingListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Training[]|array A list of Training items as assoc-arrays at
+     *   the SDK boundary; throws AiCatsError on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -109,7 +130,16 @@ class TrainingEntity
 
 
     
-    public function create($reqdata, $ctrl = null): array
+    /**
+     * Create a new Training.
+     *
+     * @param TrainingCreateData|array|null $reqdata Body data as an assoc-array;
+     *   a typed TrainingCreateData names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Training|array The created Training as an assoc-array at the
+     *   SDK boundary; throws AiCatsError on failure (item-5 convention).
+     */
+    public function create(?array $reqdata = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -135,7 +165,7 @@ class TrainingEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

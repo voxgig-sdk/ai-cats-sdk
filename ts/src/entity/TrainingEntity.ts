@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Training,
+  TrainingListMatch,
+  TrainingCreateData,
+} from '../AiCatsTypes'
 
 // TODO: needs Entity superclass
-class TrainingEntity extends AiCatsEntityBase {
+class TrainingEntity extends AiCatsEntityBase<Training> {
 
   constructor(client: AiCatsSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +38,7 @@ class TrainingEntity extends AiCatsEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: TrainingListMatch, ctrl?: Control): Promise<Training[]> {
 
     const utility = this._utility
 
@@ -133,14 +138,16 @@ class TrainingEntity extends AiCatsEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Training[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: TrainingCreateData, ctrl?: Control): Promise<Training> {
 
     const utility = this._utility
     const {
@@ -239,7 +246,9 @@ class TrainingEntity extends AiCatsEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Training> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

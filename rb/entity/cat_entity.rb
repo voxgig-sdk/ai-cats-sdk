@@ -45,6 +45,7 @@ class CatEntity
     end
   end
 
+  # @return [Cat, Hash] the current Cat data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class CatEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Cat fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Cat.
+  #
+  # @param reqmatch [CatLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Cat, Hash] the loaded Cat; raises AiCatsError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

@@ -44,17 +44,14 @@ class TestInteractionEntity:
         interaction_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.interaction"), "interaction_ref01"))
 
-        interaction_ref01_data_result, err = interaction_ref01_ent.create(interaction_ref01_data, None)
-        assert err is None
-        interaction_ref01_data = helpers.to_map(interaction_ref01_data_result)
+        interaction_ref01_data = helpers.to_map(interaction_ref01_ent.create(interaction_ref01_data, None))
         assert interaction_ref01_data is not None
         assert interaction_ref01_data["id"] is not None
 
         # LIST
         interaction_ref01_match = {}
 
-        interaction_ref01_list_result, err = interaction_ref01_ent.list(interaction_ref01_match, None)
-        assert err is None
+        interaction_ref01_list_result = interaction_ref01_ent.list(interaction_ref01_match, None)
         assert isinstance(interaction_ref01_list_result, list)
 
         found_item = vs.select(
@@ -100,7 +97,6 @@ def _interaction_basic_setup(extra):
         "AICATS_TEST_INTERACTION_ENTID": idmap,
         "AICATS_TEST_LIVE": "FALSE",
         "AICATS_TEST_EXPLAIN": "FALSE",
-        "AICATS_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -111,7 +107,6 @@ def _interaction_basic_setup(extra):
     if env.get("AICATS_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("AICATS_APIKEY"),
             },
             extra or {},
         ])

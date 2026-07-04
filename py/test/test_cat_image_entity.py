@@ -51,8 +51,7 @@ class TestCatImageEntity:
         cat_image_ref01_match_dt0 = {
             "id": cat_image_ref01_data["id"],
         }
-        cat_image_ref01_data_dt0_loaded, err = cat_image_ref01_ent.load(cat_image_ref01_match_dt0, None)
-        assert err is None
+        cat_image_ref01_data_dt0_loaded = cat_image_ref01_ent.load(cat_image_ref01_match_dt0, None)
         cat_image_ref01_data_dt0_load_result = helpers.to_map(cat_image_ref01_data_dt0_loaded)
         assert cat_image_ref01_data_dt0_load_result is not None
         assert cat_image_ref01_data_dt0_load_result["id"] == cat_image_ref01_data["id"]
@@ -95,7 +94,6 @@ def _cat_image_basic_setup(extra):
         "AICATS_TEST_CAT_IMAGE_ENTID": idmap,
         "AICATS_TEST_LIVE": "FALSE",
         "AICATS_TEST_EXPLAIN": "FALSE",
-        "AICATS_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -106,7 +104,6 @@ def _cat_image_basic_setup(extra):
     if env.get("AICATS_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("AICATS_APIKEY"),
             },
             extra or {},
         ])

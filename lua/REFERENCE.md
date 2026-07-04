@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -100,7 +99,7 @@ same parameters as `direct()`.
 ## CatEntity
 
 ```lua
-local cat = client:Cat(nil)
+local cat = client:cat(nil)
 ```
 
 ### Fields
@@ -120,7 +119,7 @@ local cat = client:Cat(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Cat():load({ id = "cat_id" })
+local result, err = client:cat():load({ id = "cat_id" })
 ```
 
 ### Common Methods
@@ -156,7 +155,7 @@ Return the entity name.
 ## CatImageEntity
 
 ```lua
-local cat_image = client:CatImage(nil)
+local cat_image = client:cat_image(nil)
 ```
 
 ### Fields
@@ -176,7 +175,7 @@ local cat_image = client:CatImage(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:CatImage():load({ id = "cat_image_id" })
+local result, err = client:cat_image():load({ id = "cat_image_id" })
 ```
 
 ### Common Methods
@@ -212,7 +211,7 @@ Return the entity name.
 ## HealthEntity
 
 ```lua
-local health = client:Health(nil)
+local health = client:health(nil)
 ```
 
 ### Fields
@@ -246,7 +245,7 @@ local health = client:Health(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Health():create({
+local result, err = client:health():create({
 })
 ```
 
@@ -255,7 +254,7 @@ local result, err = client:Health():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Health():load({ id = "health_id" })
+local result, err = client:health():load({ id = "health_id" })
 ```
 
 ### Common Methods
@@ -291,7 +290,7 @@ Return the entity name.
 ## InteractionEntity
 
 ```lua
-local interaction = client:Interaction(nil)
+local interaction = client:interaction(nil)
 ```
 
 ### Fields
@@ -325,7 +324,7 @@ local interaction = client:Interaction(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Interaction():create({
+local result, err = client:interaction():create({
   cat_id = --[[ `$STRING` ]],
   type = --[[ `$STRING` ]],
 })
@@ -336,7 +335,7 @@ local result, err = client:Interaction():create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Interaction():list()
+local results, err = client:interaction():list()
 ```
 
 ### Common Methods
@@ -372,7 +371,7 @@ Return the entity name.
 ## TrainingEntity
 
 ```lua
-local training = client:Training(nil)
+local training = client:training(nil)
 ```
 
 ### Fields
@@ -406,7 +405,7 @@ local training = client:Training(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Training():create({
+local result, err = client:training():create({
   cat_id = --[[ `$STRING` ]],
   duration = --[[ `$INTEGER` ]],
   type = --[[ `$STRING` ]],
@@ -418,7 +417,7 @@ local result, err = client:Training():create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Training():list()
+local results, err = client:training():list()
 ```
 
 ### Common Methods

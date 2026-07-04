@@ -103,7 +103,7 @@ class AiCatsSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class AiCatsSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class AiCatsSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,52 +216,107 @@ class AiCatsSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Cat($data = null)
+    private $_cat = null;
+
+    // Idiomatic facade: $client->cat()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Cat() (PHP method
+    // names are case-insensitive).
+    public function cat($data = null)
     {
         require_once __DIR__ . '/entity/cat_entity.php';
+        if ($data === null) {
+            if ($this->_cat === null) {
+                $this->_cat = new CatEntity($this, null);
+            }
+            return $this->_cat;
+        }
         return new CatEntity($this, $data);
     }
 
 
-    public function CatImage($data = null)
+    private $_cat_image = null;
+
+    // Idiomatic facade: $client->cat_image()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias CatImage() (PHP method
+    // names are case-insensitive).
+    public function cat_image($data = null)
     {
         require_once __DIR__ . '/entity/cat_image_entity.php';
+        if ($data === null) {
+            if ($this->_cat_image === null) {
+                $this->_cat_image = new CatImageEntity($this, null);
+            }
+            return $this->_cat_image;
+        }
         return new CatImageEntity($this, $data);
     }
 
 
-    public function Health($data = null)
+    private $_health = null;
+
+    // Idiomatic facade: $client->health()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Health() (PHP method
+    // names are case-insensitive).
+    public function health($data = null)
     {
         require_once __DIR__ . '/entity/health_entity.php';
+        if ($data === null) {
+            if ($this->_health === null) {
+                $this->_health = new HealthEntity($this, null);
+            }
+            return $this->_health;
+        }
         return new HealthEntity($this, $data);
     }
 
 
-    public function Interaction($data = null)
+    private $_interaction = null;
+
+    // Idiomatic facade: $client->interaction()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Interaction() (PHP method
+    // names are case-insensitive).
+    public function interaction($data = null)
     {
         require_once __DIR__ . '/entity/interaction_entity.php';
+        if ($data === null) {
+            if ($this->_interaction === null) {
+                $this->_interaction = new InteractionEntity($this, null);
+            }
+            return $this->_interaction;
+        }
         return new InteractionEntity($this, $data);
     }
 
 
-    public function Training($data = null)
+    private $_training = null;
+
+    // Idiomatic facade: $client->training()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Training() (PHP method
+    // names are case-insensitive).
+    public function training($data = null)
     {
         require_once __DIR__ . '/entity/training_entity.php';
+        if ($data === null) {
+            if ($this->_training === null) {
+                $this->_training = new TrainingEntity($this, null);
+            }
+            return $this->_training;
+        }
         return new TrainingEntity($this, $data);
     }
 

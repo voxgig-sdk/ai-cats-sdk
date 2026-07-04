@@ -36,8 +36,7 @@ class InteractionEntityTest < Minitest::Test
     interaction_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.interaction"), "interaction_ref01"))
 
-    interaction_ref01_data_result, err = interaction_ref01_ent.create(interaction_ref01_data, nil)
-    assert_nil err
+    interaction_ref01_data_result = interaction_ref01_ent.create(interaction_ref01_data, nil)
     interaction_ref01_data = Helpers.to_map(interaction_ref01_data_result)
     assert !interaction_ref01_data.nil?
     assert !interaction_ref01_data["id"].nil?
@@ -45,8 +44,7 @@ class InteractionEntityTest < Minitest::Test
     # LIST
     interaction_ref01_match = {}
 
-    interaction_ref01_list_result, err = interaction_ref01_ent.list(interaction_ref01_match, nil)
-    assert_nil err
+    interaction_ref01_list_result = interaction_ref01_ent.list(interaction_ref01_match, nil)
     assert interaction_ref01_list_result.is_a?(Array)
 
     found_item = Vs.select(
@@ -90,7 +88,6 @@ def interaction_basic_setup(extra)
     "AICATS_TEST_INTERACTION_ENTID" => idmap,
     "AICATS_TEST_LIVE" => "FALSE",
     "AICATS_TEST_EXPLAIN" => "FALSE",
-    "AICATS_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -102,7 +99,6 @@ def interaction_basic_setup(extra)
   if env["AICATS_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["AICATS_APIKEY"],
       },
       extra || {},
     ])

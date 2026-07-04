@@ -244,30 +244,95 @@ end
 
 
 
+-- Idiomatic facade: client:cat():list() / client:cat():load({ id = ... })
+function AiCatsSDK:cat(data)
+  local EntityMod = require("entity.cat_entity")
+  if data == nil then
+    if self._cat == nil then
+      self._cat = EntityMod.new(self, nil)
+    end
+    return self._cat
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:cat() instead.
 function AiCatsSDK:Cat(data)
   local EntityMod = require("entity.cat_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:cat_image():list() / client:cat_image():load({ id = ... })
+function AiCatsSDK:cat_image(data)
+  local EntityMod = require("entity.cat_image_entity")
+  if data == nil then
+    if self._cat_image == nil then
+      self._cat_image = EntityMod.new(self, nil)
+    end
+    return self._cat_image
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:cat_image() instead.
 function AiCatsSDK:CatImage(data)
   local EntityMod = require("entity.cat_image_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:health():list() / client:health():load({ id = ... })
+function AiCatsSDK:health(data)
+  local EntityMod = require("entity.health_entity")
+  if data == nil then
+    if self._health == nil then
+      self._health = EntityMod.new(self, nil)
+    end
+    return self._health
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:health() instead.
 function AiCatsSDK:Health(data)
   local EntityMod = require("entity.health_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:interaction():list() / client:interaction():load({ id = ... })
+function AiCatsSDK:interaction(data)
+  local EntityMod = require("entity.interaction_entity")
+  if data == nil then
+    if self._interaction == nil then
+      self._interaction = EntityMod.new(self, nil)
+    end
+    return self._interaction
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:interaction() instead.
 function AiCatsSDK:Interaction(data)
   local EntityMod = require("entity.interaction_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:training():list() / client:training():load({ id = ... })
+function AiCatsSDK:training(data)
+  local EntityMod = require("entity.training_entity")
+  if data == nil then
+    if self._training == nil then
+      self._training = EntityMod.new(self, nil)
+    end
+    return self._training
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:training() instead.
 function AiCatsSDK:Training(data)
   local EntityMod = require("entity.training_entity")
   return EntityMod.new(self, data)

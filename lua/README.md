@@ -9,12 +9,9 @@ The Lua SDK for the AiCats API — an entity-oriented client using Lua conventio
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-ai-cats
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/ai-cats-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("ai-cats_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("AI-CATS_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 3. Load a cat
 
 ```lua
-local result, err = client:Cat():load({ id = "example_id" })
+local result, err = client:cat():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -87,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:AiCats():load({ id = "test01" })
+local result, err = client:cat():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -120,8 +115,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-AI-CATS_TEST_LIVE=TRUE
-AI-CATS_APIKEY=<your-key>
+AI_CATS_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -144,7 +138,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -291,7 +284,7 @@ API path: `/training`
 
 ### Cat
 
-Create an instance: `const cat = client.Cat()`
+Create an instance: `const cat = client.cat`
 
 #### Operations
 
@@ -312,13 +305,13 @@ Create an instance: `const cat = client.Cat()`
 #### Example: Load
 
 ```ts
-const cat = await client.Cat().load({ id: 'cat_id' })
+const cat = await client.cat.load({ id: 'cat_id' })
 ```
 
 
 ### CatImage
 
-Create an instance: `const cat_image = client.CatImage()`
+Create an instance: `const cat_image = client.cat_image`
 
 #### Operations
 
@@ -339,13 +332,13 @@ Create an instance: `const cat_image = client.CatImage()`
 #### Example: Load
 
 ```ts
-const cat_image = await client.CatImage().load({ id: 'cat_image_id' })
+const cat_image = await client.cat_image.load({ id: 'cat_image_id' })
 ```
 
 
 ### Health
 
-Create an instance: `const health = client.Health()`
+Create an instance: `const health = client.health`
 
 #### Operations
 
@@ -369,20 +362,20 @@ Create an instance: `const health = client.Health()`
 #### Example: Load
 
 ```ts
-const health = await client.Health().load({ id: 'health_id' })
+const health = await client.health.load({ id: 'health_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const health = await client.Health().create({
+const health = await client.health.create({
 })
 ```
 
 
 ### Interaction
 
-Create an instance: `const interaction = client.Interaction()`
+Create an instance: `const interaction = client.interaction`
 
 #### Operations
 
@@ -406,13 +399,13 @@ Create an instance: `const interaction = client.Interaction()`
 #### Example: List
 
 ```ts
-const interactions = await client.Interaction().list()
+const interactions = await client.interaction.list()
 ```
 
 #### Example: Create
 
 ```ts
-const interaction = await client.Interaction().create({
+const interaction = await client.interaction.create({
   cat_id: /* `$STRING` */,
   type: /* `$STRING` */,
 })
@@ -421,7 +414,7 @@ const interaction = await client.Interaction().create({
 
 ### Training
 
-Create an instance: `const training = client.Training()`
+Create an instance: `const training = client.training`
 
 #### Operations
 
@@ -445,13 +438,13 @@ Create an instance: `const training = client.Training()`
 #### Example: List
 
 ```ts
-const trainings = await client.Training().list()
+const trainings = await client.training.list()
 ```
 
 #### Example: Create
 
 ```ts
-const training = await client.Training().create({
+const training = await client.training.create({
   cat_id: /* `$STRING` */,
   duration: /* `$INTEGER` */,
   type: /* `$STRING` */,
@@ -530,11 +523,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local cat = client:cat()
+cat:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- cat:data_get() now returns the loaded cat data
+-- cat:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -123,7 +123,6 @@ func cat_imageBasicSetup(extra map[string]any) *entityTestSetup {
 		"AICATS_TEST_CAT_IMAGE_ENTID": idmap,
 		"AICATS_TEST_LIVE":      "FALSE",
 		"AICATS_TEST_EXPLAIN":   "FALSE",
-		"AICATS_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["AICATS_TEST_CAT_IMAGE_ENTID"])
@@ -134,7 +133,6 @@ func cat_imageBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["AICATS_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["AICATS_APIKEY"],
 			},
 			extra,
 		})

@@ -9,9 +9,12 @@ The TypeScript SDK for the AiCats API — a type-safe, entity-oriented client wi
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/ai-cats
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/ai-cats-sdk/releases](https://github.com/voxgig-sdk/ai-cats-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { AiCatsSDK } from 'ai-cats'
+import { AiCatsSDK } from '@voxgig-sdk/ai-cats'
 
-const client = new AiCatsSDK({
-  apikey: process.env.AI-CATS_APIKEY,
-})
+const client = new AiCatsSDK()
 ```
 
 ### 3. Load a cat
 
 ```ts
-const result = await client.Cat().load({ id: 'example_id' })
+const result = await client.cat.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +80,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = AiCatsSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.cat.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -87,7 +88,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new AiCatsSDK({ apikey: '...' })
+const client = new AiCatsSDK()
 const testClient = client.tester()
 ```
 
@@ -96,7 +97,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.cat
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -123,7 +124,6 @@ const logger = {
 }
 
 const client = new AiCatsSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -133,8 +133,7 @@ const client = new AiCatsSDK({
 Create a `.env.local` file at the project root:
 
 ```
-AI-CATS_TEST_LIVE=TRUE
-AI-CATS_APIKEY=<your-key>
+AI_CATS_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -152,7 +151,6 @@ cd ts && npm test
 
 ```ts
 new AiCatsSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -163,7 +161,6 @@ new AiCatsSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -336,7 +333,7 @@ API path: `/training`
 
 ### Cat
 
-Create an instance: `const cat = client.Cat()`
+Create an instance: `const cat = client.cat`
 
 #### Operations
 
@@ -357,13 +354,13 @@ Create an instance: `const cat = client.Cat()`
 #### Example: Load
 
 ```ts
-const cat = await client.Cat().load({ id: 'cat_id' })
+const cat = await client.cat.load({ id: 'cat_id' })
 ```
 
 
 ### CatImage
 
-Create an instance: `const cat_image = client.CatImage()`
+Create an instance: `const cat_image = client.cat_image`
 
 #### Operations
 
@@ -384,13 +381,13 @@ Create an instance: `const cat_image = client.CatImage()`
 #### Example: Load
 
 ```ts
-const cat_image = await client.CatImage().load({ id: 'cat_image_id' })
+const cat_image = await client.cat_image.load({ id: 'cat_image_id' })
 ```
 
 
 ### Health
 
-Create an instance: `const health = client.Health()`
+Create an instance: `const health = client.health`
 
 #### Operations
 
@@ -414,20 +411,20 @@ Create an instance: `const health = client.Health()`
 #### Example: Load
 
 ```ts
-const health = await client.Health().load({ id: 'health_id' })
+const health = await client.health.load({ id: 'health_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const health = await client.Health().create({
+const health = await client.health.create({
 })
 ```
 
 
 ### Interaction
 
-Create an instance: `const interaction = client.Interaction()`
+Create an instance: `const interaction = client.interaction`
 
 #### Operations
 
@@ -451,13 +448,13 @@ Create an instance: `const interaction = client.Interaction()`
 #### Example: List
 
 ```ts
-const interactions = await client.Interaction().list()
+const interactions = await client.interaction.list()
 ```
 
 #### Example: Create
 
 ```ts
-const interaction = await client.Interaction().create({
+const interaction = await client.interaction.create({
   cat_id: /* `$STRING` */,
   type: /* `$STRING` */,
 })
@@ -466,7 +463,7 @@ const interaction = await client.Interaction().create({
 
 ### Training
 
-Create an instance: `const training = client.Training()`
+Create an instance: `const training = client.training`
 
 #### Operations
 
@@ -490,13 +487,13 @@ Create an instance: `const training = client.Training()`
 #### Example: List
 
 ```ts
-const trainings = await client.Training().list()
+const trainings = await client.training.list()
 ```
 
 #### Example: Create
 
 ```ts
-const training = await client.Training().create({
+const training = await client.training.create({
   cat_id: /* `$STRING` */,
   duration: /* `$INTEGER` */,
   type: /* `$STRING` */,
@@ -561,7 +558,7 @@ ai-cats/
 Import the SDK from the package root:
 
 ```ts
-import { AiCatsSDK } from 'ai-cats'
+import { AiCatsSDK } from '@voxgig-sdk/ai-cats'
 ```
 
 ### Entity state
@@ -571,11 +568,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const cat = client.cat
+await cat.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// cat.data() now returns the loaded cat data
+// cat.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

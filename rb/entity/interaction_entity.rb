@@ -45,6 +45,7 @@ class InteractionEntity
     end
   end
 
+  # @return [Interaction, Hash] the current Interaction data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class InteractionEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Interaction fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class InteractionEntity
   
 
   
+  # List Interaction items matching the given filter.
+  #
+  # @param reqmatch [InteractionListMatch, Hash, nil] match filter (any subset of Interaction fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Interaction>, Array] the matching Interaction items; raises AiCatsError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -85,6 +92,11 @@ class InteractionEntity
 
 
   
+  # Create a new Interaction.
+  #
+  # @param reqdata [InteractionCreateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Interaction, Hash] the created Interaction; raises AiCatsError on failure
   def create(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

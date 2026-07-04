@@ -45,6 +45,7 @@ class TrainingEntity
     end
   end
 
+  # @return [Training, Hash] the current Training data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class TrainingEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Training fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class TrainingEntity
   
 
   
+  # List Training items matching the given filter.
+  #
+  # @param reqmatch [TrainingListMatch, Hash, nil] match filter (any subset of Training fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Training>, Array] the matching Training items; raises AiCatsError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -85,6 +92,11 @@ class TrainingEntity
 
 
   
+  # Create a new Training.
+  #
+  # @param reqdata [TrainingCreateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Training, Hash] the created Training; raises AiCatsError on failure
   def create(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

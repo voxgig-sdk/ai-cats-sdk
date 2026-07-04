@@ -144,16 +144,23 @@ class AiCatsSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class AiCatsSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,35 +212,90 @@ class AiCatsSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def cat(self):
+        """Idiomatic facade: client.cat.list() / client.cat.load({"id": ...})."""
+        from entity.cat_entity import CatEntity
+        cached = getattr(self, "_cat", None)
+        if cached is None:
+            cached = CatEntity(self, None)
+            self._cat = cached
+        return cached
 
     def Cat(self, data=None):
+        # Deprecated: use client.cat instead.
         from entity.cat_entity import CatEntity
         return CatEntity(self, data)
 
 
+    @property
+    def cat_image(self):
+        """Idiomatic facade: client.cat_image.list() / client.cat_image.load({"id": ...})."""
+        from entity.cat_image_entity import CatImageEntity
+        cached = getattr(self, "_cat_image", None)
+        if cached is None:
+            cached = CatImageEntity(self, None)
+            self._cat_image = cached
+        return cached
+
     def CatImage(self, data=None):
+        # Deprecated: use client.cat_image instead.
         from entity.cat_image_entity import CatImageEntity
         return CatImageEntity(self, data)
 
 
+    @property
+    def health(self):
+        """Idiomatic facade: client.health.list() / client.health.load({"id": ...})."""
+        from entity.health_entity import HealthEntity
+        cached = getattr(self, "_health", None)
+        if cached is None:
+            cached = HealthEntity(self, None)
+            self._health = cached
+        return cached
+
     def Health(self, data=None):
+        # Deprecated: use client.health instead.
         from entity.health_entity import HealthEntity
         return HealthEntity(self, data)
 
 
+    @property
+    def interaction(self):
+        """Idiomatic facade: client.interaction.list() / client.interaction.load({"id": ...})."""
+        from entity.interaction_entity import InteractionEntity
+        cached = getattr(self, "_interaction", None)
+        if cached is None:
+            cached = InteractionEntity(self, None)
+            self._interaction = cached
+        return cached
+
     def Interaction(self, data=None):
+        # Deprecated: use client.interaction instead.
         from entity.interaction_entity import InteractionEntity
         return InteractionEntity(self, data)
 
 
+    @property
+    def training(self):
+        """Idiomatic facade: client.training.list() / client.training.load({"id": ...})."""
+        from entity.training_entity import TrainingEntity
+        cached = getattr(self, "_training", None)
+        if cached is None:
+            cached = TrainingEntity(self, None)
+            self._training = cached
+        return cached
+
     def Training(self, data=None):
+        # Deprecated: use client.training instead.
         from entity.training_entity import TrainingEntity
         return TrainingEntity(self, data)
 

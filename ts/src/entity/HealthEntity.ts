@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Health,
+  HealthLoadMatch,
+  HealthCreateData,
+} from '../AiCatsTypes'
 
 // TODO: needs Entity superclass
-class HealthEntity extends AiCatsEntityBase {
+class HealthEntity extends AiCatsEntityBase<Health> {
 
   constructor(client: AiCatsSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class HealthEntity extends AiCatsEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: HealthLoadMatch, ctrl?: Control): Promise<Health> {
 
     const utility = this._utility
 
@@ -136,7 +141,9 @@ class HealthEntity extends AiCatsEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Health> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
@@ -144,7 +151,7 @@ class HealthEntity extends AiCatsEntityBase {
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: HealthCreateData, ctrl?: Control): Promise<Health> {
 
     const utility = this._utility
     const {
@@ -243,7 +250,9 @@ class HealthEntity extends AiCatsEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Health> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

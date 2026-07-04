@@ -85,6 +85,27 @@ func (e *InteractionEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Interaction; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *InteractionEntity) DataTyped(data ...Interaction) Interaction {
+	if len(data) > 0 {
+		return typedFrom[Interaction](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Interaction](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Interaction (all fields
+// optional at the wire level).
+func (e *InteractionEntity) MatchTyped(match ...Interaction) Interaction {
+	if len(match) > 0 {
+		return typedFrom[Interaction](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Interaction](e.Match())
+}
+
 func (e *InteractionEntity) Load(_ map[string]any, _ map[string]any) (any, error) {
 	return core.UnsupportedOp("load", e.name)
 }
@@ -110,6 +131,17 @@ func (e *InteractionEntity) List(reqmatch map[string]any, ctrl map[string]any) (
 	})
 }
 
+// ListTyped is the statically-typed variant of List: it takes an
+// InteractionListMatch and returns []Interaction. It delegates to the untyped
+// List (identical runtime) and converts at the typed boundary.
+func (e *InteractionEntity) ListTyped(reqmatch InteractionListMatch, ctrl map[string]any) ([]Interaction, error) {
+	res, err := e.List(asMap(reqmatch), ctrl)
+	if err != nil {
+		return nil, err
+	}
+	return typedSliceFrom[Interaction](res), nil
+}
+
 
 
 
@@ -133,6 +165,17 @@ func (e *InteractionEntity) Create(reqdata map[string]any, ctrl map[string]any) 
 			}
 		}
 	})
+}
+
+// CreateTyped is the statically-typed variant of Create: it takes an
+// InteractionCreateData and returns an Interaction. It delegates to the untyped
+// Create (identical runtime) and converts at the typed boundary.
+func (e *InteractionEntity) CreateTyped(reqdata InteractionCreateData, ctrl map[string]any) (Interaction, error) {
+	res, err := e.Create(asMap(reqdata), ctrl)
+	if err != nil {
+		return Interaction{}, err
+	}
+	return typedFrom[Interaction](res), nil
 }
 
 

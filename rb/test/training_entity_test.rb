@@ -36,8 +36,7 @@ class TrainingEntityTest < Minitest::Test
     training_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.training"), "training_ref01"))
 
-    training_ref01_data_result, err = training_ref01_ent.create(training_ref01_data, nil)
-    assert_nil err
+    training_ref01_data_result = training_ref01_ent.create(training_ref01_data, nil)
     training_ref01_data = Helpers.to_map(training_ref01_data_result)
     assert !training_ref01_data.nil?
     assert !training_ref01_data["id"].nil?
@@ -45,8 +44,7 @@ class TrainingEntityTest < Minitest::Test
     # LIST
     training_ref01_match = {}
 
-    training_ref01_list_result, err = training_ref01_ent.list(training_ref01_match, nil)
-    assert_nil err
+    training_ref01_list_result = training_ref01_ent.list(training_ref01_match, nil)
     assert training_ref01_list_result.is_a?(Array)
 
     found_item = Vs.select(
@@ -90,7 +88,6 @@ def training_basic_setup(extra)
     "AICATS_TEST_TRAINING_ENTID" => idmap,
     "AICATS_TEST_LIVE" => "FALSE",
     "AICATS_TEST_EXPLAIN" => "FALSE",
-    "AICATS_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -102,7 +99,6 @@ def training_basic_setup(extra)
   if env["AICATS_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["AICATS_APIKEY"],
       },
       extra || {},
     ])

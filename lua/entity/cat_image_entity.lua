@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch CatImageLoadMatch
+---@param ctrl? table
+---@return CatImage
+---@return string? err
 function CatImageEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

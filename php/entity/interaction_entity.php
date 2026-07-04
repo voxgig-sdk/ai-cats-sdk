@@ -55,6 +55,9 @@ class InteractionEntity
         return new InteractionEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Interaction|array $args Interaction data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class InteractionEntity
         }
     }
 
+    /**
+     * @return Interaction|array The current Interaction data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Interaction fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class InteractionEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Interaction fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -86,7 +98,16 @@ class InteractionEntity
     
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List Interaction items matching the given filter.
+     *
+     * @param InteractionListMatch|array|null $reqmatch Match filter (any subset
+     *   of Interaction fields) as an assoc-array; InteractionListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Interaction[]|array A list of Interaction items as assoc-arrays at
+     *   the SDK boundary; throws AiCatsError on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -109,7 +130,16 @@ class InteractionEntity
 
 
     
-    public function create($reqdata, $ctrl = null): array
+    /**
+     * Create a new Interaction.
+     *
+     * @param InteractionCreateData|array|null $reqdata Body data as an assoc-array;
+     *   a typed InteractionCreateData names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Interaction|array The created Interaction as an assoc-array at the
+     *   SDK boundary; throws AiCatsError on failure (item-5 convention).
+     */
+    public function create(?array $reqdata = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -135,7 +165,7 @@ class InteractionEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

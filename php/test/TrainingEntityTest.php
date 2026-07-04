@@ -43,8 +43,7 @@ class TrainingEntityTest extends TestCase
         $training_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.training"), "training_ref01"));
 
-        [$training_ref01_data_result, $err] = $training_ref01_ent->create($training_ref01_data, null);
-        $this->assertNull($err);
+        $training_ref01_data_result = $training_ref01_ent->create($training_ref01_data, null);
         $training_ref01_data = Helpers::to_map($training_ref01_data_result);
         $this->assertNotNull($training_ref01_data);
         $this->assertNotNull($training_ref01_data["id"]);
@@ -52,8 +51,7 @@ class TrainingEntityTest extends TestCase
         // LIST
         $training_ref01_match = [];
 
-        [$training_ref01_list_result, $err] = $training_ref01_ent->list($training_ref01_match, null);
-        $this->assertNull($err);
+        $training_ref01_list_result = $training_ref01_ent->list($training_ref01_match, null);
         $this->assertIsArray($training_ref01_list_result);
 
         $found_item = sdk_select(
@@ -93,7 +91,6 @@ function training_basic_setup($extra)
         "AICATS_TEST_TRAINING_ENTID" => $idmap,
         "AICATS_TEST_LIVE" => "FALSE",
         "AICATS_TEST_EXPLAIN" => "FALSE",
-        "AICATS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -105,7 +102,6 @@ function training_basic_setup($extra)
     if ($env["AICATS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["AICATS_APIKEY"],
             ],
             $extra ?? [],
         ]);

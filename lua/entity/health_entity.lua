@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch HealthLoadMatch
+---@param ctrl? table
+---@return Health
+---@return string? err
 function HealthEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -106,6 +110,10 @@ end
 
 
 
+---@param reqdata HealthCreateData
+---@param ctrl? table
+---@return Health
+---@return string? err
 function HealthEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

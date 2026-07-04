@@ -51,8 +51,7 @@ class TestCatEntity:
         cat_ref01_match_dt0 = {
             "id": cat_ref01_data["id"],
         }
-        cat_ref01_data_dt0_loaded, err = cat_ref01_ent.load(cat_ref01_match_dt0, None)
-        assert err is None
+        cat_ref01_data_dt0_loaded = cat_ref01_ent.load(cat_ref01_match_dt0, None)
         cat_ref01_data_dt0_load_result = helpers.to_map(cat_ref01_data_dt0_loaded)
         assert cat_ref01_data_dt0_load_result is not None
         assert cat_ref01_data_dt0_load_result["id"] == cat_ref01_data["id"]
@@ -95,7 +94,6 @@ def _cat_basic_setup(extra):
         "AICATS_TEST_CAT_ENTID": idmap,
         "AICATS_TEST_LIVE": "FALSE",
         "AICATS_TEST_EXPLAIN": "FALSE",
-        "AICATS_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -106,7 +104,6 @@ def _cat_basic_setup(extra):
     if env.get("AICATS_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("AICATS_APIKEY"),
             },
             extra or {},
         ])

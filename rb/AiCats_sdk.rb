@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'AiCats_types'
+
 
 class AiCatsSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class AiCatsSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class AiCatsSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue AiCatsError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = AiCatsHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class AiCatsSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,40 +198,75 @@ class AiCatsSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.cat.list / client.cat.load({ "id" => ... })
+  def cat
+    require_relative 'entity/cat_entity'
+    @cat ||= CatEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.cat instead.
   def Cat(data = nil)
     require_relative 'entity/cat_entity'
     CatEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.cat_image.list / client.cat_image.load({ "id" => ... })
+  def cat_image
+    require_relative 'entity/cat_image_entity'
+    @cat_image ||= CatImageEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.cat_image instead.
   def CatImage(data = nil)
     require_relative 'entity/cat_image_entity'
     CatImageEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.health.list / client.health.load({ "id" => ... })
+  def health
+    require_relative 'entity/health_entity'
+    @health ||= HealthEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.health instead.
   def Health(data = nil)
     require_relative 'entity/health_entity'
     HealthEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.interaction.list / client.interaction.load({ "id" => ... })
+  def interaction
+    require_relative 'entity/interaction_entity'
+    @interaction ||= InteractionEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.interaction instead.
   def Interaction(data = nil)
     require_relative 'entity/interaction_entity'
     InteractionEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.training.list / client.training.load({ "id" => ... })
+  def training
+    require_relative 'entity/training_entity'
+    @training ||= TrainingEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.training instead.
   def Training(data = nil)
     require_relative 'entity/training_entity'
     TrainingEntity.new(self, data)

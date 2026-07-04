@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Interaction,
+  InteractionListMatch,
+  InteractionCreateData,
+} from '../AiCatsTypes'
 
 // TODO: needs Entity superclass
-class InteractionEntity extends AiCatsEntityBase {
+class InteractionEntity extends AiCatsEntityBase<Interaction> {
 
   constructor(client: AiCatsSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +38,7 @@ class InteractionEntity extends AiCatsEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: InteractionListMatch, ctrl?: Control): Promise<Interaction[]> {
 
     const utility = this._utility
 
@@ -133,14 +138,16 @@ class InteractionEntity extends AiCatsEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Interaction[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: InteractionCreateData, ctrl?: Control): Promise<Interaction> {
 
     const utility = this._utility
     const {
@@ -239,7 +246,9 @@ class InteractionEntity extends AiCatsEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Interaction> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

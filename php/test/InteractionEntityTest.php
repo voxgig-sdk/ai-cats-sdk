@@ -43,8 +43,7 @@ class InteractionEntityTest extends TestCase
         $interaction_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.interaction"), "interaction_ref01"));
 
-        [$interaction_ref01_data_result, $err] = $interaction_ref01_ent->create($interaction_ref01_data, null);
-        $this->assertNull($err);
+        $interaction_ref01_data_result = $interaction_ref01_ent->create($interaction_ref01_data, null);
         $interaction_ref01_data = Helpers::to_map($interaction_ref01_data_result);
         $this->assertNotNull($interaction_ref01_data);
         $this->assertNotNull($interaction_ref01_data["id"]);
@@ -52,8 +51,7 @@ class InteractionEntityTest extends TestCase
         // LIST
         $interaction_ref01_match = [];
 
-        [$interaction_ref01_list_result, $err] = $interaction_ref01_ent->list($interaction_ref01_match, null);
-        $this->assertNull($err);
+        $interaction_ref01_list_result = $interaction_ref01_ent->list($interaction_ref01_match, null);
         $this->assertIsArray($interaction_ref01_list_result);
 
         $found_item = sdk_select(
@@ -93,7 +91,6 @@ function interaction_basic_setup($extra)
         "AICATS_TEST_INTERACTION_ENTID" => $idmap,
         "AICATS_TEST_LIVE" => "FALSE",
         "AICATS_TEST_EXPLAIN" => "FALSE",
-        "AICATS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -105,7 +102,6 @@ function interaction_basic_setup($extra)
     if ($env["AICATS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["AICATS_APIKEY"],
             ],
             $extra ?? [],
         ]);

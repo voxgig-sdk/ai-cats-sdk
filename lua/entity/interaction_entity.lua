@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch InteractionListMatch
+---@param ctrl? table
+---@return Interaction[]
+---@return string? err
 function InteractionEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -103,6 +107,10 @@ end
 
 
 
+---@param reqdata InteractionCreateData
+---@param ctrl? table
+---@return Interaction
+---@return string? err
 function InteractionEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
