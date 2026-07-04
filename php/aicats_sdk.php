@@ -233,10 +233,10 @@ class AiCatsSDK
 
     private $_cat = null;
 
-    // Idiomatic facade: $client->cat()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Cat() (PHP method
-    // names are case-insensitive).
-    public function cat($data = null)
+    // Canonical facade: $client->Cat()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->cat()
+    // resolves here too.
+    public function Cat($data = null)
     {
         require_once __DIR__ . '/entity/cat_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class AiCatsSDK
 
     private $_cat_image = null;
 
-    // Idiomatic facade: $client->cat_image()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias CatImage() (PHP method
-    // names are case-insensitive).
-    public function cat_image($data = null)
+    // Canonical facade: $client->CatImage()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->cat_image()
+    // resolves here too.
+    public function CatImage($data = null)
     {
         require_once __DIR__ . '/entity/cat_image_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class AiCatsSDK
 
     private $_health = null;
 
-    // Idiomatic facade: $client->health()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Health() (PHP method
-    // names are case-insensitive).
-    public function health($data = null)
+    // Canonical facade: $client->Health()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->health()
+    // resolves here too.
+    public function Health($data = null)
     {
         require_once __DIR__ . '/entity/health_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class AiCatsSDK
 
     private $_interaction = null;
 
-    // Idiomatic facade: $client->interaction()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Interaction() (PHP method
-    // names are case-insensitive).
-    public function interaction($data = null)
+    // Canonical facade: $client->Interaction()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->interaction()
+    // resolves here too.
+    public function Interaction($data = null)
     {
         require_once __DIR__ . '/entity/interaction_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class AiCatsSDK
 
     private $_training = null;
 
-    // Idiomatic facade: $client->training()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Training() (PHP method
-    // names are case-insensitive).
-    public function training($data = null)
+    // Canonical facade: $client->Training()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->training()
+    // resolves here too.
+    public function Training($data = null)
     {
         require_once __DIR__ . '/entity/training_entity.php';
         if ($data === null) {

@@ -26,9 +26,9 @@ import { AiCatsSDK } from '@voxgig-sdk/ai-cats'
 
 const client = new AiCatsSDK()
 
-// Load cat data
-const cat = await client.cat.load({})
-console.log(cat.data)
+// Load cat data (returns a Cat)
+const cat = await client.Cat().load()
+console.log(cat)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -88,8 +88,8 @@ from aicats_sdk import AiCatsSDK
 client = AiCatsSDK()
 
 
-# Load a specific cat
-cat = client.cat.load({"id": "example_id"})
+# Load a specific cat (returns the record, raises on error)
+cat = client.Cat().load({"id": "example_id"})
 print(cat)
 ```
 
@@ -102,8 +102,8 @@ require_once 'aicats_sdk.php';
 $client = new AiCatsSDK();
 
 
-// Load a specific cat
-$cat = $client->cat()->load(["id" => "example_id"]);
+// Load a specific cat (returns the bare record; throws on error)
+$cat = $client->Cat()->load(["id" => "example_id"]);
 print_r($cat);
 ```
 
@@ -127,8 +127,8 @@ require_relative "AiCats_sdk"
 client = AiCatsSDK.new
 
 
-# Load a specific cat
-cat = client.cat.load({ "id" => "example_id" })
+# Load a specific cat (returns the bare record; raises on error)
+cat = client.Cat.load({ "id" => "example_id" })
 puts cat
 ```
 
@@ -141,7 +141,7 @@ local client = sdk.new()
 
 
 -- Load a specific cat
-local cat, err = client:cat():load({ id = "example_id" })
+local cat, err = client:Cat():load({ id = "example_id" })
 print(cat)
 ```
 
@@ -154,22 +154,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = AiCatsSDK.test()
-const result = await client.cat.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const cat = await client.Cat().load({ id: 'test01' })
+// cat is a bare Cat populated with mock data
+console.log(cat)
 ```
 
 ### Python
 
 ```python
 client = AiCatsSDK.test()
-result = client.cat.load({"id": "test01"})
+cat = client.Cat().load({"id": "test01"})
+print(cat)
 ```
 
 ### PHP
 
 ```php
-$client = AiCatsSDK::test();
-$result = $client->cat()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = AiCatsSDK::test([
+    "entity" => ["cat" => ["test01" => ["id" => "test01"]]],
+]);
+$cat = $client->Cat()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -184,15 +189,18 @@ result, err := client.Cat(nil).Load(
 ### Ruby
 
 ```ruby
-client = AiCatsSDK.test
-result = client.cat.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = AiCatsSDK.test({
+  "entity" => { "cat" => { "test01" => { "id" => "test01" } } },
+})
+cat = client.Cat.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:cat():load({ id = "test01" })
+local result, err = client:Cat():load({ id = "test01" })
 ```
 
 ## How it works
@@ -240,6 +248,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

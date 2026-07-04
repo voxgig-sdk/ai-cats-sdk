@@ -32,8 +32,9 @@ client = AiCatsSDK.new
 
 ```ruby
 begin
-  result = client.cat.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Cat record (raises on error).
+  cat = client.Cat.load({ "id" => "example_id" })
+  puts cat
 rescue => err
   warn "load failed: #{err}"
 end
@@ -80,13 +81,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = AiCatsSDK.test
+client = AiCatsSDK.test({
+  "entity" => { "cat" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.cat.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+cat = client.Cat.load({ "id" => "test01" })
+puts cat
 ```
 
 ### Use a custom fetch function
@@ -165,7 +170,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Cat` | `(data) -> CatEntity` | Create a Cat entity instance. |
 | `CatImage` | `(data) -> CatImageEntity` | Create a CatImage entity instance. |
 | `Health` | `(data) -> HealthEntity` | Create a Health entity instance. |
-| `Interaction` | `(data) -> InteractionEntity` | Create a Interaction entity instance. |
+| `Interaction` | `(data) -> InteractionEntity` | Create an Interaction entity instance. |
 | `Training` | `(data) -> TrainingEntity` | Create a Training entity instance. |
 
 ### Entity interface
@@ -288,7 +293,7 @@ API path: `/training`
 
 ### Cat
 
-Create an instance: `const cat = client.cat`
+Create an instance: `cat = client.Cat`
 
 #### Operations
 
@@ -308,14 +313,15 @@ Create an instance: `const cat = client.cat`
 
 #### Example: Load
 
-```ts
-const cat = await client.cat.load({ id: 'cat_id' })
+```ruby
+# load returns the bare Cat record (raises on error).
+cat = client.Cat.load({ "id" => "cat_id" })
 ```
 
 
 ### CatImage
 
-Create an instance: `const cat_image = client.cat_image`
+Create an instance: `cat_image = client.CatImage`
 
 #### Operations
 
@@ -335,14 +341,15 @@ Create an instance: `const cat_image = client.cat_image`
 
 #### Example: Load
 
-```ts
-const cat_image = await client.cat_image.load({ id: 'cat_image_id' })
+```ruby
+# load returns the bare CatImage record (raises on error).
+cat_image = client.CatImage.load({ "id" => "cat_image_id" })
 ```
 
 
 ### Health
 
-Create an instance: `const health = client.health`
+Create an instance: `health = client.Health`
 
 #### Operations
 
@@ -365,21 +372,22 @@ Create an instance: `const health = client.health`
 
 #### Example: Load
 
-```ts
-const health = await client.health.load({ id: 'health_id' })
+```ruby
+# load returns the bare Health record (raises on error).
+health = client.Health.load({ "id" => "health_id" })
 ```
 
 #### Example: Create
 
-```ts
-const health = await client.health.create({
+```ruby
+health = client.Health.create({
 })
 ```
 
 
 ### Interaction
 
-Create an instance: `const interaction = client.interaction`
+Create an instance: `interaction = client.Interaction`
 
 #### Operations
 
@@ -402,23 +410,24 @@ Create an instance: `const interaction = client.interaction`
 
 #### Example: List
 
-```ts
-const interactions = await client.interaction.list()
+```ruby
+# list returns an Array of Interaction records (raises on error).
+interactions = client.Interaction.list
 ```
 
 #### Example: Create
 
-```ts
-const interaction = await client.interaction.create({
-  cat_id: /* `$STRING` */,
-  type: /* `$STRING` */,
+```ruby
+interaction = client.Interaction.create({
+  "cat_id" => nil, # `$STRING`
+  "type" => nil, # `$STRING`
 })
 ```
 
 
 ### Training
 
-Create an instance: `const training = client.training`
+Create an instance: `training = client.Training`
 
 #### Operations
 
@@ -441,17 +450,18 @@ Create an instance: `const training = client.training`
 
 #### Example: List
 
-```ts
-const trainings = await client.training.list()
+```ruby
+# list returns an Array of Training records (raises on error).
+trainings = client.Training.list
 ```
 
 #### Example: Create
 
-```ts
-const training = await client.training.create({
-  cat_id: /* `$STRING` */,
-  duration: /* `$INTEGER` */,
-  type: /* `$STRING` */,
+```ruby
+training = client.Training.create({
+  "cat_id" => nil, # `$STRING`
+  "duration" => nil, # `$INTEGER`
+  "type" => nil, # `$STRING`
 })
 ```
 
@@ -527,7 +537,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-cat = client.cat
+cat = client.Cat
 cat.load({ "id" => "example_id" })
 
 # cat.data_get now returns the loaded cat data

@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:cat():list() / client:cat():load({ id = ... })
-function AiCatsSDK:cat(data)
+-- Idiomatic facade: client:Cat():list() / client:Cat():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AiCatsSDK:Cat(data)
   local EntityMod = require("entity.cat_entity")
   if data == nil then
     if self._cat == nil then
@@ -256,15 +257,10 @@ function AiCatsSDK:cat(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:cat() instead.
-function AiCatsSDK:Cat(data)
-  local EntityMod = require("entity.cat_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:cat_image():list() / client:cat_image():load({ id = ... })
-function AiCatsSDK:cat_image(data)
+-- Idiomatic facade: client:CatImage():list() / client:CatImage():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AiCatsSDK:CatImage(data)
   local EntityMod = require("entity.cat_image_entity")
   if data == nil then
     if self._cat_image == nil then
@@ -275,15 +271,10 @@ function AiCatsSDK:cat_image(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:cat_image() instead.
-function AiCatsSDK:CatImage(data)
-  local EntityMod = require("entity.cat_image_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:health():list() / client:health():load({ id = ... })
-function AiCatsSDK:health(data)
+-- Idiomatic facade: client:Health():list() / client:Health():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AiCatsSDK:Health(data)
   local EntityMod = require("entity.health_entity")
   if data == nil then
     if self._health == nil then
@@ -294,15 +285,10 @@ function AiCatsSDK:health(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:health() instead.
-function AiCatsSDK:Health(data)
-  local EntityMod = require("entity.health_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:interaction():list() / client:interaction():load({ id = ... })
-function AiCatsSDK:interaction(data)
+-- Idiomatic facade: client:Interaction():list() / client:Interaction():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AiCatsSDK:Interaction(data)
   local EntityMod = require("entity.interaction_entity")
   if data == nil then
     if self._interaction == nil then
@@ -313,15 +299,10 @@ function AiCatsSDK:interaction(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:interaction() instead.
-function AiCatsSDK:Interaction(data)
-  local EntityMod = require("entity.interaction_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:training():list() / client:training():load({ id = ... })
-function AiCatsSDK:training(data)
+-- Idiomatic facade: client:Training():list() / client:Training():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AiCatsSDK:Training(data)
   local EntityMod = require("entity.training_entity")
   if data == nil then
     if self._training == nil then
@@ -329,12 +310,6 @@ function AiCatsSDK:training(data)
     end
     return self._training
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:training() instead.
-function AiCatsSDK:Training(data)
-  local EntityMod = require("entity.training_entity")
   return EntityMod.new(self, data)
 end
 

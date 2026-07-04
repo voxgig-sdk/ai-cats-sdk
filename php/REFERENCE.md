@@ -101,7 +101,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## CatEntity
 
 ```php
-$cat = $client->cat();
+$cat = $client->Cat();
 ```
 
 ### Fields
@@ -121,7 +121,7 @@ $cat = $client->cat();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->cat()->load(["id" => "cat_id"]);
+$result = $client->Cat()->load(["id" => "cat_id"]);
 ```
 
 ### Common Methods
@@ -157,7 +157,7 @@ Return the entity name.
 ## CatImageEntity
 
 ```php
-$cat_image = $client->cat_image();
+$cat_image = $client->CatImage();
 ```
 
 ### Fields
@@ -177,7 +177,7 @@ $cat_image = $client->cat_image();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->cat_image()->load(["id" => "cat_image_id"]);
+$result = $client->CatImage()->load(["id" => "cat_image_id"]);
 ```
 
 ### Common Methods
@@ -213,7 +213,7 @@ Return the entity name.
 ## HealthEntity
 
 ```php
-$health = $client->health();
+$health = $client->Health();
 ```
 
 ### Fields
@@ -247,7 +247,7 @@ $health = $client->health();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->health()->create([
+$result = $client->Health()->create([
 ]);
 ```
 
@@ -256,7 +256,7 @@ $result = $client->health()->create([
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->health()->load(["id" => "health_id"]);
+$result = $client->Health()->load(["id" => "health_id"]);
 ```
 
 ### Common Methods
@@ -292,7 +292,7 @@ Return the entity name.
 ## InteractionEntity
 
 ```php
-$interaction = $client->interaction();
+$interaction = $client->Interaction();
 ```
 
 ### Fields
@@ -326,7 +326,7 @@ $interaction = $client->interaction();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->interaction()->create([
+$result = $client->Interaction()->create([
   "cat_id" => /* `$STRING` */,
   "type" => /* `$STRING` */,
 ]);
@@ -337,7 +337,7 @@ $result = $client->interaction()->create([
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->interaction()->list([]);
+$results = $client->Interaction()->list([]);
 ```
 
 ### Common Methods
@@ -373,7 +373,7 @@ Return the entity name.
 ## TrainingEntity
 
 ```php
-$training = $client->training();
+$training = $client->Training();
 ```
 
 ### Fields
@@ -407,7 +407,7 @@ $training = $client->training();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->training()->create([
+$result = $client->Training()->create([
   "cat_id" => /* `$STRING` */,
   "duration" => /* `$INTEGER` */,
   "type" => /* `$STRING` */,
@@ -419,7 +419,7 @@ $result = $client->training()->create([
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->training()->list([]);
+$results = $client->Training()->list([]);
 ```
 
 ### Common Methods

@@ -33,9 +33,10 @@ $client = new AiCatsSDK();
 
 ```php
 try {
-    $result = $client->cat()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Cat record (throws on error).
+    $cat = $client->Cat()->load(["id" => "example_id"]);
+    print_r($cat);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -81,13 +82,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = AiCatsSDK::test();
+$client = AiCatsSDK::test([
+    "entity" => ["cat" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->cat()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$cat = $client->Cat()->load(["id" => "test01"]);
+print_r($cat);
 ```
 
 ### Use a custom fetch function
@@ -169,7 +174,7 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `Cat` | `($data): CatEntity` | Create a Cat entity instance. |
 | `CatImage` | `($data): CatImageEntity` | Create a CatImage entity instance. |
 | `Health` | `($data): HealthEntity` | Create a Health entity instance. |
-| `Interaction` | `($data): InteractionEntity` | Create a Interaction entity instance. |
+| `Interaction` | `($data): InteractionEntity` | Create an Interaction entity instance. |
 | `Training` | `($data): TrainingEntity` | Create a Training entity instance. |
 
 ### Entity interface
@@ -293,7 +298,7 @@ API path: `/training`
 
 ### Cat
 
-Create an instance: `const cat = client.cat`
+Create an instance: `$cat = $client->Cat();`
 
 #### Operations
 
@@ -313,14 +318,15 @@ Create an instance: `const cat = client.cat`
 
 #### Example: Load
 
-```ts
-const cat = await client.cat.load({ id: 'cat_id' })
+```php
+// load() returns the bare Cat record (throws on error).
+$cat = $client->Cat()->load(["id" => "cat_id"]);
 ```
 
 
 ### CatImage
 
-Create an instance: `const cat_image = client.cat_image`
+Create an instance: `$cat_image = $client->CatImage();`
 
 #### Operations
 
@@ -340,14 +346,15 @@ Create an instance: `const cat_image = client.cat_image`
 
 #### Example: Load
 
-```ts
-const cat_image = await client.cat_image.load({ id: 'cat_image_id' })
+```php
+// load() returns the bare CatImage record (throws on error).
+$cat_image = $client->CatImage()->load(["id" => "cat_image_id"]);
 ```
 
 
 ### Health
 
-Create an instance: `const health = client.health`
+Create an instance: `$health = $client->Health();`
 
 #### Operations
 
@@ -370,21 +377,22 @@ Create an instance: `const health = client.health`
 
 #### Example: Load
 
-```ts
-const health = await client.health.load({ id: 'health_id' })
+```php
+// load() returns the bare Health record (throws on error).
+$health = $client->Health()->load(["id" => "health_id"]);
 ```
 
 #### Example: Create
 
-```ts
-const health = await client.health.create({
-})
+```php
+$health = $client->Health()->create([
+]);
 ```
 
 
 ### Interaction
 
-Create an instance: `const interaction = client.interaction`
+Create an instance: `$interaction = $client->Interaction();`
 
 #### Operations
 
@@ -407,23 +415,24 @@ Create an instance: `const interaction = client.interaction`
 
 #### Example: List
 
-```ts
-const interactions = await client.interaction.list()
+```php
+// list() returns an array of Interaction records (throws on error).
+$interactions = $client->Interaction()->list();
 ```
 
 #### Example: Create
 
-```ts
-const interaction = await client.interaction.create({
-  cat_id: /* `$STRING` */,
-  type: /* `$STRING` */,
-})
+```php
+$interaction = $client->Interaction()->create([
+    "cat_id" => null, // `$STRING`
+    "type" => null, // `$STRING`
+]);
 ```
 
 
 ### Training
 
-Create an instance: `const training = client.training`
+Create an instance: `$training = $client->Training();`
 
 #### Operations
 
@@ -446,18 +455,19 @@ Create an instance: `const training = client.training`
 
 #### Example: List
 
-```ts
-const trainings = await client.training.list()
+```php
+// list() returns an array of Training records (throws on error).
+$trainings = $client->Training()->list();
 ```
 
 #### Example: Create
 
-```ts
-const training = await client.training.create({
-  cat_id: /* `$STRING` */,
-  duration: /* `$INTEGER` */,
-  type: /* `$STRING` */,
-})
+```php
+$training = $client->Training()->create([
+    "cat_id" => null, // `$STRING`
+    "duration" => null, // `$INTEGER`
+    "type" => null, // `$STRING`
+]);
 ```
 
 
@@ -532,7 +542,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$cat = $client->cat();
+$cat = $client->Cat();
 $cat->load(["id" => "example_id"]);
 
 // $cat->dataGet() now returns the loaded cat data

@@ -96,7 +96,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## CatEntity
 
 ```python
-cat = client.cat
+cat = client.Cat()
 ```
 
 ### Fields
@@ -116,7 +116,7 @@ cat = client.cat
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.cat.load({"id": "cat_id"})
+result = client.Cat().load({"id": "cat_id"})
 ```
 
 ### Common Methods
@@ -151,7 +151,7 @@ Return the entity name.
 ## CatImageEntity
 
 ```python
-cat_image = client.cat_image
+cat_image = client.CatImage()
 ```
 
 ### Fields
@@ -171,7 +171,7 @@ cat_image = client.cat_image
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.cat_image.load({"id": "cat_image_id"})
+result = client.CatImage().load({"id": "cat_image_id"})
 ```
 
 ### Common Methods
@@ -206,7 +206,7 @@ Return the entity name.
 ## HealthEntity
 
 ```python
-health = client.health
+health = client.Health()
 ```
 
 ### Fields
@@ -240,7 +240,7 @@ health = client.health
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.health.create({
+result = client.Health().create({
 })
 ```
 
@@ -249,7 +249,7 @@ result = client.health.create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.health.load({"id": "health_id"})
+result = client.Health().load({"id": "health_id"})
 ```
 
 ### Common Methods
@@ -284,7 +284,7 @@ Return the entity name.
 ## InteractionEntity
 
 ```python
-interaction = client.interaction
+interaction = client.Interaction()
 ```
 
 ### Fields
@@ -318,9 +318,9 @@ interaction = client.interaction
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.interaction.create({
-    "cat_id": # `$STRING`,
-    "type": # `$STRING`,
+result = client.Interaction().create({
+    "cat_id": ...,  # `$STRING`
+    "type": ...,  # `$STRING`
 })
 ```
 
@@ -329,7 +329,9 @@ result = client.interaction.create({
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.interaction.list({})
+results = client.Interaction().list({})
+for interaction in results:
+    print(interaction)
 ```
 
 ### Common Methods
@@ -364,7 +366,7 @@ Return the entity name.
 ## TrainingEntity
 
 ```python
-training = client.training
+training = client.Training()
 ```
 
 ### Fields
@@ -398,10 +400,10 @@ training = client.training
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.training.create({
-    "cat_id": # `$STRING`,
-    "duration": # `$INTEGER`,
-    "type": # `$STRING`,
+result = client.Training().create({
+    "cat_id": ...,  # `$STRING`
+    "duration": ...,  # `$INTEGER`
+    "type": ...,  # `$STRING`
 })
 ```
 
@@ -410,7 +412,9 @@ result = client.training.create({
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.training.list({})
+results = client.Training().list({})
+for training in results:
+    print(training)
 ```
 
 ### Common Methods

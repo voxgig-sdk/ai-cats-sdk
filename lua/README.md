@@ -34,9 +34,9 @@ local client = sdk.new()
 ### 3. Load a cat
 
 ```lua
-local result, err = client:cat():load({ id = "example_id" })
+local cat, err = client:Cat():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(cat)
 ```
 
 
@@ -82,8 +82,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:cat():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Cat():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -164,7 +164,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Cat` | `(data) -> CatEntity` | Create a Cat entity instance. |
 | `CatImage` | `(data) -> CatImageEntity` | Create a CatImage entity instance. |
 | `Health` | `(data) -> HealthEntity` | Create a Health entity instance. |
-| `Interaction` | `(data) -> InteractionEntity` | Create a Interaction entity instance. |
+| `Interaction` | `(data) -> InteractionEntity` | Create an Interaction entity instance. |
 | `Training` | `(data) -> TrainingEntity` | Create a Training entity instance. |
 
 ### Entity interface
@@ -187,17 +187,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local cat, err = client:Cat():load({ id = "example_id" })
+    if err then error(err) end
+    -- cat is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -284,7 +289,7 @@ API path: `/training`
 
 ### Cat
 
-Create an instance: `const cat = client.cat`
+Create an instance: `local cat = client:Cat(nil)`
 
 #### Operations
 
@@ -304,14 +309,14 @@ Create an instance: `const cat = client.cat`
 
 #### Example: Load
 
-```ts
-const cat = await client.cat.load({ id: 'cat_id' })
+```lua
+local cat, err = client:Cat():load({ id = "cat_id" })
 ```
 
 
 ### CatImage
 
-Create an instance: `const cat_image = client.cat_image`
+Create an instance: `local cat_image = client:CatImage(nil)`
 
 #### Operations
 
@@ -331,14 +336,14 @@ Create an instance: `const cat_image = client.cat_image`
 
 #### Example: Load
 
-```ts
-const cat_image = await client.cat_image.load({ id: 'cat_image_id' })
+```lua
+local cat_image, err = client:CatImage():load({ id = "cat_image_id" })
 ```
 
 
 ### Health
 
-Create an instance: `const health = client.health`
+Create an instance: `local health = client:Health(nil)`
 
 #### Operations
 
@@ -361,21 +366,21 @@ Create an instance: `const health = client.health`
 
 #### Example: Load
 
-```ts
-const health = await client.health.load({ id: 'health_id' })
+```lua
+local health, err = client:Health():load({ id = "health_id" })
 ```
 
 #### Example: Create
 
-```ts
-const health = await client.health.create({
+```lua
+local health, err = client:Health():create({
 })
 ```
 
 
 ### Interaction
 
-Create an instance: `const interaction = client.interaction`
+Create an instance: `local interaction = client:Interaction(nil)`
 
 #### Operations
 
@@ -398,23 +403,23 @@ Create an instance: `const interaction = client.interaction`
 
 #### Example: List
 
-```ts
-const interactions = await client.interaction.list()
+```lua
+local interactions, err = client:Interaction():list()
 ```
 
 #### Example: Create
 
-```ts
-const interaction = await client.interaction.create({
-  cat_id: /* `$STRING` */,
-  type: /* `$STRING` */,
+```lua
+local interaction, err = client:Interaction():create({
+  cat_id = nil, -- `$STRING`
+  type = nil, -- `$STRING`
 })
 ```
 
 
 ### Training
 
-Create an instance: `const training = client.training`
+Create an instance: `local training = client:Training(nil)`
 
 #### Operations
 
@@ -437,17 +442,17 @@ Create an instance: `const training = client.training`
 
 #### Example: List
 
-```ts
-const trainings = await client.training.list()
+```lua
+local trainings, err = client:Training():list()
 ```
 
 #### Example: Create
 
-```ts
-const training = await client.training.create({
-  cat_id: /* `$STRING` */,
-  duration: /* `$INTEGER` */,
-  type: /* `$STRING` */,
+```lua
+local training, err = client:Training():create({
+  cat_id = nil, -- `$STRING`
+  duration = nil, -- `$INTEGER`
+  type = nil, -- `$STRING`
 })
 ```
 
@@ -523,7 +528,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local cat = client:cat()
+local cat = client:Cat()
 cat:load({ id = "example_id" })
 
 -- cat:data_get() now returns the loaded cat data

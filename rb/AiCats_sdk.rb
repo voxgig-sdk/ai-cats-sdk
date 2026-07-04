@@ -208,65 +208,35 @@ class AiCatsSDK
   end
 
 
-  # Idiomatic facade: client.cat.list / client.cat.load({ "id" => ... })
-  def cat
-    require_relative 'entity/cat_entity'
-    @cat ||= CatEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.cat instead.
+  # Canonical facade: client.Cat.list / client.Cat.load({ "id" => ... })
   def Cat(data = nil)
     require_relative 'entity/cat_entity'
     CatEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.cat_image.list / client.cat_image.load({ "id" => ... })
-  def cat_image
-    require_relative 'entity/cat_image_entity'
-    @cat_image ||= CatImageEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.cat_image instead.
+  # Canonical facade: client.CatImage.list / client.CatImage.load({ "id" => ... })
   def CatImage(data = nil)
     require_relative 'entity/cat_image_entity'
     CatImageEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.health.list / client.health.load({ "id" => ... })
-  def health
-    require_relative 'entity/health_entity'
-    @health ||= HealthEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.health instead.
+  # Canonical facade: client.Health.list / client.Health.load({ "id" => ... })
   def Health(data = nil)
     require_relative 'entity/health_entity'
     HealthEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.interaction.list / client.interaction.load({ "id" => ... })
-  def interaction
-    require_relative 'entity/interaction_entity'
-    @interaction ||= InteractionEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.interaction instead.
+  # Canonical facade: client.Interaction.list / client.Interaction.load({ "id" => ... })
   def Interaction(data = nil)
     require_relative 'entity/interaction_entity'
     InteractionEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.training.list / client.training.load({ "id" => ... })
-  def training
-    require_relative 'entity/training_entity'
-    @training ||= TrainingEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.training instead.
+  # Canonical facade: client.Training.list / client.Training.load({ "id" => ... })
   def Training(data = nil)
     require_relative 'entity/training_entity'
     TrainingEntity.new(self, data)

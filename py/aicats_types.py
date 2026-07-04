@@ -4,140 +4,137 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Cat:
-    created_at: Optional[str] = None
-    height: Optional[int] = None
-    id: Optional[str] = None
-    url: Optional[str] = None
-    width: Optional[int] = None
+class Cat(TypedDict, total=False):
+    created_at: str
+    height: int
+    id: str
+    url: str
+    width: int
 
 
-@dataclass
-class CatLoadMatch:
+class CatLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class CatImage:
-    created_at: Optional[str] = None
-    height: Optional[int] = None
-    id: Optional[str] = None
-    url: Optional[str] = None
-    width: Optional[int] = None
+class CatImage(TypedDict, total=False):
+    created_at: str
+    height: int
+    id: str
+    url: str
+    width: int
 
 
-@dataclass
-class CatImageLoadMatch:
-    created_at: Optional[str] = None
-    height: Optional[int] = None
-    id: Optional[str] = None
-    url: Optional[str] = None
-    width: Optional[int] = None
+class CatImageLoadMatch(TypedDict, total=False):
+    created_at: str
+    height: int
+    id: str
+    url: str
+    width: int
 
 
-@dataclass
-class Health:
-    activity_level: Optional[str] = None
-    cat_id: Optional[str] = None
-    heart_rate: Optional[int] = None
-    id: Optional[str] = None
-    temperature: Optional[float] = None
-    timestamp: Optional[str] = None
-    weight: Optional[float] = None
+class Health(TypedDict, total=False):
+    activity_level: str
+    cat_id: str
+    heart_rate: int
+    id: str
+    temperature: float
+    timestamp: str
+    weight: float
 
 
-@dataclass
-class HealthLoadMatch:
-    activity_level: Optional[str] = None
-    cat_id: Optional[str] = None
-    heart_rate: Optional[int] = None
-    id: Optional[str] = None
-    temperature: Optional[float] = None
-    timestamp: Optional[str] = None
-    weight: Optional[float] = None
+class HealthLoadMatch(TypedDict, total=False):
+    activity_level: str
+    cat_id: str
+    heart_rate: int
+    id: str
+    temperature: float
+    timestamp: str
+    weight: float
 
 
-@dataclass
-class HealthCreateData:
-    activity_level: Optional[str] = None
-    cat_id: Optional[str] = None
-    heart_rate: Optional[int] = None
-    id: Optional[str] = None
-    temperature: Optional[float] = None
-    timestamp: Optional[str] = None
-    weight: Optional[float] = None
+class HealthCreateData(TypedDict, total=False):
+    activity_level: str
+    cat_id: str
+    heart_rate: int
+    id: str
+    temperature: float
+    timestamp: str
+    weight: float
 
 
-@dataclass
-class Interaction:
+class InteractionRequired(TypedDict):
     cat_id: str
     type: str
-    duration: Optional[int] = None
-    id: Optional[str] = None
-    note: Optional[str] = None
-    quality: Optional[str] = None
-    timestamp: Optional[str] = None
 
 
-@dataclass
-class InteractionListMatch:
-    cat_id: Optional[str] = None
-    duration: Optional[int] = None
-    id: Optional[str] = None
-    note: Optional[str] = None
-    quality: Optional[str] = None
-    timestamp: Optional[str] = None
-    type: Optional[str] = None
+class Interaction(InteractionRequired, total=False):
+    duration: int
+    id: str
+    note: str
+    quality: str
+    timestamp: str
 
 
-@dataclass
-class InteractionCreateData:
-    cat_id: Optional[str] = None
-    duration: Optional[int] = None
-    id: Optional[str] = None
-    note: Optional[str] = None
-    quality: Optional[str] = None
-    timestamp: Optional[str] = None
-    type: Optional[str] = None
+class InteractionListMatch(TypedDict, total=False):
+    cat_id: str
+    duration: int
+    id: str
+    note: str
+    quality: str
+    timestamp: str
+    type: str
 
 
-@dataclass
-class Training:
+class InteractionCreateData(TypedDict, total=False):
+    cat_id: str
+    duration: int
+    id: str
+    note: str
+    quality: str
+    timestamp: str
+    type: str
+
+
+class TrainingRequired(TypedDict):
     cat_id: str
     duration: int
     type: str
-    id: Optional[str] = None
-    note: Optional[str] = None
-    success: Optional[bool] = None
-    timestamp: Optional[str] = None
 
 
-@dataclass
-class TrainingListMatch:
-    cat_id: Optional[str] = None
-    duration: Optional[int] = None
-    id: Optional[str] = None
-    note: Optional[str] = None
-    success: Optional[bool] = None
-    timestamp: Optional[str] = None
-    type: Optional[str] = None
+class Training(TrainingRequired, total=False):
+    id: str
+    note: str
+    success: bool
+    timestamp: str
 
 
-@dataclass
-class TrainingCreateData:
-    cat_id: Optional[str] = None
-    duration: Optional[int] = None
-    id: Optional[str] = None
-    note: Optional[str] = None
-    success: Optional[bool] = None
-    timestamp: Optional[str] = None
-    type: Optional[str] = None
+class TrainingListMatch(TypedDict, total=False):
+    cat_id: str
+    duration: int
+    id: str
+    note: str
+    success: bool
+    timestamp: str
+    type: str
 
+
+class TrainingCreateData(TypedDict, total=False):
+    cat_id: str
+    duration: int
+    id: str
+    note: str
+    success: bool
+    timestamp: str
+    type: str

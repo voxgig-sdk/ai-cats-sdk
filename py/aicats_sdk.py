@@ -220,89 +220,39 @@ class AiCatsSDK:
         }
 
 
-    @property
-    def cat(self):
-        """Idiomatic facade: client.cat.list() / client.cat.load({"id": ...})."""
-        from entity.cat_entity import CatEntity
-        cached = getattr(self, "_cat", None)
-        if cached is None:
-            cached = CatEntity(self, None)
-            self._cat = cached
-        return cached
-
-    def Cat(self, data=None):
-        # Deprecated: use client.cat instead.
+    def Cat(self, data=None) -> "CatEntity":
+        """Entity factory: client.Cat().list({}) / client.Cat().load({"id": ...})."""
         from entity.cat_entity import CatEntity
         return CatEntity(self, data)
 
 
-    @property
-    def cat_image(self):
-        """Idiomatic facade: client.cat_image.list() / client.cat_image.load({"id": ...})."""
-        from entity.cat_image_entity import CatImageEntity
-        cached = getattr(self, "_cat_image", None)
-        if cached is None:
-            cached = CatImageEntity(self, None)
-            self._cat_image = cached
-        return cached
-
-    def CatImage(self, data=None):
-        # Deprecated: use client.cat_image instead.
+    def CatImage(self, data=None) -> "CatImageEntity":
+        """Entity factory: client.CatImage().list({}) / client.CatImage().load({"id": ...})."""
         from entity.cat_image_entity import CatImageEntity
         return CatImageEntity(self, data)
 
 
-    @property
-    def health(self):
-        """Idiomatic facade: client.health.list() / client.health.load({"id": ...})."""
-        from entity.health_entity import HealthEntity
-        cached = getattr(self, "_health", None)
-        if cached is None:
-            cached = HealthEntity(self, None)
-            self._health = cached
-        return cached
-
-    def Health(self, data=None):
-        # Deprecated: use client.health instead.
+    def Health(self, data=None) -> "HealthEntity":
+        """Entity factory: client.Health().list({}) / client.Health().load({"id": ...})."""
         from entity.health_entity import HealthEntity
         return HealthEntity(self, data)
 
 
-    @property
-    def interaction(self):
-        """Idiomatic facade: client.interaction.list() / client.interaction.load({"id": ...})."""
-        from entity.interaction_entity import InteractionEntity
-        cached = getattr(self, "_interaction", None)
-        if cached is None:
-            cached = InteractionEntity(self, None)
-            self._interaction = cached
-        return cached
-
-    def Interaction(self, data=None):
-        # Deprecated: use client.interaction instead.
+    def Interaction(self, data=None) -> "InteractionEntity":
+        """Entity factory: client.Interaction().list({}) / client.Interaction().load({"id": ...})."""
         from entity.interaction_entity import InteractionEntity
         return InteractionEntity(self, data)
 
 
-    @property
-    def training(self):
-        """Idiomatic facade: client.training.list() / client.training.load({"id": ...})."""
-        from entity.training_entity import TrainingEntity
-        cached = getattr(self, "_training", None)
-        if cached is None:
-            cached = TrainingEntity(self, None)
-            self._training = cached
-        return cached
-
-    def Training(self, data=None):
-        # Deprecated: use client.training instead.
+    def Training(self, data=None) -> "TrainingEntity":
+        """Entity factory: client.Training().list({}) / client.Training().load({"id": ...})."""
         from entity.training_entity import TrainingEntity
         return TrainingEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "AiCatsSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -322,3 +272,13 @@ class AiCatsSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.cat_entity import CatEntity
+    from entity.cat_image_entity import CatImageEntity
+    from entity.health_entity import HealthEntity
+    from entity.interaction_entity import InteractionEntity
+    from entity.training_entity import TrainingEntity

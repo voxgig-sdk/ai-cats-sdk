@@ -208,70 +208,35 @@ class AiCatsSDK {
 
 
 
-  _cat?: CatEntity
-
-  // Idiomatic facade: `client.cat.list()` / `client.cat.load({ id })`.
-  get cat(): CatEntity {
-    return (this._cat ??= new CatEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.cat` instead. */
+  // Entity access: `client.Cat().list()` / `client.Cat().load({ id })`.
   Cat(data?: any) {
     const self = this
     return new CatEntity(self,data)
   }
 
 
-  _cat_image?: CatImageEntity
-
-  // Idiomatic facade: `client.cat_image.list()` / `client.cat_image.load({ id })`.
-  get cat_image(): CatImageEntity {
-    return (this._cat_image ??= new CatImageEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.cat_image` instead. */
+  // Entity access: `client.CatImage().list()` / `client.CatImage().load({ id })`.
   CatImage(data?: any) {
     const self = this
     return new CatImageEntity(self,data)
   }
 
 
-  _health?: HealthEntity
-
-  // Idiomatic facade: `client.health.list()` / `client.health.load({ id })`.
-  get health(): HealthEntity {
-    return (this._health ??= new HealthEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.health` instead. */
+  // Entity access: `client.Health().list()` / `client.Health().load({ id })`.
   Health(data?: any) {
     const self = this
     return new HealthEntity(self,data)
   }
 
 
-  _interaction?: InteractionEntity
-
-  // Idiomatic facade: `client.interaction.list()` / `client.interaction.load({ id })`.
-  get interaction(): InteractionEntity {
-    return (this._interaction ??= new InteractionEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.interaction` instead. */
+  // Entity access: `client.Interaction().list()` / `client.Interaction().load({ id })`.
   Interaction(data?: any) {
     const self = this
     return new InteractionEntity(self,data)
   }
 
 
-  _training?: TrainingEntity
-
-  // Idiomatic facade: `client.training.list()` / `client.training.load({ id })`.
-  get training(): TrainingEntity {
-    return (this._training ??= new TrainingEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.training` instead. */
+  // Entity access: `client.Training().list()` / `client.Training().load({ id })`.
   Training(data?: any) {
     const self = this
     return new TrainingEntity(self,data)

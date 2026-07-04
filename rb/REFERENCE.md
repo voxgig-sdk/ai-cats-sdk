@@ -102,7 +102,7 @@ same parameters as `direct()`. Raises on error.
 ## CatEntity
 
 ```ruby
-cat = client.cat
+cat = client.Cat
 ```
 
 ### Fields
@@ -122,7 +122,7 @@ cat = client.cat
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.cat.load({ "id" => "cat_id" })
+result = client.Cat.load({ "id" => "cat_id" })
 ```
 
 ### Common Methods
@@ -158,7 +158,7 @@ Return the entity name.
 ## CatImageEntity
 
 ```ruby
-cat_image = client.cat_image
+cat_image = client.CatImage
 ```
 
 ### Fields
@@ -178,7 +178,7 @@ cat_image = client.cat_image
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.cat_image.load({ "id" => "cat_image_id" })
+result = client.CatImage.load({ "id" => "cat_image_id" })
 ```
 
 ### Common Methods
@@ -214,7 +214,7 @@ Return the entity name.
 ## HealthEntity
 
 ```ruby
-health = client.health
+health = client.Health
 ```
 
 ### Fields
@@ -248,7 +248,7 @@ health = client.health
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.health.create({
+result = client.Health.create({
 })
 ```
 
@@ -257,7 +257,7 @@ result = client.health.create({
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.health.load({ "id" => "health_id" })
+result = client.Health.load({ "id" => "health_id" })
 ```
 
 ### Common Methods
@@ -293,7 +293,7 @@ Return the entity name.
 ## InteractionEntity
 
 ```ruby
-interaction = client.interaction
+interaction = client.Interaction
 ```
 
 ### Fields
@@ -327,7 +327,7 @@ interaction = client.interaction
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.interaction.create({
+result = client.Interaction.create({
   "cat_id" => # `$STRING`,
   "type" => # `$STRING`,
 })
@@ -338,7 +338,7 @@ result = client.interaction.create({
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.interaction.list(nil)
+results = client.Interaction.list(nil)
 ```
 
 ### Common Methods
@@ -374,7 +374,7 @@ Return the entity name.
 ## TrainingEntity
 
 ```ruby
-training = client.training
+training = client.Training
 ```
 
 ### Fields
@@ -408,7 +408,7 @@ training = client.training
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.training.create({
+result = client.Training.create({
   "cat_id" => # `$STRING`,
   "duration" => # `$INTEGER`,
   "type" => # `$STRING`,
@@ -420,7 +420,7 @@ result = client.training.create({
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.training.list(nil)
+results = client.Training.list(nil)
 ```
 
 ### Common Methods

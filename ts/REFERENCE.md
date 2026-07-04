@@ -157,7 +157,7 @@ Alias for `AiCatsSDK.test()`.
 ## CatEntity
 
 ```ts
-const cat = client.cat
+const cat = client.Cat()
 ```
 
 ### Fields
@@ -177,7 +177,7 @@ const cat = client.cat
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.cat.load({ id: 'cat_id' })
+const result = await client.Cat().load({ id: 'cat_id' })
 ```
 
 ### Common Methods
@@ -211,7 +211,7 @@ Return a copy of the entity options.
 ## CatImageEntity
 
 ```ts
-const cat_image = client.cat_image
+const cat_image = client.CatImage()
 ```
 
 ### Fields
@@ -231,7 +231,7 @@ const cat_image = client.cat_image
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.cat_image.load({ id: 'cat_image_id' })
+const result = await client.CatImage().load({ id: 'cat_image_id' })
 ```
 
 ### Common Methods
@@ -265,7 +265,7 @@ Return a copy of the entity options.
 ## HealthEntity
 
 ```ts
-const health = client.health
+const health = client.Health()
 ```
 
 ### Fields
@@ -299,7 +299,7 @@ const health = client.health
 Create a new entity with the given data.
 
 ```ts
-const result = await client.health.create({
+const result = await client.Health().create({
 })
 ```
 
@@ -308,7 +308,7 @@ const result = await client.health.create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.health.load({ id: 'health_id' })
+const result = await client.Health().load({ id: 'health_id' })
 ```
 
 ### Common Methods
@@ -342,7 +342,7 @@ Return a copy of the entity options.
 ## InteractionEntity
 
 ```ts
-const interaction = client.interaction
+const interaction = client.Interaction()
 ```
 
 ### Fields
@@ -376,7 +376,7 @@ const interaction = client.interaction
 Create a new entity with the given data.
 
 ```ts
-const result = await client.interaction.create({
+const result = await client.Interaction().create({
   cat_id: /* `$STRING` */,
   type: /* `$STRING` */,
 })
@@ -387,7 +387,7 @@ const result = await client.interaction.create({
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.interaction.list()
+const results = await client.Interaction().list()
 ```
 
 ### Common Methods
@@ -421,7 +421,7 @@ Return a copy of the entity options.
 ## TrainingEntity
 
 ```ts
-const training = client.training
+const training = client.Training()
 ```
 
 ### Fields
@@ -455,7 +455,7 @@ const training = client.training
 Create a new entity with the given data.
 
 ```ts
-const result = await client.training.create({
+const result = await client.Training().create({
   cat_id: /* `$STRING` */,
   duration: /* `$INTEGER` */,
   type: /* `$STRING` */,
@@ -467,7 +467,7 @@ const result = await client.training.create({
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.training.list()
+const results = await client.Training().list()
 ```
 
 ### Common Methods
