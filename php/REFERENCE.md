@@ -8,7 +8,7 @@ Complete API reference for the AiCats PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/ai-cats_sdk.php';
+require_once __DIR__ . '/aicats_sdk.php';
 
 $client = new AiCatsSDK($options);
 ```
@@ -61,11 +61,11 @@ Create a new `InteractionEntity` instance. Pass `null` for no initial data.
 
 Create a new `TrainingEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): AiCatsUtility`
 
 Return a copy of the SDK utility object.
 
@@ -108,11 +108,11 @@ $cat = $client->Cat();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `height` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `width` | ``$INTEGER`` | No |  |
+| `created_at` | `string` | No |  |
+| `height` | `int` | No |  |
+| `id` | `string` | No |  |
+| `url` | `string` | No |  |
+| `width` | `int` | No |  |
 
 ### Operations
 
@@ -126,19 +126,19 @@ $result = $client->Cat()->load(["id" => "cat_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -147,7 +147,7 @@ Set the entity match criteria.
 Create a new `CatEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -164,11 +164,11 @@ $cat_image = $client->CatImage();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `height` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `width` | ``$INTEGER`` | No |  |
+| `created_at` | `string` | No |  |
+| `height` | `int` | No |  |
+| `id` | `string` | No |  |
+| `url` | `string` | No |  |
+| `width` | `int` | No |  |
 
 ### Operations
 
@@ -182,19 +182,19 @@ $result = $client->CatImage()->load(["id" => "cat_image_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -203,7 +203,7 @@ Set the entity match criteria.
 Create a new `CatImageEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -220,25 +220,25 @@ $health = $client->Health();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activity_level` | ``$STRING`` | No |  |
-| `cat_id` | ``$STRING`` | No |  |
-| `heart_rate` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `temperature` | ``$NUMBER`` | No |  |
-| `timestamp` | ``$STRING`` | No |  |
-| `weight` | ``$NUMBER`` | No |  |
+| `activity_level` | `string` | No |  |
+| `cat_id` | `string` | No |  |
+| `heart_rate` | `int` | No |  |
+| `id` | `string` | No |  |
+| `temperature` | `float` | No |  |
+| `timestamp` | `string` | No |  |
+| `weight` | `float` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `activity_level` | - | - | - | - | - |
-| `cat_id` | - | - | Yes | - | - |
-| `heart_rate` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `temperature` | - | - | - | - | - |
-| `timestamp` | - | - | - | - | - |
-| `weight` | - | - | Yes | - | - |
+| Field | load | create |
+| --- | --- | --- |
+| `activity_level` | - | - |
+| `cat_id` | - | Yes |
+| `heart_rate` | - | - |
+| `id` | - | - |
+| `temperature` | - | - |
+| `timestamp` | - | - |
+| `weight` | - | Yes |
 
 ### Operations
 
@@ -261,19 +261,19 @@ $result = $client->Health()->load(["id" => "health_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -282,7 +282,7 @@ Set the entity match criteria.
 Create a new `HealthEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -299,25 +299,25 @@ $interaction = $client->Interaction();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `note` | ``$STRING`` | No |  |
-| `quality` | ``$STRING`` | No |  |
-| `timestamp` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `cat_id` | `string` | Yes |  |
+| `duration` | `int` | No |  |
+| `id` | `string` | No |  |
+| `note` | `string` | No |  |
+| `quality` | `string` | No |  |
+| `timestamp` | `string` | No |  |
+| `type` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `cat_id` | - | Yes | - | - | - |
-| `duration` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `note` | - | - | - | - | - |
-| `quality` | - | - | - | - | - |
-| `timestamp` | - | - | - | - | - |
-| `type` | - | Yes | - | - | - |
+| Field | list | create |
+| --- | --- | --- |
+| `cat_id` | Yes | - |
+| `duration` | - | - |
+| `id` | - | - |
+| `note` | - | - |
+| `quality` | - | - |
+| `timestamp` | - | - |
+| `type` | Yes | - |
 
 ### Operations
 
@@ -327,34 +327,34 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Interaction()->create([
-  "cat_id" => /* `$STRING` */,
-  "type" => /* `$STRING` */,
+  "cat_id" => null, // string
+  "type" => null, // string
 ]);
 ```
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Interaction()->list([]);
+$results = $client->Interaction()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -363,7 +363,7 @@ Set the entity match criteria.
 Create a new `InteractionEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -380,25 +380,25 @@ $training = $client->Training();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `note` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `timestamp` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `cat_id` | `string` | Yes |  |
+| `duration` | `int` | Yes |  |
+| `id` | `string` | No |  |
+| `note` | `string` | No |  |
+| `success` | `bool` | No |  |
+| `timestamp` | `string` | No |  |
+| `type` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `cat_id` | - | Yes | - | - | - |
-| `duration` | - | Yes | - | - | - |
-| `id` | - | - | - | - | - |
-| `note` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `timestamp` | - | - | - | - | - |
-| `type` | - | Yes | - | - | - |
+| Field | list | create |
+| --- | --- | --- |
+| `cat_id` | Yes | - |
+| `duration` | Yes | - |
+| `id` | - | - |
+| `note` | - | - |
+| `success` | - | - |
+| `timestamp` | - | - |
+| `type` | Yes | - |
 
 ### Operations
 
@@ -408,35 +408,35 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Training()->create([
-  "cat_id" => /* `$STRING` */,
-  "duration" => /* `$INTEGER` */,
-  "type" => /* `$STRING` */,
+  "cat_id" => null, // string
+  "duration" => null, // int
+  "type" => null, // string
 ]);
 ```
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Training()->list([]);
+$results = $client->Training()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -445,7 +445,7 @@ Set the entity match criteria.
 Create a new `TrainingEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

@@ -25,7 +25,13 @@ export interface CatImage {
   width?: number
 }
 
-export type CatImageLoadMatch = Partial<CatImage>
+export interface CatImageLoadMatch {
+  created_at?: string
+  height?: number
+  id: string
+  url?: string
+  width?: number
+}
 
 export interface Health {
   activity_level?: string
@@ -37,9 +43,25 @@ export interface Health {
   weight?: number
 }
 
-export type HealthLoadMatch = Partial<Health>
+export interface HealthLoadMatch {
+  activity_level?: string
+  cat_id?: string
+  heart_rate?: number
+  id: string
+  temperature?: number
+  timestamp?: string
+  weight?: number
+}
 
-export type HealthCreateData = Partial<Health>
+export interface HealthCreateData {
+  activity_level?: string
+  cat_id?: string
+  heart_rate?: number
+  id?: string
+  temperature?: number
+  timestamp?: string
+  weight?: number
+}
 
 export interface Interaction {
   cat_id: string
@@ -51,9 +73,25 @@ export interface Interaction {
   type: string
 }
 
-export type InteractionListMatch = Partial<Interaction>
+export interface InteractionListMatch {
+  cat_id?: string
+  duration?: number
+  id?: string
+  note?: string
+  quality?: string
+  timestamp?: string
+  type?: string
+}
 
-export type InteractionCreateData = Partial<Interaction>
+export interface InteractionCreateData {
+  cat_id: string
+  duration?: number
+  id?: string
+  note?: string
+  quality?: string
+  timestamp?: string
+  type: string
+}
 
 export interface Training {
   cat_id: string
@@ -65,7 +103,23 @@ export interface Training {
   type: string
 }
 
-export type TrainingListMatch = Partial<Training>
+export interface TrainingListMatch {
+  cat_id?: string
+  duration?: number
+  id?: string
+  note?: string
+  success?: boolean
+  timestamp?: string
+  type?: string
+}
 
-export type TrainingCreateData = Partial<Training>
+export interface TrainingCreateData {
+  cat_id: string
+  duration: number
+  id?: string
+  note?: string
+  success?: boolean
+  timestamp?: string
+  type: string
+}
 

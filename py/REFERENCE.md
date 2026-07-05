@@ -8,7 +8,7 @@ Complete API reference for the AiCats Python SDK.
 ### Constructor
 
 ```python
-from ai-cats_sdk import AiCatsSDK
+from aicats_sdk import AiCatsSDK
 
 client = AiCatsSDK(options)
 ```
@@ -103,11 +103,11 @@ cat = client.Cat()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `height` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `width` | ``$INTEGER`` | No |  |
+| `created_at` | `str` | No |  |
+| `height` | `int` | No |  |
+| `id` | `str` | No |  |
+| `url` | `str` | No |  |
+| `width` | `int` | No |  |
 
 ### Operations
 
@@ -158,11 +158,11 @@ cat_image = client.CatImage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `height` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `width` | ``$INTEGER`` | No |  |
+| `created_at` | `str` | No |  |
+| `height` | `int` | No |  |
+| `id` | `str` | No |  |
+| `url` | `str` | No |  |
+| `width` | `int` | No |  |
 
 ### Operations
 
@@ -213,25 +213,25 @@ health = client.Health()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activity_level` | ``$STRING`` | No |  |
-| `cat_id` | ``$STRING`` | No |  |
-| `heart_rate` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `temperature` | ``$NUMBER`` | No |  |
-| `timestamp` | ``$STRING`` | No |  |
-| `weight` | ``$NUMBER`` | No |  |
+| `activity_level` | `str` | No |  |
+| `cat_id` | `str` | No |  |
+| `heart_rate` | `int` | No |  |
+| `id` | `str` | No |  |
+| `temperature` | `float` | No |  |
+| `timestamp` | `str` | No |  |
+| `weight` | `float` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `activity_level` | - | - | - | - | - |
-| `cat_id` | - | - | Yes | - | - |
-| `heart_rate` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `temperature` | - | - | - | - | - |
-| `timestamp` | - | - | - | - | - |
-| `weight` | - | - | Yes | - | - |
+| Field | load | create |
+| --- | --- | --- |
+| `activity_level` | - | - |
+| `cat_id` | - | Yes |
+| `heart_rate` | - | - |
+| `id` | - | - |
+| `temperature` | - | - |
+| `timestamp` | - | - |
+| `weight` | - | Yes |
 
 ### Operations
 
@@ -291,25 +291,25 @@ interaction = client.Interaction()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `note` | ``$STRING`` | No |  |
-| `quality` | ``$STRING`` | No |  |
-| `timestamp` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `cat_id` | `str` | Yes |  |
+| `duration` | `int` | No |  |
+| `id` | `str` | No |  |
+| `note` | `str` | No |  |
+| `quality` | `str` | No |  |
+| `timestamp` | `str` | No |  |
+| `type` | `str` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `cat_id` | - | Yes | - | - | - |
-| `duration` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `note` | - | - | - | - | - |
-| `quality` | - | - | - | - | - |
-| `timestamp` | - | - | - | - | - |
-| `type` | - | Yes | - | - | - |
+| Field | list | create |
+| --- | --- | --- |
+| `cat_id` | Yes | - |
+| `duration` | - | - |
+| `id` | - | - |
+| `note` | - | - |
+| `quality` | - | - |
+| `timestamp` | - | - |
+| `type` | Yes | - |
 
 ### Operations
 
@@ -319,17 +319,17 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Interaction().create({
-    "cat_id": ...,  # `$STRING`
-    "type": ...,  # `$STRING`
+    "cat_id": "example",  # str
+    "type": "example",  # str
 })
 ```
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Interaction().list({})
+results = client.Interaction().list()
 for interaction in results:
     print(interaction)
 ```
@@ -373,25 +373,25 @@ training = client.Training()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `note` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `timestamp` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `cat_id` | `str` | Yes |  |
+| `duration` | `int` | Yes |  |
+| `id` | `str` | No |  |
+| `note` | `str` | No |  |
+| `success` | `bool` | No |  |
+| `timestamp` | `str` | No |  |
+| `type` | `str` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `cat_id` | - | Yes | - | - | - |
-| `duration` | - | Yes | - | - | - |
-| `id` | - | - | - | - | - |
-| `note` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `timestamp` | - | - | - | - | - |
-| `type` | - | Yes | - | - | - |
+| Field | list | create |
+| --- | --- | --- |
+| `cat_id` | Yes | - |
+| `duration` | Yes | - |
+| `id` | - | - |
+| `note` | - | - |
+| `success` | - | - |
+| `timestamp` | - | - |
+| `type` | Yes | - |
 
 ### Operations
 
@@ -401,18 +401,18 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Training().create({
-    "cat_id": ...,  # `$STRING`
-    "duration": ...,  # `$INTEGER`
-    "type": ...,  # `$STRING`
+    "cat_id": "example",  # str
+    "duration": 1,  # int
+    "type": "example",  # str
 })
 ```
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Training().list({})
+results = client.Training().list()
 for training in results:
     print(training)
 ```

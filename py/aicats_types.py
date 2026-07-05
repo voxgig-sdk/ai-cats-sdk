@@ -36,10 +36,13 @@ class CatImage(TypedDict, total=False):
     width: int
 
 
-class CatImageLoadMatch(TypedDict, total=False):
+class CatImageLoadMatchRequired(TypedDict):
+    id: str
+
+
+class CatImageLoadMatch(CatImageLoadMatchRequired, total=False):
     created_at: str
     height: int
-    id: str
     url: str
     width: int
 
@@ -54,11 +57,14 @@ class Health(TypedDict, total=False):
     weight: float
 
 
-class HealthLoadMatch(TypedDict, total=False):
+class HealthLoadMatchRequired(TypedDict):
+    id: str
+
+
+class HealthLoadMatch(HealthLoadMatchRequired, total=False):
     activity_level: str
     cat_id: str
     heart_rate: int
-    id: str
     temperature: float
     timestamp: str
     weight: float
@@ -97,14 +103,17 @@ class InteractionListMatch(TypedDict, total=False):
     type: str
 
 
-class InteractionCreateData(TypedDict, total=False):
+class InteractionCreateDataRequired(TypedDict):
     cat_id: str
+    type: str
+
+
+class InteractionCreateData(InteractionCreateDataRequired, total=False):
     duration: int
     id: str
     note: str
     quality: str
     timestamp: str
-    type: str
 
 
 class TrainingRequired(TypedDict):
@@ -130,11 +139,14 @@ class TrainingListMatch(TypedDict, total=False):
     type: str
 
 
-class TrainingCreateData(TypedDict, total=False):
+class TrainingCreateDataRequired(TypedDict):
     cat_id: str
     duration: int
+    type: str
+
+
+class TrainingCreateData(TrainingCreateDataRequired, total=False):
     id: str
     note: str
     success: bool
     timestamp: str
-    type: str

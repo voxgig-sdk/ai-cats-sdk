@@ -113,11 +113,11 @@ cat := client.Cat(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `height` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `width` | ``$INTEGER`` | No |  |
+| `created_at` | `string` | No |  |
+| `height` | `int` | No |  |
+| `id` | `string` | No |  |
+| `url` | `string` | No |  |
+| `width` | `int` | No |  |
 
 ### Operations
 
@@ -163,11 +163,11 @@ cat_image := client.CatImage(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `height` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `width` | ``$INTEGER`` | No |  |
+| `created_at` | `string` | No |  |
+| `height` | `int` | No |  |
+| `id` | `string` | No |  |
+| `url` | `string` | No |  |
+| `width` | `int` | No |  |
 
 ### Operations
 
@@ -213,25 +213,25 @@ health := client.Health(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activity_level` | ``$STRING`` | No |  |
-| `cat_id` | ``$STRING`` | No |  |
-| `heart_rate` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `temperature` | ``$NUMBER`` | No |  |
-| `timestamp` | ``$STRING`` | No |  |
-| `weight` | ``$NUMBER`` | No |  |
+| `activity_level` | `string` | No |  |
+| `cat_id` | `string` | No |  |
+| `heart_rate` | `int` | No |  |
+| `id` | `string` | No |  |
+| `temperature` | `float64` | No |  |
+| `timestamp` | `string` | No |  |
+| `weight` | `float64` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `activity_level` | - | - | - | - | - |
-| `cat_id` | - | - | Yes | - | - |
-| `heart_rate` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `temperature` | - | - | - | - | - |
-| `timestamp` | - | - | - | - | - |
-| `weight` | - | - | Yes | - | - |
+| Field | load | create |
+| --- | --- | --- |
+| `activity_level` | - | - |
+| `cat_id` | - | Yes |
+| `heart_rate` | - | - |
+| `id` | - | - |
+| `temperature` | - | - |
+| `timestamp` | - | - |
+| `weight` | - | Yes |
 
 ### Operations
 
@@ -286,25 +286,25 @@ interaction := client.Interaction(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `note` | ``$STRING`` | No |  |
-| `quality` | ``$STRING`` | No |  |
-| `timestamp` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `cat_id` | `string` | Yes |  |
+| `duration` | `int` | No |  |
+| `id` | `string` | No |  |
+| `note` | `string` | No |  |
+| `quality` | `string` | No |  |
+| `timestamp` | `string` | No |  |
+| `type` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `cat_id` | - | Yes | - | - | - |
-| `duration` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `note` | - | - | - | - | - |
-| `quality` | - | - | - | - | - |
-| `timestamp` | - | - | - | - | - |
-| `type` | - | Yes | - | - | - |
+| Field | list | create |
+| --- | --- | --- |
+| `cat_id` | Yes | - |
+| `duration` | - | - |
+| `id` | - | - |
+| `note` | - | - |
+| `quality` | - | - |
+| `timestamp` | - | - |
+| `type` | Yes | - |
 
 ### Operations
 
@@ -314,8 +314,8 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Interaction(nil).Create(map[string]any{
-    "cat_id": /* `$STRING` */,
-    "type": /* `$STRING` */,
+    "cat_id": /* string */,
+    "type": /* string */,
 }, nil)
 ```
 
@@ -361,25 +361,25 @@ training := client.Training(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `note` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `timestamp` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `cat_id` | `string` | Yes |  |
+| `duration` | `int` | Yes |  |
+| `id` | `string` | No |  |
+| `note` | `string` | No |  |
+| `success` | `bool` | No |  |
+| `timestamp` | `string` | No |  |
+| `type` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `cat_id` | - | Yes | - | - | - |
-| `duration` | - | Yes | - | - | - |
-| `id` | - | - | - | - | - |
-| `note` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `timestamp` | - | - | - | - | - |
-| `type` | - | Yes | - | - | - |
+| Field | list | create |
+| --- | --- | --- |
+| `cat_id` | Yes | - |
+| `duration` | Yes | - |
+| `id` | - | - |
+| `note` | - | - |
+| `success` | - | - |
+| `timestamp` | - | - |
+| `type` | Yes | - |
 
 ### Operations
 
@@ -389,9 +389,9 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Training(nil).Create(map[string]any{
-    "cat_id": /* `$STRING` */,
-    "duration": /* `$INTEGER` */,
-    "type": /* `$STRING` */,
+    "cat_id": /* string */,
+    "duration": /* int */,
+    "type": /* string */,
 }, nil)
 ```
 

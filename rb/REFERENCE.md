@@ -8,7 +8,7 @@ Complete API reference for the AiCats Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'ai-cats_sdk'
+require_relative 'AiCats_sdk'
 
 client = AiCatsSDK.new(options)
 ```
@@ -109,11 +109,11 @@ cat = client.Cat
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `height` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `width` | ``$INTEGER`` | No |  |
+| `created_at` | `String` | No |  |
+| `height` | `Integer` | No |  |
+| `id` | `String` | No |  |
+| `url` | `String` | No |  |
+| `width` | `Integer` | No |  |
 
 ### Operations
 
@@ -165,11 +165,11 @@ cat_image = client.CatImage
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `height` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `width` | ``$INTEGER`` | No |  |
+| `created_at` | `String` | No |  |
+| `height` | `Integer` | No |  |
+| `id` | `String` | No |  |
+| `url` | `String` | No |  |
+| `width` | `Integer` | No |  |
 
 ### Operations
 
@@ -221,25 +221,25 @@ health = client.Health
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activity_level` | ``$STRING`` | No |  |
-| `cat_id` | ``$STRING`` | No |  |
-| `heart_rate` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `temperature` | ``$NUMBER`` | No |  |
-| `timestamp` | ``$STRING`` | No |  |
-| `weight` | ``$NUMBER`` | No |  |
+| `activity_level` | `String` | No |  |
+| `cat_id` | `String` | No |  |
+| `heart_rate` | `Integer` | No |  |
+| `id` | `String` | No |  |
+| `temperature` | `Float` | No |  |
+| `timestamp` | `String` | No |  |
+| `weight` | `Float` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `activity_level` | - | - | - | - | - |
-| `cat_id` | - | - | Yes | - | - |
-| `heart_rate` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `temperature` | - | - | - | - | - |
-| `timestamp` | - | - | - | - | - |
-| `weight` | - | - | Yes | - | - |
+| Field | load | create |
+| --- | --- | --- |
+| `activity_level` | - | - |
+| `cat_id` | - | Yes |
+| `heart_rate` | - | - |
+| `id` | - | - |
+| `temperature` | - | - |
+| `timestamp` | - | - |
+| `weight` | - | Yes |
 
 ### Operations
 
@@ -300,25 +300,25 @@ interaction = client.Interaction
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `note` | ``$STRING`` | No |  |
-| `quality` | ``$STRING`` | No |  |
-| `timestamp` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `cat_id` | `String` | Yes |  |
+| `duration` | `Integer` | No |  |
+| `id` | `String` | No |  |
+| `note` | `String` | No |  |
+| `quality` | `String` | No |  |
+| `timestamp` | `String` | No |  |
+| `type` | `String` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `cat_id` | - | Yes | - | - | - |
-| `duration` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `note` | - | - | - | - | - |
-| `quality` | - | - | - | - | - |
-| `timestamp` | - | - | - | - | - |
-| `type` | - | Yes | - | - | - |
+| Field | list | create |
+| --- | --- | --- |
+| `cat_id` | Yes | - |
+| `duration` | - | - |
+| `id` | - | - |
+| `note` | - | - |
+| `quality` | - | - |
+| `timestamp` | - | - |
+| `type` | Yes | - |
 
 ### Operations
 
@@ -328,17 +328,17 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Interaction.create({
-  "cat_id" => # `$STRING`,
-  "type" => # `$STRING`,
+  "cat_id" => "example", # String
+  "type" => "example", # String
 })
 ```
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Interaction.list(nil)
+results = client.Interaction.list
 ```
 
 ### Common Methods
@@ -381,25 +381,25 @@ training = client.Training
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `note` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `timestamp` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `cat_id` | `String` | Yes |  |
+| `duration` | `Integer` | Yes |  |
+| `id` | `String` | No |  |
+| `note` | `String` | No |  |
+| `success` | `Boolean` | No |  |
+| `timestamp` | `String` | No |  |
+| `type` | `String` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `cat_id` | - | Yes | - | - | - |
-| `duration` | - | Yes | - | - | - |
-| `id` | - | - | - | - | - |
-| `note` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `timestamp` | - | - | - | - | - |
-| `type` | - | Yes | - | - | - |
+| Field | list | create |
+| --- | --- | --- |
+| `cat_id` | Yes | - |
+| `duration` | Yes | - |
+| `id` | - | - |
+| `note` | - | - |
+| `success` | - | - |
+| `timestamp` | - | - |
+| `type` | Yes | - |
 
 ### Operations
 
@@ -409,18 +409,18 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Training.create({
-  "cat_id" => # `$STRING`,
-  "duration" => # `$INTEGER`,
-  "type" => # `$STRING`,
+  "cat_id" => "example", # String
+  "duration" => 1, # Integer
+  "type" => "example", # String
 })
 ```
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Training.list(nil)
+results = client.Training.list
 ```
 
 ### Common Methods

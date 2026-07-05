@@ -221,31 +221,31 @@ class AiCatsSDK:
 
 
     def Cat(self, data=None) -> "CatEntity":
-        """Entity factory: client.Cat().list({}) / client.Cat().load({"id": ...})."""
+        """Entity factory: client.Cat().list() / client.Cat().load({"id": ...})."""
         from entity.cat_entity import CatEntity
         return CatEntity(self, data)
 
 
     def CatImage(self, data=None) -> "CatImageEntity":
-        """Entity factory: client.CatImage().list({}) / client.CatImage().load({"id": ...})."""
+        """Entity factory: client.CatImage().list() / client.CatImage().load({"id": ...})."""
         from entity.cat_image_entity import CatImageEntity
         return CatImageEntity(self, data)
 
 
     def Health(self, data=None) -> "HealthEntity":
-        """Entity factory: client.Health().list({}) / client.Health().load({"id": ...})."""
+        """Entity factory: client.Health().list() / client.Health().load({"id": ...})."""
         from entity.health_entity import HealthEntity
         return HealthEntity(self, data)
 
 
     def Interaction(self, data=None) -> "InteractionEntity":
-        """Entity factory: client.Interaction().list({}) / client.Interaction().load({"id": ...})."""
+        """Entity factory: client.Interaction().list() / client.Interaction().load({"id": ...})."""
         from entity.interaction_entity import InteractionEntity
         return InteractionEntity(self, data)
 
 
     def Training(self, data=None) -> "TrainingEntity":
-        """Entity factory: client.Training().list({}) / client.Training().load({"id": ...})."""
+        """Entity factory: client.Training().list() / client.Training().load({"id": ...})."""
         from entity.training_entity import TrainingEntity
         return TrainingEntity(self, data)
 

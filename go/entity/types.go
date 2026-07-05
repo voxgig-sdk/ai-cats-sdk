@@ -31,12 +31,11 @@ type CatImage struct {
 	Width *int `json:"width,omitempty"`
 }
 
-// CatImageLoadMatch mirrors the cat_image fields as an all-optional match
-// filter (Go analog of Partial<CatImage>).
+// CatImageLoadMatch is the typed request payload for CatImage.LoadTyped.
 type CatImageLoadMatch struct {
 	CreatedAt *string `json:"created_at,omitempty"`
 	Height *int `json:"height,omitempty"`
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	Url *string `json:"url,omitempty"`
 	Width *int `json:"width,omitempty"`
 }
@@ -52,20 +51,18 @@ type Health struct {
 	Weight *float64 `json:"weight,omitempty"`
 }
 
-// HealthLoadMatch mirrors the health fields as an all-optional match
-// filter (Go analog of Partial<Health>).
+// HealthLoadMatch is the typed request payload for Health.LoadTyped.
 type HealthLoadMatch struct {
 	ActivityLevel *string `json:"activity_level,omitempty"`
 	CatId *string `json:"cat_id,omitempty"`
 	HeartRate *int `json:"heart_rate,omitempty"`
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	Temperature *float64 `json:"temperature,omitempty"`
 	Timestamp *string `json:"timestamp,omitempty"`
 	Weight *float64 `json:"weight,omitempty"`
 }
 
-// HealthCreateData mirrors the health fields as an all-optional match
-// filter (Go analog of Partial<Health>).
+// HealthCreateData is the typed request payload for Health.CreateTyped.
 type HealthCreateData struct {
 	ActivityLevel *string `json:"activity_level,omitempty"`
 	CatId *string `json:"cat_id,omitempty"`
@@ -87,8 +84,7 @@ type Interaction struct {
 	Type string `json:"type"`
 }
 
-// InteractionListMatch mirrors the interaction fields as an all-optional match
-// filter (Go analog of Partial<Interaction>).
+// InteractionListMatch is the typed request payload for Interaction.ListTyped.
 type InteractionListMatch struct {
 	CatId *string `json:"cat_id,omitempty"`
 	Duration *int `json:"duration,omitempty"`
@@ -99,16 +95,15 @@ type InteractionListMatch struct {
 	Type *string `json:"type,omitempty"`
 }
 
-// InteractionCreateData mirrors the interaction fields as an all-optional match
-// filter (Go analog of Partial<Interaction>).
+// InteractionCreateData is the typed request payload for Interaction.CreateTyped.
 type InteractionCreateData struct {
-	CatId *string `json:"cat_id,omitempty"`
+	CatId string `json:"cat_id"`
 	Duration *int `json:"duration,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Note *string `json:"note,omitempty"`
 	Quality *string `json:"quality,omitempty"`
 	Timestamp *string `json:"timestamp,omitempty"`
-	Type *string `json:"type,omitempty"`
+	Type string `json:"type"`
 }
 
 // Training is the typed data model for the training entity.
@@ -122,8 +117,7 @@ type Training struct {
 	Type string `json:"type"`
 }
 
-// TrainingListMatch mirrors the training fields as an all-optional match
-// filter (Go analog of Partial<Training>).
+// TrainingListMatch is the typed request payload for Training.ListTyped.
 type TrainingListMatch struct {
 	CatId *string `json:"cat_id,omitempty"`
 	Duration *int `json:"duration,omitempty"`
@@ -134,16 +128,15 @@ type TrainingListMatch struct {
 	Type *string `json:"type,omitempty"`
 }
 
-// TrainingCreateData mirrors the training fields as an all-optional match
-// filter (Go analog of Partial<Training>).
+// TrainingCreateData is the typed request payload for Training.CreateTyped.
 type TrainingCreateData struct {
-	CatId *string `json:"cat_id,omitempty"`
-	Duration *int `json:"duration,omitempty"`
+	CatId string `json:"cat_id"`
+	Duration int `json:"duration"`
 	Id *string `json:"id,omitempty"`
 	Note *string `json:"note,omitempty"`
 	Success *bool `json:"success,omitempty"`
 	Timestamp *string `json:"timestamp,omitempty"`
-	Type *string `json:"type,omitempty"`
+	Type string `json:"type"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

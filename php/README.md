@@ -4,6 +4,8 @@
 
 The PHP SDK for the AiCats API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Cat()` — with named operations (`list`/`load`/`create`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -42,6 +44,37 @@ try {
 ```
 
 
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $cat = $client->Cat()->load(["id" => "example_id"]);
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
+}
+```
+
+
 ## How-to guides
 
 ### Make a direct HTTP request
@@ -61,7 +94,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -90,7 +126,7 @@ $client = AiCatsSDK::test([
     "entity" => ["cat" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// load() returns the bare mock record (throws on error).
+// Entity ops return the bare mock record (throws on error).
 $cat = $client->Cat()->load(["id" => "test01"]);
 print_r($cat);
 ```
@@ -184,10 +220,8 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
+| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
 | `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -310,11 +344,11 @@ Create an instance: `$cat = $client->Cat();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$STRING`` |  |
-| `height` | ``$INTEGER`` |  |
-| `id` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
-| `width` | ``$INTEGER`` |  |
+| `created_at` | `string` |  |
+| `height` | `int` |  |
+| `id` | `string` |  |
+| `url` | `string` |  |
+| `width` | `int` |  |
 
 #### Example: Load
 
@@ -338,11 +372,11 @@ Create an instance: `$cat_image = $client->CatImage();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$STRING`` |  |
-| `height` | ``$INTEGER`` |  |
-| `id` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
-| `width` | ``$INTEGER`` |  |
+| `created_at` | `string` |  |
+| `height` | `int` |  |
+| `id` | `string` |  |
+| `url` | `string` |  |
+| `width` | `int` |  |
 
 #### Example: Load
 
@@ -367,13 +401,13 @@ Create an instance: `$health = $client->Health();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `activity_level` | ``$STRING`` |  |
-| `cat_id` | ``$STRING`` |  |
-| `heart_rate` | ``$INTEGER`` |  |
-| `id` | ``$STRING`` |  |
-| `temperature` | ``$NUMBER`` |  |
-| `timestamp` | ``$STRING`` |  |
-| `weight` | ``$NUMBER`` |  |
+| `activity_level` | `string` |  |
+| `cat_id` | `string` |  |
+| `heart_rate` | `int` |  |
+| `id` | `string` |  |
+| `temperature` | `float` |  |
+| `timestamp` | `string` |  |
+| `weight` | `float` |  |
 
 #### Example: Load
 
@@ -405,13 +439,13 @@ Create an instance: `$interaction = $client->Interaction();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | ``$STRING`` |  |
-| `duration` | ``$INTEGER`` |  |
-| `id` | ``$STRING`` |  |
-| `note` | ``$STRING`` |  |
-| `quality` | ``$STRING`` |  |
-| `timestamp` | ``$STRING`` |  |
-| `type` | ``$STRING`` |  |
+| `cat_id` | `string` |  |
+| `duration` | `int` |  |
+| `id` | `string` |  |
+| `note` | `string` |  |
+| `quality` | `string` |  |
+| `timestamp` | `string` |  |
+| `type` | `string` |  |
 
 #### Example: List
 
@@ -424,8 +458,8 @@ $interactions = $client->Interaction()->list();
 
 ```php
 $interaction = $client->Interaction()->create([
-    "cat_id" => null, // `$STRING`
-    "type" => null, // `$STRING`
+    "cat_id" => null, // string
+    "type" => null, // string
 ]);
 ```
 
@@ -445,13 +479,13 @@ Create an instance: `$training = $client->Training();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | ``$STRING`` |  |
-| `duration` | ``$INTEGER`` |  |
-| `id` | ``$STRING`` |  |
-| `note` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timestamp` | ``$STRING`` |  |
-| `type` | ``$STRING`` |  |
+| `cat_id` | `string` |  |
+| `duration` | `int` |  |
+| `id` | `string` |  |
+| `note` | `string` |  |
+| `success` | `bool` |  |
+| `timestamp` | `string` |  |
+| `type` | `string` |  |
 
 #### Example: List
 
@@ -464,19 +498,23 @@ $trainings = $client->Training()->list();
 
 ```php
 $training = $client->Training()->create([
-    "cat_id" => null, // `$STRING`
-    "duration" => null, // `$INTEGER`
-    "type" => null, // `$STRING`
+    "cat_id" => null, // string
+    "duration" => null, // int
+    "type" => null, // string
 ]);
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -493,8 +531,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -545,8 +584,8 @@ stores the returned data and match criteria internally.
 $cat = $client->Cat();
 $cat->load(["id" => "example_id"]);
 
-// $cat->dataGet() now returns the loaded cat data
-// $cat->matchGet() returns the last match criteria
+// $cat->data_get() now returns the cat data from the last load
+// $cat->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

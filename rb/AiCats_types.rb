@@ -67,7 +67,7 @@ CatImage = Struct.new(
   keyword_init: true
 )
 
-# Match filter for CatImage#load (any subset of CatImage fields).
+# Request payload for CatImage#load.
 #
 # @!attribute [rw] created_at
 #   @return [String, nil]
@@ -76,7 +76,7 @@ CatImage = Struct.new(
 #   @return [Integer, nil]
 #
 # @!attribute [rw] id
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] url
 #   @return [String, nil]
@@ -125,7 +125,7 @@ Health = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Health#load (any subset of Health fields).
+# Request payload for Health#load.
 #
 # @!attribute [rw] activity_level
 #   @return [String, nil]
@@ -137,7 +137,7 @@ Health = Struct.new(
 #   @return [Integer, nil]
 #
 # @!attribute [rw] id
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] temperature
 #   @return [Float, nil]
@@ -158,7 +158,7 @@ HealthLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Health#create (any subset of Health fields).
+# Request payload for Health#create.
 #
 # @!attribute [rw] activity_level
 #   @return [String, nil]
@@ -224,7 +224,7 @@ Interaction = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Interaction#list (any subset of Interaction fields).
+# Request payload for Interaction#list.
 #
 # @!attribute [rw] cat_id
 #   @return [String, nil]
@@ -257,10 +257,10 @@ InteractionListMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Interaction#create (any subset of Interaction fields).
+# Request payload for Interaction#create.
 #
 # @!attribute [rw] cat_id
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] duration
 #   @return [Integer, nil]
@@ -278,7 +278,7 @@ InteractionListMatch = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] type
-#   @return [String, nil]
+#   @return [String]
 InteractionCreateData = Struct.new(
   :cat_id,
   :duration,
@@ -323,7 +323,7 @@ Training = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Training#list (any subset of Training fields).
+# Request payload for Training#list.
 #
 # @!attribute [rw] cat_id
 #   @return [String, nil]
@@ -356,13 +356,13 @@ TrainingListMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Training#create (any subset of Training fields).
+# Request payload for Training#create.
 #
 # @!attribute [rw] cat_id
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] duration
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
@@ -377,7 +377,7 @@ TrainingListMatch = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] type
-#   @return [String, nil]
+#   @return [String]
 TrainingCreateData = Struct.new(
   :cat_id,
   :duration,

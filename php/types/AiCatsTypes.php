@@ -38,12 +38,12 @@ class CatImage
     public ?int $width = null;
 }
 
-/** Match filter for CatImage#load (any subset of CatImage fields). */
+/** Request payload for CatImage#load. */
 class CatImageLoadMatch
 {
     public ?string $created_at = null;
     public ?int $height = null;
-    public ?string $id = null;
+    public string $id;
     public ?string $url = null;
     public ?int $width = null;
 }
@@ -60,19 +60,19 @@ class Health
     public ?float $weight = null;
 }
 
-/** Match filter for Health#load (any subset of Health fields). */
+/** Request payload for Health#load. */
 class HealthLoadMatch
 {
     public ?string $activity_level = null;
     public ?string $cat_id = null;
     public ?int $heart_rate = null;
-    public ?string $id = null;
+    public string $id;
     public ?float $temperature = null;
     public ?string $timestamp = null;
     public ?float $weight = null;
 }
 
-/** Match filter for Health#create (any subset of Health fields). */
+/** Request payload for Health#create. */
 class HealthCreateData
 {
     public ?string $activity_level = null;
@@ -96,7 +96,7 @@ class Interaction
     public string $type;
 }
 
-/** Match filter for Interaction#list (any subset of Interaction fields). */
+/** Request payload for Interaction#list. */
 class InteractionListMatch
 {
     public ?string $cat_id = null;
@@ -108,16 +108,16 @@ class InteractionListMatch
     public ?string $type = null;
 }
 
-/** Match filter for Interaction#create (any subset of Interaction fields). */
+/** Request payload for Interaction#create. */
 class InteractionCreateData
 {
-    public ?string $cat_id = null;
+    public string $cat_id;
     public ?int $duration = null;
     public ?string $id = null;
     public ?string $note = null;
     public ?string $quality = null;
     public ?string $timestamp = null;
-    public ?string $type = null;
+    public string $type;
 }
 
 /** Training entity data model. */
@@ -132,7 +132,7 @@ class Training
     public string $type;
 }
 
-/** Match filter for Training#list (any subset of Training fields). */
+/** Request payload for Training#list. */
 class TrainingListMatch
 {
     public ?string $cat_id = null;
@@ -144,15 +144,15 @@ class TrainingListMatch
     public ?string $type = null;
 }
 
-/** Match filter for Training#create (any subset of Training fields). */
+/** Request payload for Training#create. */
 class TrainingCreateData
 {
-    public ?string $cat_id = null;
-    public ?int $duration = null;
+    public string $cat_id;
+    public int $duration;
     public ?string $id = null;
     public ?string $note = null;
     public ?bool $success = null;
     public ?string $timestamp = null;
-    public ?string $type = null;
+    public string $type;
 }
 
