@@ -433,8 +433,8 @@ local interactions, err = client:Interaction():list()
 
 ```lua
 local interaction, err = client:Interaction():create({
-  cat_id = nil, -- string
-  type = nil, -- string
+  cat_id = "example_cat_id", -- string
+  type = "example_type", -- string
 })
 ```
 
@@ -472,9 +472,9 @@ local trainings, err = client:Training():list()
 
 ```lua
 local training, err = client:Training():create({
-  cat_id = nil, -- string
-  duration = nil, -- number
-  type = nil, -- string
+  cat_id = "example_cat_id", -- string
+  duration = 1, -- number
+  type = "example_type", -- string
 })
 ```
 

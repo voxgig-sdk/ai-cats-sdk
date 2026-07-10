@@ -328,8 +328,8 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Interaction.create({
-  "cat_id" => "example", # String
-  "type" => "example", # String
+  "cat_id" => "example_cat_id", # String
+  "type" => "example_type", # String
 })
 ```
 
@@ -409,9 +409,9 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Training.create({
-  "cat_id" => "example", # String
+  "cat_id" => "example_cat_id", # String
   "duration" => 1, # Integer
-  "type" => "example", # String
+  "type" => "example_type", # String
 })
 ```
 

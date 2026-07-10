@@ -15,9 +15,9 @@ main: {
           url: "https://ai-cats.net/api"
         }
       ]
+      summary: "The ai-cats API provides access to various functionalities related to AI and cat management, offering features such as training, health monitoring, and interaction tracking."
       title: "ai-cats API"
       version: "1.0.0"
+      website: "https://ai-cats.net"
     }
   }
-}
-

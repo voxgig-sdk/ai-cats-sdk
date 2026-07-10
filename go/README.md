@@ -51,7 +51,7 @@ func main() {
     client := sdk.New()
 
     // Load a single cat — the value is the loaded record.
-    cat, err := client.Cat(nil).Load(map[string]any{"id": "example"}, nil)
+    cat, err := client.Cat(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
@@ -375,7 +375,7 @@ fmt.Println(cat) // the loaded record
 
 ### CatImage
 
-Create an instance: `cat_image := client.CatImage(nil)`
+Create an instance: `catImage := client.CatImage(nil)`
 
 #### Operations
 
@@ -396,11 +396,11 @@ Create an instance: `cat_image := client.CatImage(nil)`
 #### Example: Load
 
 ```go
-cat_image, err := client.CatImage(nil).Load(map[string]any{"id": "cat_image_id"}, nil)
+catImage, err := client.CatImage(nil).Load(map[string]any{"id": "cat_image_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(cat_image) // the loaded record
+fmt.Println(catImage) // the loaded record
 ```
 
 
@@ -412,8 +412,8 @@ Create an instance: `health := client.Health(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 
 #### Fields
 
@@ -442,6 +442,10 @@ fmt.Println(health) // the loaded record
 ```go
 result, err := client.Health(nil).Create(map[string]any{
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
@@ -453,8 +457,8 @@ Create an instance: `interaction := client.Interaction(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `List(match, ctrl)` | List entities matching the criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 
 #### Fields
 
@@ -482,9 +486,13 @@ fmt.Println(interactions) // the array of records
 
 ```go
 result, err := client.Interaction(nil).Create(map[string]any{
-    "cat_id": /* string */,
-    "type": /* string */,
+    "cat_id": "example_cat_id",
+    "type": "example_type",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
@@ -496,8 +504,8 @@ Create an instance: `training := client.Training(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `List(match, ctrl)` | List entities matching the criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 
 #### Fields
 
@@ -525,10 +533,14 @@ fmt.Println(trainings) // the array of records
 
 ```go
 result, err := client.Training(nil).Create(map[string]any{
-    "cat_id": /* string */,
-    "duration": /* int */,
-    "type": /* string */,
+    "cat_id": "example_cat_id",
+    "duration": 1,
+    "type": "example_type",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 

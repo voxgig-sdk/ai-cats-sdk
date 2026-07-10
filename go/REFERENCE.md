@@ -107,6 +107,7 @@ same parameters as `Direct()`.
 
 ```go
 cat := client.Cat(nil)
+fmt.Println(cat.GetName()) // "cat"
 ```
 
 ### Fields
@@ -127,6 +128,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Cat(nil).Load(map[string]any{"id": "cat_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -156,7 +161,8 @@ Return the entity name.
 ## CatImageEntity
 
 ```go
-cat_image := client.CatImage(nil)
+catImage := client.CatImage(nil)
+fmt.Println(catImage.GetName()) // "cat_image"
 ```
 
 ### Fields
@@ -177,6 +183,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.CatImage(nil).Load(map[string]any{"id": "cat_image_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -207,6 +217,7 @@ Return the entity name.
 
 ```go
 health := client.Health(nil)
+fmt.Println(health.GetName()) // "health"
 ```
 
 ### Fields
@@ -235,6 +246,18 @@ health := client.Health(nil)
 
 ### Operations
 
+#### `Load(reqmatch, ctrl map[string]any) (any, error)`
+
+Load a single entity matching the given criteria.
+
+```go
+result, err := client.Health(nil).Load(map[string]any{"id": "health_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
 #### `Create(reqdata, ctrl map[string]any) (any, error)`
 
 Create a new entity with the given data.
@@ -242,14 +265,10 @@ Create a new entity with the given data.
 ```go
 result, err := client.Health(nil).Create(map[string]any{
 }, nil)
-```
-
-#### `Load(reqmatch, ctrl map[string]any) (any, error)`
-
-Load a single entity matching the given criteria.
-
-```go
-result, err := client.Health(nil).Load(map[string]any{"id": "health_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -280,6 +299,7 @@ Return the entity name.
 
 ```go
 interaction := client.Interaction(nil)
+fmt.Println(interaction.GetName()) // "interaction"
 ```
 
 ### Fields
@@ -308,23 +328,31 @@ interaction := client.Interaction(nil)
 
 ### Operations
 
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data.
-
-```go
-result, err := client.Interaction(nil).Create(map[string]any{
-    "cat_id": /* string */,
-    "type": /* string */,
-}, nil)
-```
-
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
 List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Interaction(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
+```
+
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
+
+Create a new entity with the given data.
+
+```go
+result, err := client.Interaction(nil).Create(map[string]any{
+    "cat_id": "example_cat_id",
+    "type": "example_type",
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -355,6 +383,7 @@ Return the entity name.
 
 ```go
 training := client.Training(nil)
+fmt.Println(training.GetName()) // "training"
 ```
 
 ### Fields
@@ -383,24 +412,32 @@ training := client.Training(nil)
 
 ### Operations
 
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data.
-
-```go
-result, err := client.Training(nil).Create(map[string]any{
-    "cat_id": /* string */,
-    "duration": /* int */,
-    "type": /* string */,
-}, nil)
-```
-
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
 List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Training(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
+```
+
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
+
+Create a new entity with the given data.
+
+```go
+result, err := client.Training(nil).Create(map[string]any{
+    "cat_id": "example_cat_id",
+    "duration": 1,
+    "type": "example_type",
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

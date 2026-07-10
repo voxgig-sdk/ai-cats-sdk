@@ -447,8 +447,8 @@ interactions = client.Interaction().list()
 
 ```python
 interaction = client.Interaction().create({
-    "cat_id": "example",  # str
-    "type": "example",  # str
+    "cat_id": "example_cat_id",  # str
+    "type": "example_type",  # str
 })
 ```
 
@@ -486,9 +486,9 @@ trainings = client.Training().list()
 
 ```python
 training = client.Training().create({
-    "cat_id": "example",  # str
+    "cat_id": "example_cat_id",  # str
     "duration": 1,  # int
-    "type": "example",  # str
+    "type": "example_type",  # str
 })
 ```
 

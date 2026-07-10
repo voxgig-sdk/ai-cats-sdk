@@ -493,8 +493,8 @@ const interactions = await client.Interaction().list()
 
 ```ts
 const interaction = await client.Interaction().create({
-  cat_id: /* string */,
-  type: /* string */,
+  cat_id: 'example_cat_id',
+  type: 'example_type',
 })
 ```
 
@@ -532,9 +532,9 @@ const trainings = await client.Training().list()
 
 ```ts
 const training = await client.Training().create({
-  cat_id: /* string */,
-  duration: /* number */,
-  type: /* string */,
+  cat_id: 'example_cat_id',
+  duration: 1,
+  type: 'example_type',
 })
 ```
 

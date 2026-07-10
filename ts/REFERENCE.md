@@ -377,8 +377,8 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Interaction().create({
-  cat_id: /* string */,
-  type: /* string */,
+  cat_id: 'example_cat_id',
+  type: 'example_type',
 })
 ```
 
@@ -456,9 +456,9 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Training().create({
-  cat_id: /* string */,
-  duration: /* number */,
-  type: /* string */,
+  cat_id: 'example_cat_id',
+  duration: 1,
+  type: 'example_type',
 })
 ```
 
