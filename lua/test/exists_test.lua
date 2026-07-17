@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- AiCats SDK exists test
 
 local sdk = require("ai-cats_sdk")
 
