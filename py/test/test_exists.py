@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# AiCats SDK exists test
 
 import pytest
 from aicats_sdk import AiCatsSDK

@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'AiCats',
   }
 
 
@@ -68,7 +68,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "created_at",
+          "name": "createdAt",
           "req": false,
           "type": "`$STRING`",
           "index$": 0
@@ -123,6 +123,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/cats/{id}",
               "parts": [
@@ -152,7 +153,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "created_at",
+          "name": "createdAt",
           "req": false,
           "type": "`$STRING`",
           "index$": 0
@@ -195,6 +196,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/cats/random",
               "parts": [
@@ -220,14 +222,14 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "activity_level",
+          "name": "activityLevel",
           "req": false,
           "type": "`$STRING`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "cat_id",
+          "name": "catId",
           "op": {
             "create": {
               "req": true,
@@ -240,7 +242,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "heart_rate",
+          "name": "heartRate",
           "req": false,
           "type": "`$INTEGER`",
           "index$": 2
@@ -289,6 +291,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/cats/health",
               "parts": [
@@ -323,6 +326,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/cats/health",
               "parts": [
@@ -352,7 +356,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "cat_id",
+          "name": "catId",
           "op": {
             "list": {
               "req": false,
@@ -379,7 +383,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "note",
+          "name": "notes",
           "req": false,
           "type": "`$STRING`",
           "index$": 3
@@ -421,6 +425,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/interactions",
               "parts": [
@@ -470,6 +475,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/interactions",
               "parts": [
@@ -500,7 +506,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "cat_id",
+          "name": "catId",
           "op": {
             "list": {
               "req": false,
@@ -533,7 +539,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "note",
+          "name": "notes",
           "req": false,
           "type": "`$STRING`",
           "index$": 3
@@ -575,6 +581,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/training",
               "parts": [
@@ -617,6 +624,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/training",
               "parts": [

@@ -30,7 +30,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "created_at",
+						"name": "createdAt",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 0,
@@ -85,6 +85,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/cats/{id}",
 								"parts": []any{
@@ -103,7 +104,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -114,7 +114,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "created_at",
+						"name": "createdAt",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 0,
@@ -157,6 +157,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/cats/random",
 								"parts": []any{
@@ -171,7 +172,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -182,14 +182,14 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "activity_level",
+						"name": "activityLevel",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "cat_id",
+						"name": "catId",
 						"op": map[string]any{
 							"create": map[string]any{
 								"req": true,
@@ -202,7 +202,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "heart_rate",
+						"name": "heartRate",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 2,
@@ -251,6 +251,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/cats/health",
 								"parts": []any{
@@ -265,7 +266,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -285,6 +285,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/cats/health",
 								"parts": []any{
@@ -303,7 +304,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -314,7 +314,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "cat_id",
+						"name": "catId",
 						"op": map[string]any{
 							"list": map[string]any{
 								"req": false,
@@ -341,7 +341,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "note",
+						"name": "notes",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 3,
@@ -383,6 +383,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/interactions",
 								"parts": []any{
@@ -396,7 +397,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 					"list": map[string]any{
 						"input": "data",
@@ -432,6 +432,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/interactions",
 								"parts": []any{
@@ -451,7 +452,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -462,7 +462,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "cat_id",
+						"name": "catId",
 						"op": map[string]any{
 							"list": map[string]any{
 								"req": false,
@@ -495,7 +495,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "note",
+						"name": "notes",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 3,
@@ -537,6 +537,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/training",
 								"parts": []any{
@@ -550,7 +551,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 					"list": map[string]any{
 						"input": "data",
@@ -579,6 +579,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/training",
 								"parts": []any{
@@ -597,7 +598,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{

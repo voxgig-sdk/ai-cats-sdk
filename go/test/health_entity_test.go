@@ -44,7 +44,7 @@ func TestHealthEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set AICATS_TEST_HEALTH_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set AI_CATS_TEST_HEALTH_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -58,7 +58,7 @@ func TestHealthEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		healthRef01Data = core.ToMapAny(healthRef01DataResult)
+		healthRef01Data = core.ToMapAny(entityData(healthRef01DataResult))
 		if healthRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -74,7 +74,7 @@ func TestHealthEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		healthRef01DataDt0LoadResult := core.ToMapAny(healthRef01DataDt0Loaded)
+		healthRef01DataDt0LoadResult := core.ToMapAny(entityData(healthRef01DataDt0Loaded))
 		if healthRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
@@ -122,21 +122,21 @@ func healthBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("AICATS_TEST_HEALTH_ENTID")
+	entidEnvRaw := os.Getenv("AI_CATS_TEST_HEALTH_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"AICATS_TEST_HEALTH_ENTID": idmap,
-		"AICATS_TEST_LIVE":      "FALSE",
-		"AICATS_TEST_EXPLAIN":   "FALSE",
+		"AI_CATS_TEST_HEALTH_ENTID": idmap,
+		"AI_CATS_TEST_LIVE":      "FALSE",
+		"AI_CATS_TEST_EXPLAIN":   "FALSE",
 	})
 
-	idmapResolved := core.ToMapAny(env["AICATS_TEST_HEALTH_ENTID"])
+	idmapResolved := core.ToMapAny(env["AI_CATS_TEST_HEALTH_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["AICATS_TEST_LIVE"] == "TRUE" {
+	if env["AI_CATS_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
 			},
@@ -145,13 +145,13 @@ func healthBasicSetup(extra map[string]any) *entityTestSetup {
 		client = sdk.NewAiCatsSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["AICATS_TEST_LIVE"] == "TRUE"
+	live := env["AI_CATS_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["AICATS_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["AI_CATS_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

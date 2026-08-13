@@ -35,7 +35,7 @@ $client = new AiCatsSDK();
 
 ```php
 try {
-    // load() returns the bare Cat record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Cat record (throws on error).
     $cat = $client->Cat()->load(["id" => "example_id"]);
     print_r($cat);
 } catch (\Throwable $err) {
@@ -51,7 +51,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $cat = $client->Cat()->load(["id" => "example_id"]);
+    $trainings = $client->Training()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -118,17 +118,15 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = AiCatsSDK::test([
-    "entity" => ["cat" => ["test01" => ["id" => "test01"]]],
-]);
+$client = AiCatsSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$cat = $client->Cat()->load(["id" => "test01"]);
-print_r($cat);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$training = $client->Training()->list();
+print_r($training);
 ```
 
 ### Use a custom fetch function
@@ -231,7 +229,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -253,7 +251,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
+| `createdAt` |  |
 | `height` |  |
 | `id` |  |
 | `url` |  |
@@ -267,7 +265,7 @@ API path: `/cats/{id}`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
+| `createdAt` |  |
 | `height` |  |
 | `id` |  |
 | `url` |  |
@@ -281,9 +279,9 @@ API path: `/cats/random`
 
 | Field | Description |
 | --- | --- |
-| `activity_level` |  |
-| `cat_id` |  |
-| `heart_rate` |  |
+| `activityLevel` |  |
+| `catId` |  |
+| `heartRate` |  |
 | `id` |  |
 | `temperature` |  |
 | `timestamp` |  |
@@ -297,10 +295,10 @@ API path: `/cats/health`
 
 | Field | Description |
 | --- | --- |
-| `cat_id` |  |
+| `catId` |  |
 | `duration` |  |
 | `id` |  |
-| `note` |  |
+| `notes` |  |
 | `quality` |  |
 | `timestamp` |  |
 | `type` |  |
@@ -313,10 +311,10 @@ API path: `/interactions`
 
 | Field | Description |
 | --- | --- |
-| `cat_id` |  |
+| `catId` |  |
 | `duration` |  |
 | `id` |  |
-| `note` |  |
+| `notes` |  |
 | `success` |  |
 | `timestamp` |  |
 | `type` |  |
@@ -344,7 +342,7 @@ Create an instance: `$cat = $client->Cat();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
+| `createdAt` | `string` |  |
 | `height` | `int` |  |
 | `id` | `string` |  |
 | `url` | `string` |  |
@@ -353,7 +351,7 @@ Create an instance: `$cat = $client->Cat();`
 #### Example: Load
 
 ```php
-// load() returns the bare Cat record (throws on error).
+// load() returns the ENTITY — call data_get() for the Cat record (throws on error).
 $cat = $client->Cat()->load(["id" => "cat_id"]);
 ```
 
@@ -372,7 +370,7 @@ Create an instance: `$cat_image = $client->CatImage();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
+| `createdAt` | `string` |  |
 | `height` | `int` |  |
 | `id` | `string` |  |
 | `url` | `string` |  |
@@ -381,7 +379,7 @@ Create an instance: `$cat_image = $client->CatImage();`
 #### Example: Load
 
 ```php
-// load() returns the bare CatImage record (throws on error).
+// load() returns the ENTITY — call data_get() for the CatImage record (throws on error).
 $cat_image = $client->CatImage()->load(["id" => "cat_image_id"]);
 ```
 
@@ -401,9 +399,9 @@ Create an instance: `$health = $client->Health();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `activity_level` | `string` |  |
-| `cat_id` | `string` |  |
-| `heart_rate` | `int` |  |
+| `activityLevel` | `string` |  |
+| `catId` | `string` |  |
+| `heartRate` | `int` |  |
 | `id` | `string` |  |
 | `temperature` | `float` |  |
 | `timestamp` | `string` |  |
@@ -412,7 +410,7 @@ Create an instance: `$health = $client->Health();`
 #### Example: Load
 
 ```php
-// load() returns the bare Health record (throws on error).
+// load() returns the ENTITY — call data_get() for the Health record (throws on error).
 $health = $client->Health()->load(["id" => "health_id"]);
 ```
 
@@ -439,10 +437,10 @@ Create an instance: `$interaction = $client->Interaction();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | `string` |  |
+| `catId` | `string` |  |
 | `duration` | `int` |  |
 | `id` | `string` |  |
-| `note` | `string` |  |
+| `notes` | `string` |  |
 | `quality` | `string` |  |
 | `timestamp` | `string` |  |
 | `type` | `string` |  |
@@ -458,7 +456,7 @@ $interactions = $client->Interaction()->list();
 
 ```php
 $interaction = $client->Interaction()->create([
-    "cat_id" => null, // string
+    "catId" => null, // string
     "type" => null, // string
 ]);
 ```
@@ -479,10 +477,10 @@ Create an instance: `$training = $client->Training();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | `string` |  |
+| `catId` | `string` |  |
 | `duration` | `int` |  |
 | `id` | `string` |  |
-| `note` | `string` |  |
+| `notes` | `string` |  |
 | `success` | `bool` |  |
 | `timestamp` | `string` |  |
 | `type` | `string` |  |
@@ -498,7 +496,7 @@ $trainings = $client->Training()->list();
 
 ```php
 $training = $client->Training()->create([
-    "cat_id" => null, // string
+    "catId" => null, // string
     "duration" => null, // int
     "type" => null, // string
 ]);
@@ -577,15 +575,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$cat = $client->Cat();
-$cat->load(["id" => "example_id"]);
+$training = $client->Training();
+$training->list();
 
-// $cat->data_get() now returns the cat data from the last load
-// $cat->match_get() returns the last match criteria
+// $training->data_get() now returns the training data from the last list
+// $training->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

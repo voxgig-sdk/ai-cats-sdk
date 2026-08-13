@@ -114,7 +114,7 @@ fmt.Println(cat.GetName()) // "cat"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
+| `createdAt` | `string` | No |  |
 | `height` | `int` | No |  |
 | `id` | `string` | No |  |
 | `url` | `string` | No |  |
@@ -169,7 +169,7 @@ fmt.Println(catImage.GetName()) // "cat_image"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
+| `createdAt` | `string` | No |  |
 | `height` | `int` | No |  |
 | `id` | `string` | No |  |
 | `url` | `string` | No |  |
@@ -224,9 +224,9 @@ fmt.Println(health.GetName()) // "health"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activity_level` | `string` | No |  |
-| `cat_id` | `string` | No |  |
-| `heart_rate` | `int` | No |  |
+| `activityLevel` | `string` | No |  |
+| `catId` | `string` | No |  |
+| `heartRate` | `int` | No |  |
 | `id` | `string` | No |  |
 | `temperature` | `float64` | No |  |
 | `timestamp` | `string` | No |  |
@@ -236,9 +236,9 @@ fmt.Println(health.GetName()) // "health"
 
 | Field | load | create |
 | --- | --- | --- |
-| `activity_level` | - | - |
-| `cat_id` | - | Yes |
-| `heart_rate` | - | - |
+| `activityLevel` | - | - |
+| `catId` | - | Yes |
+| `heartRate` | - | - |
 | `id` | - | - |
 | `temperature` | - | - |
 | `timestamp` | - | - |
@@ -306,10 +306,10 @@ fmt.Println(interaction.GetName()) // "interaction"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | `string` | Yes |  |
+| `catId` | `string` | Yes |  |
 | `duration` | `int` | No |  |
 | `id` | `string` | No |  |
-| `note` | `string` | No |  |
+| `notes` | `string` | No |  |
 | `quality` | `string` | No |  |
 | `timestamp` | `string` | No |  |
 | `type` | `string` | Yes |  |
@@ -318,10 +318,10 @@ fmt.Println(interaction.GetName()) // "interaction"
 
 | Field | list | create |
 | --- | --- | --- |
-| `cat_id` | Yes | - |
+| `catId` | Yes | - |
 | `duration` | - | - |
 | `id` | - | - |
-| `note` | - | - |
+| `notes` | - | - |
 | `quality` | - | - |
 | `timestamp` | - | - |
 | `type` | Yes | - |
@@ -346,7 +346,7 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Interaction(nil).Create(map[string]any{
-    "cat_id": "example_cat_id",
+    "catId": "example_catId",
     "type": "example_type",
 }, nil)
 if err != nil {
@@ -390,10 +390,10 @@ fmt.Println(training.GetName()) // "training"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | `string` | Yes |  |
+| `catId` | `string` | Yes |  |
 | `duration` | `int` | Yes |  |
 | `id` | `string` | No |  |
-| `note` | `string` | No |  |
+| `notes` | `string` | No |  |
 | `success` | `bool` | No |  |
 | `timestamp` | `string` | No |  |
 | `type` | `string` | Yes |  |
@@ -402,10 +402,10 @@ fmt.Println(training.GetName()) // "training"
 
 | Field | list | create |
 | --- | --- | --- |
-| `cat_id` | Yes | - |
+| `catId` | Yes | - |
 | `duration` | Yes | - |
 | `id` | - | - |
-| `note` | - | - |
+| `notes` | - | - |
 | `success` | - | - |
 | `timestamp` | - | - |
 | `type` | Yes | - |
@@ -430,7 +430,7 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Training(nil).Create(map[string]any{
-    "cat_id": "example_cat_id",
+    "catId": "example_catId",
     "duration": 1,
     "type": "example_type",
 }, nil)

@@ -38,7 +38,7 @@ client = AiCatsSDK()
 
 ### 3. Load a cat
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -55,10 +55,10 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    cat = client.Cat().load({"id": "example_id"})
-    print(cat)
+    trainings = client.Training().list()
+    print(trainings)
 except Exception as err:
-    print(f"load failed: {err}")
+    print(f"list failed: {err}")
 ```
 
 `direct()` does **not** raise — it returns the result envelope. Branch
@@ -122,9 +122,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = AiCatsSDK.test()
 
-# Entity ops return the bare record and raise on error.
-cat = client.Cat().load({"id": "test01"})
-# cat contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+training = client.Training().list()
+# training contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -224,7 +225,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -246,7 +247,7 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
+| `createdAt` |  |
 | `height` |  |
 | `id` |  |
 | `url` |  |
@@ -260,7 +261,7 @@ API path: `/cats/{id}`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
+| `createdAt` |  |
 | `height` |  |
 | `id` |  |
 | `url` |  |
@@ -274,9 +275,9 @@ API path: `/cats/random`
 
 | Field | Description |
 | --- | --- |
-| `activity_level` |  |
-| `cat_id` |  |
-| `heart_rate` |  |
+| `activityLevel` |  |
+| `catId` |  |
+| `heartRate` |  |
 | `id` |  |
 | `temperature` |  |
 | `timestamp` |  |
@@ -290,10 +291,10 @@ API path: `/cats/health`
 
 | Field | Description |
 | --- | --- |
-| `cat_id` |  |
+| `catId` |  |
 | `duration` |  |
 | `id` |  |
-| `note` |  |
+| `notes` |  |
 | `quality` |  |
 | `timestamp` |  |
 | `type` |  |
@@ -306,10 +307,10 @@ API path: `/interactions`
 
 | Field | Description |
 | --- | --- |
-| `cat_id` |  |
+| `catId` |  |
 | `duration` |  |
 | `id` |  |
-| `note` |  |
+| `notes` |  |
 | `success` |  |
 | `timestamp` |  |
 | `type` |  |
@@ -337,7 +338,7 @@ Create an instance: `cat = client.Cat()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `str` |  |
+| `createdAt` | `str` |  |
 | `height` | `int` |  |
 | `id` | `str` |  |
 | `url` | `str` |  |
@@ -364,7 +365,7 @@ Create an instance: `cat_image = client.CatImage()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `str` |  |
+| `createdAt` | `str` |  |
 | `height` | `int` |  |
 | `id` | `str` |  |
 | `url` | `str` |  |
@@ -392,9 +393,9 @@ Create an instance: `health = client.Health()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `activity_level` | `str` |  |
-| `cat_id` | `str` |  |
-| `heart_rate` | `int` |  |
+| `activityLevel` | `str` |  |
+| `catId` | `str` |  |
+| `heartRate` | `int` |  |
 | `id` | `str` |  |
 | `temperature` | `float` |  |
 | `timestamp` | `str` |  |
@@ -429,10 +430,10 @@ Create an instance: `interaction = client.Interaction()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | `str` |  |
+| `catId` | `str` |  |
 | `duration` | `int` |  |
 | `id` | `str` |  |
-| `note` | `str` |  |
+| `notes` | `str` |  |
 | `quality` | `str` |  |
 | `timestamp` | `str` |  |
 | `type` | `str` |  |
@@ -447,7 +448,7 @@ interactions = client.Interaction().list()
 
 ```python
 interaction = client.Interaction().create({
-    "cat_id": "example_cat_id",  # str
+    "catId": "example_catId",  # str
     "type": "example_type",  # str
 })
 ```
@@ -468,10 +469,10 @@ Create an instance: `training = client.Training()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | `str` |  |
+| `catId` | `str` |  |
 | `duration` | `int` |  |
 | `id` | `str` |  |
-| `note` | `str` |  |
+| `notes` | `str` |  |
 | `success` | `bool` |  |
 | `timestamp` | `str` |  |
 | `type` | `str` |  |
@@ -486,7 +487,7 @@ trainings = client.Training().list()
 
 ```python
 training = client.Training().create({
-    "cat_id": "example_cat_id",  # str
+    "catId": "example_catId",  # str
     "duration": 1,  # int
     "type": "example_type",  # str
 })
@@ -564,15 +565,15 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-cat = client.Cat()
-cat.load({"id": "example_id"})
+training = client.Training()
+training.list()
 
-# cat.data_get() now returns the cat data from the last load
-# cat.match_get() returns the last match criteria
+# training.data_get() now returns the training data from the last list
+# training.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

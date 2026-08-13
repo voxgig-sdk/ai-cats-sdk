@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from aicats_sdk.utility.voxgig_struct import voxgig_struct as vs
 from aicats_sdk import AiCatsSDK
-from core import helpers
+from aicats_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -36,7 +36,7 @@ class TestCatImageEntity:
         # without an *_ENTID env override, those IDs hit the live API and 4xx.
         if setup.get("synthetic_only"):
             pytest.skip("live entity test uses synthetic IDs from fixture — "
-                        "set AICATS_TEST_CAT_IMAGE_ENTID JSON to run live")
+                        "set AI_CATS_TEST_CAT_IMAGE_ENTID JSON to run live")
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -52,7 +52,7 @@ class TestCatImageEntity:
             "id": cat_image_ref01_data["id"],
         }
         cat_image_ref01_data_dt0_loaded = cat_image_ref01_ent.load(cat_image_ref01_match_dt0, None)
-        cat_image_ref01_data_dt0_load_result = helpers.to_map(cat_image_ref01_data_dt0_loaded)
+        cat_image_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(cat_image_ref01_data_dt0_loaded))
         assert cat_image_ref01_data_dt0_load_result is not None
         assert cat_image_ref01_data_dt0_load_result["id"] == cat_image_ref01_data["id"]
 
@@ -87,21 +87,21 @@ def _cat_image_basic_setup(extra):
     # mode is on without a real override, the basic test runs against synthetic
     # IDs from the fixture and 4xx's. We surface this so the test can skip.
     _entid_env_raw = os.environ.get(
-        "AICATS_TEST_CAT_IMAGE_ENTID")
+        "AI_CATS_TEST_CAT_IMAGE_ENTID")
     _idmap_overridden = _entid_env_raw is not None and _entid_env_raw.strip().startswith("{")
 
     env = runner.env_override({
-        "AICATS_TEST_CAT_IMAGE_ENTID": idmap,
-        "AICATS_TEST_LIVE": "FALSE",
-        "AICATS_TEST_EXPLAIN": "FALSE",
+        "AI_CATS_TEST_CAT_IMAGE_ENTID": idmap,
+        "AI_CATS_TEST_LIVE": "FALSE",
+        "AI_CATS_TEST_EXPLAIN": "FALSE",
     })
 
     idmap_resolved = helpers.to_map(
-        env.get("AICATS_TEST_CAT_IMAGE_ENTID"))
+        env.get("AI_CATS_TEST_CAT_IMAGE_ENTID"))
     if idmap_resolved is None:
         idmap_resolved = helpers.to_map(idmap)
 
-    if env.get("AICATS_TEST_LIVE") == "TRUE":
+    if env.get("AI_CATS_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
             },
@@ -109,13 +109,13 @@ def _cat_image_basic_setup(extra):
         ])
         client = AiCatsSDK(helpers.to_map(merged_opts))
 
-    _live = env.get("AICATS_TEST_LIVE") == "TRUE"
+    _live = env.get("AI_CATS_TEST_LIVE") == "TRUE"
     return {
         "client": client,
         "data": entity_data,
         "idmap": idmap_resolved,
         "env": env,
-        "explain": env.get("AICATS_TEST_EXPLAIN") == "TRUE",
+        "explain": env.get("AI_CATS_TEST_EXPLAIN") == "TRUE",
         "live": _live,
         "synthetic_only": _live and not _idmap_overridden,
         "now": int(time.time() * 1000),

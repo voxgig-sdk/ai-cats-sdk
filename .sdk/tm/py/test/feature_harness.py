@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import AiCatsControl
-from core.error import AiCatsError
-from core.result import AiCatsResult
-from core.spec import AiCatsSpec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import AiCatsControl
+from projectname_sdk.core.error import AiCatsError
+from projectname_sdk.core.result import AiCatsResult
+from projectname_sdk.core.spec import AiCatsSpec
 
 
 # True when this SDK was generated with the named feature.

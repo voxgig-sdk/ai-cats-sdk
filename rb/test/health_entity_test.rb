@@ -26,7 +26,7 @@ class HealthEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set AICATS_TEST_HEALTH_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set AI_CATS_TEST_HEALTH_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -37,7 +37,7 @@ class HealthEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.health"), "health_ref01"))
 
     health_ref01_data_result = health_ref01_ent.create(health_ref01_data, nil)
-    health_ref01_data = Helpers.to_map(health_ref01_data_result)
+    health_ref01_data = Helpers.to_map(health_ref01_data_result.respond_to?(:data_get) ? health_ref01_data_result.data_get : health_ref01_data_result)
     assert !health_ref01_data.nil?
     assert !health_ref01_data["id"].nil?
 
@@ -46,7 +46,7 @@ class HealthEntityTest < Minitest::Test
       "id" => health_ref01_data["id"],
     }
     health_ref01_data_dt0_loaded = health_ref01_ent.load(health_ref01_match_dt0, nil)
-    health_ref01_data_dt0_load_result = Helpers.to_map(health_ref01_data_dt0_loaded)
+    health_ref01_data_dt0_load_result = Helpers.to_map(health_ref01_data_dt0_loaded.respond_to?(:data_get) ? health_ref01_data_dt0_loaded.data_get : health_ref01_data_dt0_loaded)
     assert !health_ref01_data_dt0_load_result.nil?
     assert_equal health_ref01_data_dt0_load_result["id"], health_ref01_data["id"]
 
@@ -79,22 +79,22 @@ def health_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["AICATS_TEST_HEALTH_ENTID"]
+  entid_env_raw = ENV["AI_CATS_TEST_HEALTH_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "AICATS_TEST_HEALTH_ENTID" => idmap,
-    "AICATS_TEST_LIVE" => "FALSE",
-    "AICATS_TEST_EXPLAIN" => "FALSE",
+    "AI_CATS_TEST_HEALTH_ENTID" => idmap,
+    "AI_CATS_TEST_LIVE" => "FALSE",
+    "AI_CATS_TEST_EXPLAIN" => "FALSE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["AICATS_TEST_HEALTH_ENTID"])
+    env["AI_CATS_TEST_HEALTH_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["AICATS_TEST_LIVE"] == "TRUE"
+  if env["AI_CATS_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
       },
@@ -103,13 +103,13 @@ def health_basic_setup(extra)
     client = AiCatsSDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["AICATS_TEST_LIVE"] == "TRUE"
+  live = env["AI_CATS_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["AICATS_TEST_EXPLAIN"] == "TRUE",
+    explain: env["AI_CATS_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

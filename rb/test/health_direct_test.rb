@@ -59,11 +59,11 @@ def health_direct_setup(mockres)
   calls = []
 
   env = Runner.env_override({
-    "AICATS_TEST_HEALTH_ENTID" => {},
-    "AICATS_TEST_LIVE" => "FALSE",
+    "AI_CATS_TEST_HEALTH_ENTID" => {},
+    "AI_CATS_TEST_LIVE" => "FALSE",
   })
 
-  live = env["AICATS_TEST_LIVE"] == "TRUE"
+  live = env["AI_CATS_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {

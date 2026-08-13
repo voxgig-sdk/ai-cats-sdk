@@ -66,12 +66,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-cat, err := client.Cat(nil).Load(map[string]any{"id": "example_id"}, nil)
+trainings, err := client.Training(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = cat
+_ = trainings
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -135,13 +135,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-cat, err := client.Cat(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+training, err := client.Training(nil).List(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(cat) // the returned mock data
+fmt.Println(training) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -265,7 +265,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"created_at"` |  |
+| `"createdAt"` |  |
 | `"height"` |  |
 | `"id"` |  |
 | `"url"` |  |
@@ -279,7 +279,7 @@ API path: `/cats/{id}`
 
 | Field | Description |
 | --- | --- |
-| `"created_at"` |  |
+| `"createdAt"` |  |
 | `"height"` |  |
 | `"id"` |  |
 | `"url"` |  |
@@ -293,9 +293,9 @@ API path: `/cats/random`
 
 | Field | Description |
 | --- | --- |
-| `"activity_level"` |  |
-| `"cat_id"` |  |
-| `"heart_rate"` |  |
+| `"activityLevel"` |  |
+| `"catId"` |  |
+| `"heartRate"` |  |
 | `"id"` |  |
 | `"temperature"` |  |
 | `"timestamp"` |  |
@@ -309,10 +309,10 @@ API path: `/cats/health`
 
 | Field | Description |
 | --- | --- |
-| `"cat_id"` |  |
+| `"catId"` |  |
 | `"duration"` |  |
 | `"id"` |  |
-| `"note"` |  |
+| `"notes"` |  |
 | `"quality"` |  |
 | `"timestamp"` |  |
 | `"type"` |  |
@@ -325,10 +325,10 @@ API path: `/interactions`
 
 | Field | Description |
 | --- | --- |
-| `"cat_id"` |  |
+| `"catId"` |  |
 | `"duration"` |  |
 | `"id"` |  |
-| `"note"` |  |
+| `"notes"` |  |
 | `"success"` |  |
 | `"timestamp"` |  |
 | `"type"` |  |
@@ -356,7 +356,7 @@ Create an instance: `cat := client.Cat(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
+| `createdAt` | `string` |  |
 | `height` | `int` |  |
 | `id` | `string` |  |
 | `url` | `string` |  |
@@ -387,7 +387,7 @@ Create an instance: `catImage := client.CatImage(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
+| `createdAt` | `string` |  |
 | `height` | `int` |  |
 | `id` | `string` |  |
 | `url` | `string` |  |
@@ -419,9 +419,9 @@ Create an instance: `health := client.Health(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `activity_level` | `string` |  |
-| `cat_id` | `string` |  |
-| `heart_rate` | `int` |  |
+| `activityLevel` | `string` |  |
+| `catId` | `string` |  |
+| `heartRate` | `int` |  |
 | `id` | `string` |  |
 | `temperature` | `float64` |  |
 | `timestamp` | `string` |  |
@@ -464,10 +464,10 @@ Create an instance: `interaction := client.Interaction(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | `string` |  |
+| `catId` | `string` |  |
 | `duration` | `int` |  |
 | `id` | `string` |  |
-| `note` | `string` |  |
+| `notes` | `string` |  |
 | `quality` | `string` |  |
 | `timestamp` | `string` |  |
 | `type` | `string` |  |
@@ -486,7 +486,7 @@ fmt.Println(interactions) // the array of records
 
 ```go
 result, err := client.Interaction(nil).Create(map[string]any{
-    "cat_id": "example_cat_id",
+    "catId": "example_catId",
     "type": "example_type",
 }, nil)
 if err != nil {
@@ -511,10 +511,10 @@ Create an instance: `training := client.Training(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | `string` |  |
+| `catId` | `string` |  |
 | `duration` | `int` |  |
 | `id` | `string` |  |
-| `note` | `string` |  |
+| `notes` | `string` |  |
 | `success` | `bool` |  |
 | `timestamp` | `string` |  |
 | `type` | `string` |  |
@@ -533,7 +533,7 @@ fmt.Println(trainings) // the array of records
 
 ```go
 result, err := client.Training(nil).Create(map[string]any{
-    "cat_id": "example_cat_id",
+    "catId": "example_catId",
     "duration": 1,
     "type": "example_type",
 }, nil)
@@ -613,15 +613,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Load`, the entity
+Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-cat := client.Cat(nil)
-cat.Load(map[string]any{"id": "example_id"}, nil)
+training := client.Training(nil)
+training.List(nil, nil)
 
-// cat.Data() now returns the cat data from the last load
-// cat.Match() returns the last match criteria
+// training.Data() now returns the training data from the last list
+// training.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

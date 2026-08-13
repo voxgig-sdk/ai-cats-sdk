@@ -103,7 +103,7 @@ cat = client.Cat()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `str` | No |  |
+| `createdAt` | `str` | No |  |
 | `height` | `int` | No |  |
 | `id` | `str` | No |  |
 | `url` | `str` | No |  |
@@ -158,7 +158,7 @@ cat_image = client.CatImage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `str` | No |  |
+| `createdAt` | `str` | No |  |
 | `height` | `int` | No |  |
 | `id` | `str` | No |  |
 | `url` | `str` | No |  |
@@ -213,9 +213,9 @@ health = client.Health()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activity_level` | `str` | No |  |
-| `cat_id` | `str` | No |  |
-| `heart_rate` | `int` | No |  |
+| `activityLevel` | `str` | No |  |
+| `catId` | `str` | No |  |
+| `heartRate` | `int` | No |  |
 | `id` | `str` | No |  |
 | `temperature` | `float` | No |  |
 | `timestamp` | `str` | No |  |
@@ -225,9 +225,9 @@ health = client.Health()
 
 | Field | load | create |
 | --- | --- | --- |
-| `activity_level` | - | - |
-| `cat_id` | - | Yes |
-| `heart_rate` | - | - |
+| `activityLevel` | - | - |
+| `catId` | - | Yes |
+| `heartRate` | - | - |
 | `id` | - | - |
 | `temperature` | - | - |
 | `timestamp` | - | - |
@@ -291,10 +291,10 @@ interaction = client.Interaction()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | `str` | Yes |  |
+| `catId` | `str` | Yes |  |
 | `duration` | `int` | No |  |
 | `id` | `str` | No |  |
-| `note` | `str` | No |  |
+| `notes` | `str` | No |  |
 | `quality` | `str` | No |  |
 | `timestamp` | `str` | No |  |
 | `type` | `str` | Yes |  |
@@ -303,10 +303,10 @@ interaction = client.Interaction()
 
 | Field | list | create |
 | --- | --- | --- |
-| `cat_id` | Yes | - |
+| `catId` | Yes | - |
 | `duration` | - | - |
 | `id` | - | - |
-| `note` | - | - |
+| `notes` | - | - |
 | `quality` | - | - |
 | `timestamp` | - | - |
 | `type` | Yes | - |
@@ -319,7 +319,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Interaction().create({
-    "cat_id": "example_cat_id",  # str
+    "catId": "example_catId",  # str
     "type": "example_type",  # str
 })
 ```
@@ -373,10 +373,10 @@ training = client.Training()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | `str` | Yes |  |
+| `catId` | `str` | Yes |  |
 | `duration` | `int` | Yes |  |
 | `id` | `str` | No |  |
-| `note` | `str` | No |  |
+| `notes` | `str` | No |  |
 | `success` | `bool` | No |  |
 | `timestamp` | `str` | No |  |
 | `type` | `str` | Yes |  |
@@ -385,10 +385,10 @@ training = client.Training()
 
 | Field | list | create |
 | --- | --- | --- |
-| `cat_id` | Yes | - |
+| `catId` | Yes | - |
 | `duration` | Yes | - |
 | `id` | - | - |
-| `note` | - | - |
+| `notes` | - | - |
 | `success` | - | - |
 | `timestamp` | - | - |
 | `type` | Yes | - |
@@ -401,7 +401,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Training().create({
-    "cat_id": "example_cat_id",  # str
+    "catId": "example_catId",  # str
     "duration": 1,  # int
     "type": "example_type",  # str
 })

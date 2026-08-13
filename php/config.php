@@ -36,7 +36,7 @@ class AiCatsConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'created_at',
+              'name' => 'createdAt',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 0,
@@ -91,6 +91,7 @@ class AiCatsConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cats/{id}',
                   'parts' => [
@@ -120,7 +121,7 @@ class AiCatsConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'created_at',
+              'name' => 'createdAt',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 0,
@@ -163,6 +164,7 @@ class AiCatsConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cats/random',
                   'parts' => [
@@ -188,14 +190,14 @@ class AiCatsConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'activity_level',
+              'name' => 'activityLevel',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 0,
             ],
             [
               'active' => true,
-              'name' => 'cat_id',
+              'name' => 'catId',
               'op' => [
                 'create' => [
                   'req' => true,
@@ -208,7 +210,7 @@ class AiCatsConfig
             ],
             [
               'active' => true,
-              'name' => 'heart_rate',
+              'name' => 'heartRate',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 2,
@@ -257,6 +259,7 @@ class AiCatsConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/cats/health',
                   'parts' => [
@@ -291,6 +294,7 @@ class AiCatsConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cats/health',
                   'parts' => [
@@ -320,7 +324,7 @@ class AiCatsConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'cat_id',
+              'name' => 'catId',
               'op' => [
                 'list' => [
                   'req' => false,
@@ -347,7 +351,7 @@ class AiCatsConfig
             ],
             [
               'active' => true,
-              'name' => 'note',
+              'name' => 'notes',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 3,
@@ -389,6 +393,7 @@ class AiCatsConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/interactions',
                   'parts' => [
@@ -438,6 +443,7 @@ class AiCatsConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/interactions',
                   'parts' => [
@@ -468,7 +474,7 @@ class AiCatsConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'cat_id',
+              'name' => 'catId',
               'op' => [
                 'list' => [
                   'req' => false,
@@ -501,7 +507,7 @@ class AiCatsConfig
             ],
             [
               'active' => true,
-              'name' => 'note',
+              'name' => 'notes',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 3,
@@ -543,6 +549,7 @@ class AiCatsConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/training',
                   'parts' => [
@@ -585,6 +592,7 @@ class AiCatsConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/training',
                   'parts' => [

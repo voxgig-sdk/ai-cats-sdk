@@ -23,8 +23,8 @@ module AiCatsTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("AICATS_TEST_LIVE")
-    override = getenv("AICATS_TEST_OVERRIDE")
+    live = getenv("AI_CATS_TEST_LIVE")
+    override = getenv("AI_CATS_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module AiCatsTestRunner
       end
     end
 
-    explain = getenv("AICATS_TEST_EXPLAIN")
-    m["AICATS_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("AI_CATS_TEST_EXPLAIN")
+    m["AI_CATS_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

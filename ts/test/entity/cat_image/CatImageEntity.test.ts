@@ -26,8 +26,8 @@ import {
 describe('CatImageEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when AICATS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('AICATS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when AI_CATS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('AI_CATS_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = AiCatsSDK.test()
@@ -63,7 +63,7 @@ describe('CatImageEntity', async () => {
     const cat_image_ref01_ent = client.CatImage()
     const cat_image_ref01_match_dt0: any = {}
     cat_image_ref01_match_dt0.id = cat_image_ref01_data.id
-    const cat_image_ref01_data_dt0 = await cat_image_ref01_ent.load(cat_image_ref01_match_dt0)
+    const cat_image_ref01_data_dt0 = (await cat_image_ref01_ent.load(cat_image_ref01_match_dt0)).data()
     assert(cat_image_ref01_data_dt0.id === cat_image_ref01_data.id)
 
 

@@ -26,8 +26,8 @@ import {
 describe('HealthEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when AICATS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('AICATS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when AI_CATS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('AI_CATS_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = AiCatsSDK.test()
@@ -62,14 +62,14 @@ describe('HealthEntity', async () => {
     const health_ref01_ent = client.Health()
     let health_ref01_data = setup.data.new.health['health_ref01']
 
-    health_ref01_data = await health_ref01_ent.create(health_ref01_data)
+    health_ref01_data = (await health_ref01_ent.create(health_ref01_data)).data()
     assert(null != health_ref01_data.id)
 
 
     // LOAD
     const health_ref01_match_dt0: any = {}
     health_ref01_match_dt0.id = health_ref01_data.id
-    const health_ref01_data_dt0 = await health_ref01_ent.load(health_ref01_match_dt0)
+    const health_ref01_data_dt0 = (await health_ref01_ent.load(health_ref01_match_dt0)).data()
     assert(health_ref01_data_dt0.id === health_ref01_data.id)
 
 

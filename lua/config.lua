@@ -30,7 +30,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "created_at",
+            ["name"] = "createdAt",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 0,
@@ -85,6 +85,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/cats/{id}",
                 ["parts"] = {
@@ -114,7 +115,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "created_at",
+            ["name"] = "createdAt",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 0,
@@ -157,6 +158,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/cats/random",
                 ["parts"] = {
@@ -182,14 +184,14 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "activity_level",
+            ["name"] = "activityLevel",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 0,
           },
           {
             ["active"] = true,
-            ["name"] = "cat_id",
+            ["name"] = "catId",
             ["op"] = {
               ["create"] = {
                 ["req"] = true,
@@ -202,7 +204,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "heart_rate",
+            ["name"] = "heartRate",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 2,
@@ -251,6 +253,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/cats/health",
                 ["parts"] = {
@@ -285,6 +288,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/cats/health",
                 ["parts"] = {
@@ -314,7 +318,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "cat_id",
+            ["name"] = "catId",
             ["op"] = {
               ["list"] = {
                 ["req"] = false,
@@ -341,7 +345,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "note",
+            ["name"] = "notes",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 3,
@@ -383,6 +387,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/interactions",
                 ["parts"] = {
@@ -432,6 +437,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/interactions",
                 ["parts"] = {
@@ -462,7 +468,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "cat_id",
+            ["name"] = "catId",
             ["op"] = {
               ["list"] = {
                 ["req"] = false,
@@ -495,7 +501,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "note",
+            ["name"] = "notes",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 3,
@@ -537,6 +543,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/training",
                 ["parts"] = {
@@ -579,6 +586,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/training",
                 ["parts"] = {

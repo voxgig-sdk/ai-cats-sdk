@@ -23,7 +23,7 @@ support (`list`, `load`, `create`):
 
 ```ts
 const client = new AiCatsSDK()
-const cat = await client.Cat().load()
+const cat = await client.Cat().load({ id: "example_id" })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = AiCatsSDK.test()
-const cat = await client.Cat().load({ id: 'test01' })
-// cat is a bare Cat populated with mock data
-console.log(cat)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = AiCatsSDK.test({
+  entity: {
+    training: {
+      test01: { id: 'test01', catId: 'example_catId', duration: 1, type: 'example_type' },
+    },
+  },
+})
+const trainings = await client.Training().list()
+// trainings is an array of Training entities, populated with mock data
+// — call trainings[0].data() for the record itself
+console.log(trainings)
 ```
 
 ### Python
 
 ```python
 client = AiCatsSDK.test()
-cat = client.Cat().load({"id": "test01"})
-print(cat)
+trainings = client.Training().list()
+print(trainings)
 ```
 
 ### PHP
@@ -57,17 +66,17 @@ print(cat)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = AiCatsSDK::test([
-    "entity" => ["cat" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["training" => ["test01" => []]],
 ]);
-$cat = $client->Cat()->load(["id" => "test01"]);
+$trainings = $client->Training()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Cat(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+result, err := client.Training(nil).List(
+    nil, nil,
 )
 ```
 
@@ -76,16 +85,16 @@ result, err := client.Cat(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = AiCatsSDK.test({
-  "entity" => { "cat" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "training" => { "test01" => {} } },
 })
-cat = client.Cat.load({ "id" => "test01" })
+trainings = client.Training.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Cat():load({ id = "test01" })
+local results, err = client:Training():list()
 ```
 
 ## Packages
@@ -186,7 +195,7 @@ require_once 'aicats_sdk.php';
 $client = new AiCatsSDK();
 
 
-// Load a specific cat (returns the bare record; throws on error)
+// Load a specific cat (returns the ENTITY; call data_get() for the record; throws on error)
 $cat = $client->Cat()->load(["id" => "example_id"]);
 print_r($cat);
 ```
@@ -214,7 +223,7 @@ require_relative "AiCats_sdk"
 client = AiCatsSDK.new
 
 
-# Load a specific cat (returns the bare record; raises on error)
+# Load a specific cat (returns the ENTITY; call data_get for the record)
 cat = client.Cat.load({ "id" => "example_id" })
 puts cat
 ```
@@ -348,6 +357,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://ai-cats.net/api-doc](https://ai-cats.net/api-doc)
 

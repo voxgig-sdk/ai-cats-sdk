@@ -29,7 +29,7 @@ describe("CatEntity", function()
     -- The basic flow consumes synthetic IDs from the fixture. In live mode
     -- without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup.synthetic_only then
-      pending("live entity test uses synthetic IDs from fixture — set AICATS_TEST_CAT_ENTID JSON to run live")
+      pending("live entity test uses synthetic IDs from fixture — set AI_CATS_TEST_CAT_ENTID JSON to run live")
       return
     end
     local client = setup.client
@@ -49,7 +49,7 @@ describe("CatEntity", function()
     }
     local cat_ref01_data_dt0_loaded, err = cat_ref01_ent:load(cat_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local cat_ref01_data_dt0_load_result = helpers.to_map(cat_ref01_data_dt0_loaded)
+    local cat_ref01_data_dt0_load_result = helpers.to_map(type(cat_ref01_data_dt0_loaded) == 'table' and cat_ref01_data_dt0_loaded.data_get and cat_ref01_data_dt0_loaded:data_get() or cat_ref01_data_dt0_loaded)
     assert.is_not_nil(cat_ref01_data_dt0_load_result)
     assert.are.equal(cat_ref01_data_dt0_load_result["id"], cat_ref01_data["id"])
 
@@ -88,22 +88,22 @@ function cat_basic_setup(extra)
   -- Detect ENTID env override before envOverride consumes it. When live
   -- mode is on without a real override, the basic test runs against synthetic
   -- IDs from the fixture and 4xx's. Surface this so the test can skip.
-  local entid_env_raw = os.getenv("AICATS_TEST_CAT_ENTID")
+  local entid_env_raw = os.getenv("AI_CATS_TEST_CAT_ENTID")
   local idmap_overridden = entid_env_raw ~= nil and entid_env_raw:match("^%s*{") ~= nil
 
   local env = runner.env_override({
-    ["AICATS_TEST_CAT_ENTID"] = idmap,
-    ["AICATS_TEST_LIVE"] = "FALSE",
-    ["AICATS_TEST_EXPLAIN"] = "FALSE",
+    ["AI_CATS_TEST_CAT_ENTID"] = idmap,
+    ["AI_CATS_TEST_LIVE"] = "FALSE",
+    ["AI_CATS_TEST_EXPLAIN"] = "FALSE",
   })
 
   local idmap_resolved = helpers.to_map(
-    env["AICATS_TEST_CAT_ENTID"])
+    env["AI_CATS_TEST_CAT_ENTID"])
   if idmap_resolved == nil then
     idmap_resolved = helpers.to_map(idmap)
   end
 
-  if env["AICATS_TEST_LIVE"] == "TRUE" then
+  if env["AI_CATS_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
       },
@@ -112,13 +112,13 @@ function cat_basic_setup(extra)
     client = sdk.new(helpers.to_map(merged_opts))
   end
 
-  local live = env["AICATS_TEST_LIVE"] == "TRUE"
+  local live = env["AI_CATS_TEST_LIVE"] == "TRUE"
   return {
     client = client,
     data = entity_data,
     idmap = idmap_resolved,
     env = env,
-    explain = env["AICATS_TEST_EXPLAIN"] == "TRUE",
+    explain = env["AI_CATS_TEST_EXPLAIN"] == "TRUE",
     live = live,
     synthetic_only = live and not idmap_overridden,
     now = os.time() * 1000,

@@ -70,11 +70,11 @@ function cat_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["AICATS_TEST_CAT_ENTID"] = {},
-    ["AICATS_TEST_LIVE"] = "FALSE",
+    ["AI_CATS_TEST_CAT_ENTID"] = {},
+    ["AI_CATS_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["AICATS_TEST_LIVE"] == "TRUE"
+  local live = env["AI_CATS_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

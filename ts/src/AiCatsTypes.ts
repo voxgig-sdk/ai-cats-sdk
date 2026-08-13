@@ -6,7 +6,7 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Cat {
-  created_at?: string
+  createdAt?: string
   height?: number
   id?: string
   url?: string
@@ -18,7 +18,7 @@ export interface CatLoadMatch {
 }
 
 export interface CatImage {
-  created_at?: string
+  createdAt?: string
   height?: number
   id?: string
   url?: string
@@ -26,7 +26,7 @@ export interface CatImage {
 }
 
 export interface CatImageLoadMatch {
-  created_at?: string
+  createdAt?: string
   height?: number
   id: string
   url?: string
@@ -34,9 +34,9 @@ export interface CatImageLoadMatch {
 }
 
 export interface Health {
-  activity_level?: string
-  cat_id?: string
-  heart_rate?: number
+  activityLevel?: string
+  catId?: string
+  heartRate?: number
   id?: string
   temperature?: number
   timestamp?: string
@@ -44,9 +44,9 @@ export interface Health {
 }
 
 export interface HealthLoadMatch {
-  activity_level?: string
-  cat_id?: string
-  heart_rate?: number
+  activityLevel?: string
+  catId?: string
+  heartRate?: number
   id: string
   temperature?: number
   timestamp?: string
@@ -54,9 +54,9 @@ export interface HealthLoadMatch {
 }
 
 export interface HealthCreateData {
-  activity_level?: string
-  cat_id?: string
-  heart_rate?: number
+  activityLevel?: string
+  catId?: string
+  heartRate?: number
   id?: string
   temperature?: number
   timestamp?: string
@@ -64,60 +64,60 @@ export interface HealthCreateData {
 }
 
 export interface Interaction {
-  cat_id: string
+  catId: string
   duration?: number
   id?: string
-  note?: string
+  notes?: string
   quality?: string
   timestamp?: string
   type: string
 }
 
 export interface InteractionListMatch {
-  cat_id?: string
+  catId?: string
   duration?: number
   id?: string
-  note?: string
+  notes?: string
   quality?: string
   timestamp?: string
   type?: string
 }
 
 export interface InteractionCreateData {
-  cat_id: string
+  catId: string
   duration?: number
   id?: string
-  note?: string
+  notes?: string
   quality?: string
   timestamp?: string
   type: string
 }
 
 export interface Training {
-  cat_id: string
+  catId: string
   duration: number
   id?: string
-  note?: string
+  notes?: string
   success?: boolean
   timestamp?: string
   type: string
 }
 
 export interface TrainingListMatch {
-  cat_id?: string
+  catId?: string
   duration?: number
   id?: string
-  note?: string
+  notes?: string
   success?: boolean
   timestamp?: string
   type?: string
 }
 
 export interface TrainingCreateData {
-  cat_id: string
+  catId: string
   duration: number
   id?: string
-  note?: string
+  notes?: string
   success?: boolean
   timestamp?: string
   type: string

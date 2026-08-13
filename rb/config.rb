@@ -31,7 +31,7 @@ module AiCatsConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "created_at",
+              "name" => "createdAt",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 0,
@@ -86,6 +86,7 @@ module AiCatsConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/cats/{id}",
                   "parts" => [
@@ -115,7 +116,7 @@ module AiCatsConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "created_at",
+              "name" => "createdAt",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 0,
@@ -158,6 +159,7 @@ module AiCatsConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/cats/random",
                   "parts" => [
@@ -183,14 +185,14 @@ module AiCatsConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "activity_level",
+              "name" => "activityLevel",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 0,
             },
             {
               "active" => true,
-              "name" => "cat_id",
+              "name" => "catId",
               "op" => {
                 "create" => {
                   "req" => true,
@@ -203,7 +205,7 @@ module AiCatsConfig
             },
             {
               "active" => true,
-              "name" => "heart_rate",
+              "name" => "heartRate",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 2,
@@ -252,6 +254,7 @@ module AiCatsConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/cats/health",
                   "parts" => [
@@ -286,6 +289,7 @@ module AiCatsConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/cats/health",
                   "parts" => [
@@ -315,7 +319,7 @@ module AiCatsConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "cat_id",
+              "name" => "catId",
               "op" => {
                 "list" => {
                   "req" => false,
@@ -342,7 +346,7 @@ module AiCatsConfig
             },
             {
               "active" => true,
-              "name" => "note",
+              "name" => "notes",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 3,
@@ -384,6 +388,7 @@ module AiCatsConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/interactions",
                   "parts" => [
@@ -433,6 +438,7 @@ module AiCatsConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/interactions",
                   "parts" => [
@@ -463,7 +469,7 @@ module AiCatsConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "cat_id",
+              "name" => "catId",
               "op" => {
                 "list" => {
                   "req" => false,
@@ -496,7 +502,7 @@ module AiCatsConfig
             },
             {
               "active" => true,
-              "name" => "note",
+              "name" => "notes",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 3,
@@ -538,6 +544,7 @@ module AiCatsConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/training",
                   "parts" => [
@@ -580,6 +587,7 @@ module AiCatsConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/training",
                   "parts" => [

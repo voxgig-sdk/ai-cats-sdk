@@ -43,8 +43,8 @@ class AiCatsTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('AICATS_TEST_LIVE');
-        $override = self::getenv('AICATS_TEST_OVERRIDE');
+        $live = self::getenv('AI_CATS_TEST_LIVE');
+        $override = self::getenv('AI_CATS_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class AiCatsTestRunner
             }
         }
 
-        $explain = self::getenv('AICATS_TEST_EXPLAIN');
+        $explain = self::getenv('AI_CATS_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['AICATS_TEST_EXPLAIN'] = $explain;
+            $m['AI_CATS_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

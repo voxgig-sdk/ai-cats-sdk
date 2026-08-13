@@ -108,7 +108,7 @@ $cat = $client->Cat();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
+| `createdAt` | `string` | No |  |
 | `height` | `int` | No |  |
 | `id` | `string` | No |  |
 | `url` | `string` | No |  |
@@ -164,7 +164,7 @@ $cat_image = $client->CatImage();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
+| `createdAt` | `string` | No |  |
 | `height` | `int` | No |  |
 | `id` | `string` | No |  |
 | `url` | `string` | No |  |
@@ -220,9 +220,9 @@ $health = $client->Health();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activity_level` | `string` | No |  |
-| `cat_id` | `string` | No |  |
-| `heart_rate` | `int` | No |  |
+| `activityLevel` | `string` | No |  |
+| `catId` | `string` | No |  |
+| `heartRate` | `int` | No |  |
 | `id` | `string` | No |  |
 | `temperature` | `float` | No |  |
 | `timestamp` | `string` | No |  |
@@ -232,9 +232,9 @@ $health = $client->Health();
 
 | Field | load | create |
 | --- | --- | --- |
-| `activity_level` | - | - |
-| `cat_id` | - | Yes |
-| `heart_rate` | - | - |
+| `activityLevel` | - | - |
+| `catId` | - | Yes |
+| `heartRate` | - | - |
 | `id` | - | - |
 | `temperature` | - | - |
 | `timestamp` | - | - |
@@ -299,10 +299,10 @@ $interaction = $client->Interaction();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | `string` | Yes |  |
+| `catId` | `string` | Yes |  |
 | `duration` | `int` | No |  |
 | `id` | `string` | No |  |
-| `note` | `string` | No |  |
+| `notes` | `string` | No |  |
 | `quality` | `string` | No |  |
 | `timestamp` | `string` | No |  |
 | `type` | `string` | Yes |  |
@@ -311,10 +311,10 @@ $interaction = $client->Interaction();
 
 | Field | list | create |
 | --- | --- | --- |
-| `cat_id` | Yes | - |
+| `catId` | Yes | - |
 | `duration` | - | - |
 | `id` | - | - |
-| `note` | - | - |
+| `notes` | - | - |
 | `quality` | - | - |
 | `timestamp` | - | - |
 | `type` | Yes | - |
@@ -327,7 +327,7 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Interaction()->create([
-  "cat_id" => null, // string
+  "catId" => null, // string
   "type" => null, // string
 ]);
 ```
@@ -380,10 +380,10 @@ $training = $client->Training();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | `string` | Yes |  |
+| `catId` | `string` | Yes |  |
 | `duration` | `int` | Yes |  |
 | `id` | `string` | No |  |
-| `note` | `string` | No |  |
+| `notes` | `string` | No |  |
 | `success` | `bool` | No |  |
 | `timestamp` | `string` | No |  |
 | `type` | `string` | Yes |  |
@@ -392,10 +392,10 @@ $training = $client->Training();
 
 | Field | list | create |
 | --- | --- | --- |
-| `cat_id` | Yes | - |
+| `catId` | Yes | - |
 | `duration` | Yes | - |
 | `id` | - | - |
-| `note` | - | - |
+| `notes` | - | - |
 | `success` | - | - |
 | `timestamp` | - | - |
 | `type` | Yes | - |
@@ -408,7 +408,7 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Training()->create([
-  "cat_id" => null, // string
+  "catId" => null, // string
   "duration" => null, // int
   "type" => null, // string
 ]);

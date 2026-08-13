@@ -48,7 +48,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local cat, err = client:Cat():load({ id = "example_id" })
+local trainings, err = client:Training():list()
 if err then error(err) end
 ```
 
@@ -106,7 +106,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Cat():load({ id = "test01" })
+local result, err = client:Training():list()
 -- result is the returned data; err is set on failure
 ```
 
@@ -232,7 +232,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
+| `createdAt` |  |
 | `height` |  |
 | `id` |  |
 | `url` |  |
@@ -246,7 +246,7 @@ API path: `/cats/{id}`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
+| `createdAt` |  |
 | `height` |  |
 | `id` |  |
 | `url` |  |
@@ -260,9 +260,9 @@ API path: `/cats/random`
 
 | Field | Description |
 | --- | --- |
-| `activity_level` |  |
-| `cat_id` |  |
-| `heart_rate` |  |
+| `activityLevel` |  |
+| `catId` |  |
+| `heartRate` |  |
 | `id` |  |
 | `temperature` |  |
 | `timestamp` |  |
@@ -276,10 +276,10 @@ API path: `/cats/health`
 
 | Field | Description |
 | --- | --- |
-| `cat_id` |  |
+| `catId` |  |
 | `duration` |  |
 | `id` |  |
-| `note` |  |
+| `notes` |  |
 | `quality` |  |
 | `timestamp` |  |
 | `type` |  |
@@ -292,10 +292,10 @@ API path: `/interactions`
 
 | Field | Description |
 | --- | --- |
-| `cat_id` |  |
+| `catId` |  |
 | `duration` |  |
 | `id` |  |
-| `note` |  |
+| `notes` |  |
 | `success` |  |
 | `timestamp` |  |
 | `type` |  |
@@ -323,7 +323,7 @@ Create an instance: `local cat = client:Cat(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
+| `createdAt` | `string` |  |
 | `height` | `number` |  |
 | `id` | `string` |  |
 | `url` | `string` |  |
@@ -350,7 +350,7 @@ Create an instance: `local cat_image = client:CatImage(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
+| `createdAt` | `string` |  |
 | `height` | `number` |  |
 | `id` | `string` |  |
 | `url` | `string` |  |
@@ -378,9 +378,9 @@ Create an instance: `local health = client:Health(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `activity_level` | `string` |  |
-| `cat_id` | `string` |  |
-| `heart_rate` | `number` |  |
+| `activityLevel` | `string` |  |
+| `catId` | `string` |  |
+| `heartRate` | `number` |  |
 | `id` | `string` |  |
 | `temperature` | `number` |  |
 | `timestamp` | `string` |  |
@@ -415,10 +415,10 @@ Create an instance: `local interaction = client:Interaction(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | `string` |  |
+| `catId` | `string` |  |
 | `duration` | `number` |  |
 | `id` | `string` |  |
-| `note` | `string` |  |
+| `notes` | `string` |  |
 | `quality` | `string` |  |
 | `timestamp` | `string` |  |
 | `type` | `string` |  |
@@ -433,7 +433,7 @@ local interactions, err = client:Interaction():list()
 
 ```lua
 local interaction, err = client:Interaction():create({
-  cat_id = "example_cat_id", -- string
+  catId = "example_catId", -- string
   type = "example_type", -- string
 })
 ```
@@ -454,10 +454,10 @@ Create an instance: `local training = client:Training(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | `string` |  |
+| `catId` | `string` |  |
 | `duration` | `number` |  |
 | `id` | `string` |  |
-| `note` | `string` |  |
+| `notes` | `string` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `string` |  |
 | `type` | `string` |  |
@@ -472,7 +472,7 @@ local trainings, err = client:Training():list()
 
 ```lua
 local training, err = client:Training():create({
-  cat_id = "example_cat_id", -- string
+  catId = "example_catId", -- string
   duration = 1, -- number
   type = "example_type", -- string
 })
@@ -551,15 +551,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local cat = client:Cat()
-cat:load({ id = "example_id" })
+local training = client:Training()
+training:list()
 
--- cat:data_get() now returns the cat data from the last load
--- cat:match_get() returns the last match criteria
+-- training:data_get() now returns the training data from the last list
+-- training:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

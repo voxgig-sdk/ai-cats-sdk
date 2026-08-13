@@ -19,11 +19,15 @@ import {
 describe('InteractionDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when AICATS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('AICATS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when AI_CATS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('AI_CATS_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new AiCatsSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -77,17 +81,17 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'AICATS_TEST_INTERACTION_ENTID': {},
-    'AICATS_TEST_LIVE': 'FALSE',
+    'AI_CATS_TEST_INTERACTION_ENTID': {},
+    'AI_CATS_TEST_LIVE': 'FALSE',
   })
 
-  const live = 'TRUE' === env.AICATS_TEST_LIVE
+  const live = 'TRUE' === env.AI_CATS_TEST_LIVE
 
   if (live) {
     const client = new AiCatsSDK({
     })
 
-    let idmap: any = env['AICATS_TEST_INTERACTION_ENTID']
+    let idmap: any = env['AI_CATS_TEST_INTERACTION_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

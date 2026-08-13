@@ -16,11 +16,11 @@
 import pytest
 
 from aicats_sdk import AiCatsSDK
-from core.error import AiCatsError
-from core.result import AiCatsResult
-from core.response import AiCatsResponse
-from core.spec import AiCatsSpec
-from feature.base_feature import AiCatsBaseFeature
+from aicats_sdk.core.error import AiCatsError
+from aicats_sdk.core.result import AiCatsResult
+from aicats_sdk.core.response import AiCatsResponse
+from aicats_sdk.core.spec import AiCatsSpec
+from aicats_sdk.feature.base_feature import AiCatsBaseFeature
 
 
 def _client():

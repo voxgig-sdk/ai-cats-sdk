@@ -37,7 +37,7 @@ class HealthEntity extends AiCatsEntityBase<Health> {
 
 
 
-  async load(this: any, reqmatch?: HealthLoadMatch, ctrl?: Control): Promise<Health> {
+  async load(this: any, reqmatch?: HealthLoadMatch, ctrl?: Control): Promise<HealthEntity> {
 
     const utility = this._utility
 
@@ -128,7 +128,15 @@ class HealthEntity extends AiCatsEntityBase<Health> {
         }
       }
 
-      return done(ctx)
+      const out = done(ctx)
+
+      // An operation resolves to the ENTITY, not the raw data — the record
+      // has just been absorbed into this instance and is reached through
+      // data(). `done` still runs: it completes the pipeline and raises on
+      // failure, and when throwing is disabled it hands back the error
+      // payload, which passes through unchanged. See AGENTS.md "Entity
+      // operations return ENTITIES".
+      return (ctx.result && ctx.result.ok) ? this : out
     }
     catch (err: any) {
 
@@ -151,7 +159,7 @@ class HealthEntity extends AiCatsEntityBase<Health> {
 
 
 
-  async create(this: any, reqdata?: HealthCreateData, ctrl?: Control): Promise<Health> {
+  async create(this: any, reqdata?: HealthCreateData, ctrl?: Control): Promise<HealthEntity> {
 
     const utility = this._utility
     const {
@@ -237,7 +245,15 @@ class HealthEntity extends AiCatsEntityBase<Health> {
         }
       }
 
-      return done(ctx)
+      const out = done(ctx)
+
+      // An operation resolves to the ENTITY, not the raw data — the record
+      // has just been absorbed into this instance and is reached through
+      // data(). `done` still runs: it completes the pipeline and raises on
+      // failure, and when throwing is disabled it hands back the error
+      // payload, which passes through unchanged. See AGENTS.md "Entity
+      // operations return ENTITIES".
+      return (ctx.result && ctx.result.ok) ? this : out
     }
     catch (err: any) {
 

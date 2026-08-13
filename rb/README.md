@@ -34,7 +34,7 @@ client = AiCatsSDK.new
 
 ```ruby
 begin
-  # load returns the bare Cat record (raises on error).
+  # load returns the ENTITY — call data_get for the Cat record (raises on error).
   cat = client.Cat.load({ "id" => "example_id" })
   puts cat
 rescue => err
@@ -49,9 +49,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  cat = client.Cat.load({ "id" => "example_id" })
+  trainings = client.Training.list()
 rescue => err
-  warn "load failed: #{err}"
+  warn "list failed: #{err}"
 end
 ```
 
@@ -112,17 +112,15 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```ruby
-client = AiCatsSDK.test({
-  "entity" => { "cat" => { "test01" => { "id" => "test01" } } },
-})
+client = AiCatsSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-cat = client.Cat.load({ "id" => "test01" })
-puts cat
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+training = client.Training.list()
+puts training
 ```
 
 ### Use a custom fetch function
@@ -243,7 +241,7 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
+| `createdAt` |  |
 | `height` |  |
 | `id` |  |
 | `url` |  |
@@ -257,7 +255,7 @@ API path: `/cats/{id}`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
+| `createdAt` |  |
 | `height` |  |
 | `id` |  |
 | `url` |  |
@@ -271,9 +269,9 @@ API path: `/cats/random`
 
 | Field | Description |
 | --- | --- |
-| `activity_level` |  |
-| `cat_id` |  |
-| `heart_rate` |  |
+| `activityLevel` |  |
+| `catId` |  |
+| `heartRate` |  |
 | `id` |  |
 | `temperature` |  |
 | `timestamp` |  |
@@ -287,10 +285,10 @@ API path: `/cats/health`
 
 | Field | Description |
 | --- | --- |
-| `cat_id` |  |
+| `catId` |  |
 | `duration` |  |
 | `id` |  |
-| `note` |  |
+| `notes` |  |
 | `quality` |  |
 | `timestamp` |  |
 | `type` |  |
@@ -303,10 +301,10 @@ API path: `/interactions`
 
 | Field | Description |
 | --- | --- |
-| `cat_id` |  |
+| `catId` |  |
 | `duration` |  |
 | `id` |  |
-| `note` |  |
+| `notes` |  |
 | `success` |  |
 | `timestamp` |  |
 | `type` |  |
@@ -334,7 +332,7 @@ Create an instance: `cat = client.Cat`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `String` |  |
+| `createdAt` | `String` |  |
 | `height` | `Integer` |  |
 | `id` | `String` |  |
 | `url` | `String` |  |
@@ -343,7 +341,7 @@ Create an instance: `cat = client.Cat`
 #### Example: Load
 
 ```ruby
-# load returns the bare Cat record (raises on error).
+# load returns the ENTITY — call data_get for the Cat record (raises on error).
 cat = client.Cat.load({ "id" => "cat_id" })
 ```
 
@@ -362,7 +360,7 @@ Create an instance: `cat_image = client.CatImage`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `String` |  |
+| `createdAt` | `String` |  |
 | `height` | `Integer` |  |
 | `id` | `String` |  |
 | `url` | `String` |  |
@@ -371,7 +369,7 @@ Create an instance: `cat_image = client.CatImage`
 #### Example: Load
 
 ```ruby
-# load returns the bare CatImage record (raises on error).
+# load returns the ENTITY — call data_get for the CatImage record (raises on error).
 cat_image = client.CatImage.load({ "id" => "cat_image_id" })
 ```
 
@@ -391,9 +389,9 @@ Create an instance: `health = client.Health`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `activity_level` | `String` |  |
-| `cat_id` | `String` |  |
-| `heart_rate` | `Integer` |  |
+| `activityLevel` | `String` |  |
+| `catId` | `String` |  |
+| `heartRate` | `Integer` |  |
 | `id` | `String` |  |
 | `temperature` | `Float` |  |
 | `timestamp` | `String` |  |
@@ -402,7 +400,7 @@ Create an instance: `health = client.Health`
 #### Example: Load
 
 ```ruby
-# load returns the bare Health record (raises on error).
+# load returns the ENTITY — call data_get for the Health record (raises on error).
 health = client.Health.load({ "id" => "health_id" })
 ```
 
@@ -429,10 +427,10 @@ Create an instance: `interaction = client.Interaction`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | `String` |  |
+| `catId` | `String` |  |
 | `duration` | `Integer` |  |
 | `id` | `String` |  |
-| `note` | `String` |  |
+| `notes` | `String` |  |
 | `quality` | `String` |  |
 | `timestamp` | `String` |  |
 | `type` | `String` |  |
@@ -448,7 +446,7 @@ interactions = client.Interaction.list
 
 ```ruby
 interaction = client.Interaction.create({
-  "cat_id" => "example_cat_id", # String
+  "catId" => "example_catId", # String
   "type" => "example_type", # String
 })
 ```
@@ -469,10 +467,10 @@ Create an instance: `training = client.Training`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | `String` |  |
+| `catId` | `String` |  |
 | `duration` | `Integer` |  |
 | `id` | `String` |  |
-| `note` | `String` |  |
+| `notes` | `String` |  |
 | `success` | `Boolean` |  |
 | `timestamp` | `String` |  |
 | `type` | `String` |  |
@@ -488,7 +486,7 @@ trainings = client.Training.list
 
 ```ruby
 training = client.Training.create({
-  "cat_id" => "example_cat_id", # String
+  "catId" => "example_catId", # String
   "duration" => 1, # Integer
   "type" => "example_type", # String
 })
@@ -567,15 +565,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-cat = client.Cat
-cat.load({ "id" => "example_id" })
+training = client.Training
+training.list()
 
-# cat.data_get now returns the cat data from the last load
-# cat.match_get returns the last match criteria
+# training.data_get now returns the training data from the last list
+# training.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

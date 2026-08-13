@@ -26,8 +26,8 @@ import {
 describe('TrainingEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when AICATS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('AICATS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when AI_CATS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('AI_CATS_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = AiCatsSDK.test()
@@ -62,14 +62,14 @@ describe('TrainingEntity', async () => {
     const training_ref01_ent = client.Training()
     let training_ref01_data = setup.data.new.training['training_ref01']
 
-    training_ref01_data = await training_ref01_ent.create(training_ref01_data)
+    training_ref01_data = (await training_ref01_ent.create(training_ref01_data)).data()
     assert(null != training_ref01_data.id)
 
 
     // LIST
     const training_ref01_match: any = {}
 
-    const training_ref01_list = await training_ref01_ent.list(training_ref01_match)
+    const training_ref01_list = (await training_ref01_ent.list(training_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(training_ref01_list, { id: training_ref01_data.id })))
 

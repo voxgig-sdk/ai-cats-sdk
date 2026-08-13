@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from aicats_sdk.utility.voxgig_struct import voxgig_struct as vs
 from aicats_sdk import AiCatsSDK
-from core import helpers
+from aicats_sdk.core import helpers
 from test import runner
 
 
@@ -58,11 +58,11 @@ def _training_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "AICATS_TEST_TRAINING_ENTID": {},
-        "AICATS_TEST_LIVE": "FALSE",
+        "AI_CATS_TEST_TRAINING_ENTID": {},
+        "AI_CATS_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("AICATS_TEST_LIVE") == "TRUE"
+    live = env.get("AI_CATS_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

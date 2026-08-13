@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ AiCatsUtility.registrar = ->(u) {
   u.prepare_params = AiCatsUtilities::PrepareParams
   u.prepare_path = AiCatsUtilities::PreparePath
   u.prepare_query = AiCatsUtilities::PrepareQuery
+  u.graphql_body = AiCatsUtilities::GraphqlBody
+  u.graphql_errors = AiCatsUtilities::GraphqlErrors
   u.result_basic = AiCatsUtilities::ResultBasic
   u.result_body = AiCatsUtilities::ResultBody
   u.result_headers = AiCatsUtilities::ResultHeaders

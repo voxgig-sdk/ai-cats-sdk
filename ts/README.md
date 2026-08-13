@@ -53,10 +53,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const cat = await client.Cat().load({ id: "example_id" })
-  console.log(cat)
+  const trainings = await client.Training().list()
+  console.log(trainings)
 } catch (err) {
-  console.error('load failed:', err)
+  console.error('list failed:', err)
 }
 ```
 
@@ -120,9 +120,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = AiCatsSDK.test()
 
-const cat = await client.Cat().load({ id: 'test01' })
-// cat is a bare entity populated with mock response data
-console.log(cat)
+const training = await client.Training().list()
+// training is the entity, populated with mock response data
+// — call training.data() for the record itself
+console.log(training)
 ```
 
 You can also use the instance method:
@@ -137,10 +138,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Cat()
+const entity = client.Training()
 
 // First call runs the operation and stores its result
-await entity.load({ id: 'example' })
+await entity.list()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -292,7 +293,7 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
+| `createdAt` |  |
 | `height` |  |
 | `id` |  |
 | `url` |  |
@@ -306,7 +307,7 @@ API path: `/cats/{id}`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
+| `createdAt` |  |
 | `height` |  |
 | `id` |  |
 | `url` |  |
@@ -320,9 +321,9 @@ API path: `/cats/random`
 
 | Field | Description |
 | --- | --- |
-| `activity_level` |  |
-| `cat_id` |  |
-| `heart_rate` |  |
+| `activityLevel` |  |
+| `catId` |  |
+| `heartRate` |  |
 | `id` |  |
 | `temperature` |  |
 | `timestamp` |  |
@@ -336,10 +337,10 @@ API path: `/cats/health`
 
 | Field | Description |
 | --- | --- |
-| `cat_id` |  |
+| `catId` |  |
 | `duration` |  |
 | `id` |  |
-| `note` |  |
+| `notes` |  |
 | `quality` |  |
 | `timestamp` |  |
 | `type` |  |
@@ -352,10 +353,10 @@ API path: `/interactions`
 
 | Field | Description |
 | --- | --- |
-| `cat_id` |  |
+| `catId` |  |
 | `duration` |  |
 | `id` |  |
-| `note` |  |
+| `notes` |  |
 | `success` |  |
 | `timestamp` |  |
 | `type` |  |
@@ -383,7 +384,7 @@ Create an instance: `const cat = client.Cat()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
+| `createdAt` | `string` |  |
 | `height` | `number` |  |
 | `id` | `string` |  |
 | `url` | `string` |  |
@@ -410,7 +411,7 @@ Create an instance: `const cat_image = client.CatImage()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
+| `createdAt` | `string` |  |
 | `height` | `number` |  |
 | `id` | `string` |  |
 | `url` | `string` |  |
@@ -438,9 +439,9 @@ Create an instance: `const health = client.Health()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `activity_level` | `string` |  |
-| `cat_id` | `string` |  |
-| `heart_rate` | `number` |  |
+| `activityLevel` | `string` |  |
+| `catId` | `string` |  |
+| `heartRate` | `number` |  |
 | `id` | `string` |  |
 | `temperature` | `number` |  |
 | `timestamp` | `string` |  |
@@ -475,10 +476,10 @@ Create an instance: `const interaction = client.Interaction()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | `string` |  |
+| `catId` | `string` |  |
 | `duration` | `number` |  |
 | `id` | `string` |  |
-| `note` | `string` |  |
+| `notes` | `string` |  |
 | `quality` | `string` |  |
 | `timestamp` | `string` |  |
 | `type` | `string` |  |
@@ -493,7 +494,7 @@ const interactions = await client.Interaction().list()
 
 ```ts
 const interaction = await client.Interaction().create({
-  cat_id: 'example_cat_id',
+  catId: 'example_catId',
   type: 'example_type',
 })
 ```
@@ -514,10 +515,10 @@ Create an instance: `const training = client.Training()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cat_id` | `string` |  |
+| `catId` | `string` |  |
 | `duration` | `number` |  |
 | `id` | `string` |  |
-| `note` | `string` |  |
+| `notes` | `string` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `string` |  |
 | `type` | `string` |  |
@@ -532,7 +533,7 @@ const trainings = await client.Training().list()
 
 ```ts
 const training = await client.Training().create({
-  cat_id: 'example_cat_id',
+  catId: 'example_catId',
   duration: 1,
   type: 'example_type',
 })
@@ -603,16 +604,16 @@ import { AiCatsSDK } from '@voxgig-sdk/ai-cats'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const cat = client.Cat()
-await cat.load({ id: "example_id" })
+const training = client.Training()
+await training.list()
 
-// cat.data() now returns the cat data from the last `load`
-// cat.match() returns { id: "example_id" }
+// training.data() now returns the training data from the last `list`
+// training.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

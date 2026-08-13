@@ -10,7 +10,7 @@
 
 # Cat entity data model.
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
 # @!attribute [rw] height
@@ -25,7 +25,7 @@
 # @!attribute [rw] width
 #   @return [Integer, nil]
 Cat = Struct.new(
-  :created_at,
+  :createdAt,
   :height,
   :id,
   :url,
@@ -44,7 +44,7 @@ CatLoadMatch = Struct.new(
 
 # CatImage entity data model.
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
 # @!attribute [rw] height
@@ -59,7 +59,7 @@ CatLoadMatch = Struct.new(
 # @!attribute [rw] width
 #   @return [Integer, nil]
 CatImage = Struct.new(
-  :created_at,
+  :createdAt,
   :height,
   :id,
   :url,
@@ -69,7 +69,7 @@ CatImage = Struct.new(
 
 # Request payload for CatImage#load.
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
 # @!attribute [rw] height
@@ -84,7 +84,7 @@ CatImage = Struct.new(
 # @!attribute [rw] width
 #   @return [Integer, nil]
 CatImageLoadMatch = Struct.new(
-  :created_at,
+  :createdAt,
   :height,
   :id,
   :url,
@@ -94,13 +94,13 @@ CatImageLoadMatch = Struct.new(
 
 # Health entity data model.
 #
-# @!attribute [rw] activity_level
+# @!attribute [rw] activityLevel
 #   @return [String, nil]
 #
-# @!attribute [rw] cat_id
+# @!attribute [rw] catId
 #   @return [String, nil]
 #
-# @!attribute [rw] heart_rate
+# @!attribute [rw] heartRate
 #   @return [Integer, nil]
 #
 # @!attribute [rw] id
@@ -115,9 +115,9 @@ CatImageLoadMatch = Struct.new(
 # @!attribute [rw] weight
 #   @return [Float, nil]
 Health = Struct.new(
-  :activity_level,
-  :cat_id,
-  :heart_rate,
+  :activityLevel,
+  :catId,
+  :heartRate,
   :id,
   :temperature,
   :timestamp,
@@ -127,13 +127,13 @@ Health = Struct.new(
 
 # Request payload for Health#load.
 #
-# @!attribute [rw] activity_level
+# @!attribute [rw] activityLevel
 #   @return [String, nil]
 #
-# @!attribute [rw] cat_id
+# @!attribute [rw] catId
 #   @return [String, nil]
 #
-# @!attribute [rw] heart_rate
+# @!attribute [rw] heartRate
 #   @return [Integer, nil]
 #
 # @!attribute [rw] id
@@ -148,9 +148,9 @@ Health = Struct.new(
 # @!attribute [rw] weight
 #   @return [Float, nil]
 HealthLoadMatch = Struct.new(
-  :activity_level,
-  :cat_id,
-  :heart_rate,
+  :activityLevel,
+  :catId,
+  :heartRate,
   :id,
   :temperature,
   :timestamp,
@@ -160,13 +160,13 @@ HealthLoadMatch = Struct.new(
 
 # Request payload for Health#create.
 #
-# @!attribute [rw] activity_level
+# @!attribute [rw] activityLevel
 #   @return [String, nil]
 #
-# @!attribute [rw] cat_id
+# @!attribute [rw] catId
 #   @return [String, nil]
 #
-# @!attribute [rw] heart_rate
+# @!attribute [rw] heartRate
 #   @return [Integer, nil]
 #
 # @!attribute [rw] id
@@ -181,9 +181,9 @@ HealthLoadMatch = Struct.new(
 # @!attribute [rw] weight
 #   @return [Float, nil]
 HealthCreateData = Struct.new(
-  :activity_level,
-  :cat_id,
-  :heart_rate,
+  :activityLevel,
+  :catId,
+  :heartRate,
   :id,
   :temperature,
   :timestamp,
@@ -193,7 +193,7 @@ HealthCreateData = Struct.new(
 
 # Interaction entity data model.
 #
-# @!attribute [rw] cat_id
+# @!attribute [rw] catId
 #   @return [String]
 #
 # @!attribute [rw] duration
@@ -202,7 +202,7 @@ HealthCreateData = Struct.new(
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] note
+# @!attribute [rw] notes
 #   @return [String, nil]
 #
 # @!attribute [rw] quality
@@ -214,10 +214,10 @@ HealthCreateData = Struct.new(
 # @!attribute [rw] type
 #   @return [String]
 Interaction = Struct.new(
-  :cat_id,
+  :catId,
   :duration,
   :id,
-  :note,
+  :notes,
   :quality,
   :timestamp,
   :type,
@@ -226,7 +226,7 @@ Interaction = Struct.new(
 
 # Request payload for Interaction#list.
 #
-# @!attribute [rw] cat_id
+# @!attribute [rw] catId
 #   @return [String, nil]
 #
 # @!attribute [rw] duration
@@ -235,7 +235,7 @@ Interaction = Struct.new(
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] note
+# @!attribute [rw] notes
 #   @return [String, nil]
 #
 # @!attribute [rw] quality
@@ -247,10 +247,10 @@ Interaction = Struct.new(
 # @!attribute [rw] type
 #   @return [String, nil]
 InteractionListMatch = Struct.new(
-  :cat_id,
+  :catId,
   :duration,
   :id,
-  :note,
+  :notes,
   :quality,
   :timestamp,
   :type,
@@ -259,7 +259,7 @@ InteractionListMatch = Struct.new(
 
 # Request payload for Interaction#create.
 #
-# @!attribute [rw] cat_id
+# @!attribute [rw] catId
 #   @return [String]
 #
 # @!attribute [rw] duration
@@ -268,7 +268,7 @@ InteractionListMatch = Struct.new(
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] note
+# @!attribute [rw] notes
 #   @return [String, nil]
 #
 # @!attribute [rw] quality
@@ -280,10 +280,10 @@ InteractionListMatch = Struct.new(
 # @!attribute [rw] type
 #   @return [String]
 InteractionCreateData = Struct.new(
-  :cat_id,
+  :catId,
   :duration,
   :id,
-  :note,
+  :notes,
   :quality,
   :timestamp,
   :type,
@@ -292,7 +292,7 @@ InteractionCreateData = Struct.new(
 
 # Training entity data model.
 #
-# @!attribute [rw] cat_id
+# @!attribute [rw] catId
 #   @return [String]
 #
 # @!attribute [rw] duration
@@ -301,7 +301,7 @@ InteractionCreateData = Struct.new(
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] note
+# @!attribute [rw] notes
 #   @return [String, nil]
 #
 # @!attribute [rw] success
@@ -313,10 +313,10 @@ InteractionCreateData = Struct.new(
 # @!attribute [rw] type
 #   @return [String]
 Training = Struct.new(
-  :cat_id,
+  :catId,
   :duration,
   :id,
-  :note,
+  :notes,
   :success,
   :timestamp,
   :type,
@@ -325,7 +325,7 @@ Training = Struct.new(
 
 # Request payload for Training#list.
 #
-# @!attribute [rw] cat_id
+# @!attribute [rw] catId
 #   @return [String, nil]
 #
 # @!attribute [rw] duration
@@ -334,7 +334,7 @@ Training = Struct.new(
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] note
+# @!attribute [rw] notes
 #   @return [String, nil]
 #
 # @!attribute [rw] success
@@ -346,10 +346,10 @@ Training = Struct.new(
 # @!attribute [rw] type
 #   @return [String, nil]
 TrainingListMatch = Struct.new(
-  :cat_id,
+  :catId,
   :duration,
   :id,
-  :note,
+  :notes,
   :success,
   :timestamp,
   :type,
@@ -358,7 +358,7 @@ TrainingListMatch = Struct.new(
 
 # Request payload for Training#create.
 #
-# @!attribute [rw] cat_id
+# @!attribute [rw] catId
 #   @return [String]
 #
 # @!attribute [rw] duration
@@ -367,7 +367,7 @@ TrainingListMatch = Struct.new(
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] note
+# @!attribute [rw] notes
 #   @return [String, nil]
 #
 # @!attribute [rw] success
@@ -379,10 +379,10 @@ TrainingListMatch = Struct.new(
 # @!attribute [rw] type
 #   @return [String]
 TrainingCreateData = Struct.new(
-  :cat_id,
+  :catId,
   :duration,
   :id,
-  :note,
+  :notes,
   :success,
   :timestamp,
   :type,

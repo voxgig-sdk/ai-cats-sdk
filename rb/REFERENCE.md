@@ -109,7 +109,7 @@ cat = client.Cat
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `String` | No |  |
+| `createdAt` | `String` | No |  |
 | `height` | `Integer` | No |  |
 | `id` | `String` | No |  |
 | `url` | `String` | No |  |
@@ -165,7 +165,7 @@ cat_image = client.CatImage
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `String` | No |  |
+| `createdAt` | `String` | No |  |
 | `height` | `Integer` | No |  |
 | `id` | `String` | No |  |
 | `url` | `String` | No |  |
@@ -221,9 +221,9 @@ health = client.Health
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activity_level` | `String` | No |  |
-| `cat_id` | `String` | No |  |
-| `heart_rate` | `Integer` | No |  |
+| `activityLevel` | `String` | No |  |
+| `catId` | `String` | No |  |
+| `heartRate` | `Integer` | No |  |
 | `id` | `String` | No |  |
 | `temperature` | `Float` | No |  |
 | `timestamp` | `String` | No |  |
@@ -233,9 +233,9 @@ health = client.Health
 
 | Field | load | create |
 | --- | --- | --- |
-| `activity_level` | - | - |
-| `cat_id` | - | Yes |
-| `heart_rate` | - | - |
+| `activityLevel` | - | - |
+| `catId` | - | Yes |
+| `heartRate` | - | - |
 | `id` | - | - |
 | `temperature` | - | - |
 | `timestamp` | - | - |
@@ -300,10 +300,10 @@ interaction = client.Interaction
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | `String` | Yes |  |
+| `catId` | `String` | Yes |  |
 | `duration` | `Integer` | No |  |
 | `id` | `String` | No |  |
-| `note` | `String` | No |  |
+| `notes` | `String` | No |  |
 | `quality` | `String` | No |  |
 | `timestamp` | `String` | No |  |
 | `type` | `String` | Yes |  |
@@ -312,10 +312,10 @@ interaction = client.Interaction
 
 | Field | list | create |
 | --- | --- | --- |
-| `cat_id` | Yes | - |
+| `catId` | Yes | - |
 | `duration` | - | - |
 | `id` | - | - |
-| `note` | - | - |
+| `notes` | - | - |
 | `quality` | - | - |
 | `timestamp` | - | - |
 | `type` | Yes | - |
@@ -328,7 +328,7 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Interaction.create({
-  "cat_id" => "example_cat_id", # String
+  "catId" => "example_catId", # String
   "type" => "example_type", # String
 })
 ```
@@ -381,10 +381,10 @@ training = client.Training
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | `String` | Yes |  |
+| `catId` | `String` | Yes |  |
 | `duration` | `Integer` | Yes |  |
 | `id` | `String` | No |  |
-| `note` | `String` | No |  |
+| `notes` | `String` | No |  |
 | `success` | `Boolean` | No |  |
 | `timestamp` | `String` | No |  |
 | `type` | `String` | Yes |  |
@@ -393,10 +393,10 @@ training = client.Training
 
 | Field | list | create |
 | --- | --- | --- |
-| `cat_id` | Yes | - |
+| `catId` | Yes | - |
 | `duration` | Yes | - |
 | `id` | - | - |
-| `note` | - | - |
+| `notes` | - | - |
 | `success` | - | - |
 | `timestamp` | - | - |
 | `type` | Yes | - |
@@ -409,7 +409,7 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Training.create({
-  "cat_id" => "example_cat_id", # String
+  "catId" => "example_catId", # String
   "duration" => 1, # Integer
   "type" => "example_type", # String
 })

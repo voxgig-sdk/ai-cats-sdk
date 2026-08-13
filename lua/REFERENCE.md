@@ -106,7 +106,7 @@ local cat = client:Cat(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
+| `createdAt` | `string` | No |  |
 | `height` | `number` | No |  |
 | `id` | `string` | No |  |
 | `url` | `string` | No |  |
@@ -162,7 +162,7 @@ local cat_image = client:CatImage(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
+| `createdAt` | `string` | No |  |
 | `height` | `number` | No |  |
 | `id` | `string` | No |  |
 | `url` | `string` | No |  |
@@ -218,9 +218,9 @@ local health = client:Health(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activity_level` | `string` | No |  |
-| `cat_id` | `string` | No |  |
-| `heart_rate` | `number` | No |  |
+| `activityLevel` | `string` | No |  |
+| `catId` | `string` | No |  |
+| `heartRate` | `number` | No |  |
 | `id` | `string` | No |  |
 | `temperature` | `number` | No |  |
 | `timestamp` | `string` | No |  |
@@ -230,9 +230,9 @@ local health = client:Health(nil)
 
 | Field | load | create |
 | --- | --- | --- |
-| `activity_level` | - | - |
-| `cat_id` | - | Yes |
-| `heart_rate` | - | - |
+| `activityLevel` | - | - |
+| `catId` | - | Yes |
+| `heartRate` | - | - |
 | `id` | - | - |
 | `temperature` | - | - |
 | `timestamp` | - | - |
@@ -297,10 +297,10 @@ local interaction = client:Interaction(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | `string` | Yes |  |
+| `catId` | `string` | Yes |  |
 | `duration` | `number` | No |  |
 | `id` | `string` | No |  |
-| `note` | `string` | No |  |
+| `notes` | `string` | No |  |
 | `quality` | `string` | No |  |
 | `timestamp` | `string` | No |  |
 | `type` | `string` | Yes |  |
@@ -309,10 +309,10 @@ local interaction = client:Interaction(nil)
 
 | Field | list | create |
 | --- | --- | --- |
-| `cat_id` | Yes | - |
+| `catId` | Yes | - |
 | `duration` | - | - |
 | `id` | - | - |
-| `note` | - | - |
+| `notes` | - | - |
 | `quality` | - | - |
 | `timestamp` | - | - |
 | `type` | Yes | - |
@@ -325,7 +325,7 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Interaction():create({
-  cat_id = --[[ string ]],
+  catId = --[[ string ]],
   type = --[[ string ]],
 })
 ```
@@ -378,10 +378,10 @@ local training = client:Training(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | `string` | Yes |  |
+| `catId` | `string` | Yes |  |
 | `duration` | `number` | Yes |  |
 | `id` | `string` | No |  |
-| `note` | `string` | No |  |
+| `notes` | `string` | No |  |
 | `success` | `boolean` | No |  |
 | `timestamp` | `string` | No |  |
 | `type` | `string` | Yes |  |
@@ -390,10 +390,10 @@ local training = client:Training(nil)
 
 | Field | list | create |
 | --- | --- | --- |
-| `cat_id` | Yes | - |
+| `catId` | Yes | - |
 | `duration` | Yes | - |
 | `id` | - | - |
-| `note` | - | - |
+| `notes` | - | - |
 | `success` | - | - |
 | `timestamp` | - | - |
 | `type` | Yes | - |
@@ -406,7 +406,7 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Training():create({
-  cat_id = --[[ string ]],
+  catId = --[[ string ]],
   duration = --[[ number ]],
   type = --[[ string ]],
 })

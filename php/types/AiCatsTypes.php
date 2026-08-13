@@ -15,7 +15,7 @@ declare(strict_types=1);
 /** Cat entity data model. */
 class Cat
 {
-    public ?string $created_at = null;
+    public ?string $createdAt = null;
     public ?int $height = null;
     public ?string $id = null;
     public ?string $url = null;
@@ -31,7 +31,7 @@ class CatLoadMatch
 /** CatImage entity data model. */
 class CatImage
 {
-    public ?string $created_at = null;
+    public ?string $createdAt = null;
     public ?int $height = null;
     public ?string $id = null;
     public ?string $url = null;
@@ -41,7 +41,7 @@ class CatImage
 /** Request payload for CatImage#load. */
 class CatImageLoadMatch
 {
-    public ?string $created_at = null;
+    public ?string $createdAt = null;
     public ?int $height = null;
     public string $id;
     public ?string $url = null;
@@ -51,9 +51,9 @@ class CatImageLoadMatch
 /** Health entity data model. */
 class Health
 {
-    public ?string $activity_level = null;
-    public ?string $cat_id = null;
-    public ?int $heart_rate = null;
+    public ?string $activityLevel = null;
+    public ?string $catId = null;
+    public ?int $heartRate = null;
     public ?string $id = null;
     public ?float $temperature = null;
     public ?string $timestamp = null;
@@ -63,9 +63,9 @@ class Health
 /** Request payload for Health#load. */
 class HealthLoadMatch
 {
-    public ?string $activity_level = null;
-    public ?string $cat_id = null;
-    public ?int $heart_rate = null;
+    public ?string $activityLevel = null;
+    public ?string $catId = null;
+    public ?int $heartRate = null;
     public string $id;
     public ?float $temperature = null;
     public ?string $timestamp = null;
@@ -75,9 +75,9 @@ class HealthLoadMatch
 /** Request payload for Health#create. */
 class HealthCreateData
 {
-    public ?string $activity_level = null;
-    public ?string $cat_id = null;
-    public ?int $heart_rate = null;
+    public ?string $activityLevel = null;
+    public ?string $catId = null;
+    public ?int $heartRate = null;
     public ?string $id = null;
     public ?float $temperature = null;
     public ?string $timestamp = null;
@@ -87,10 +87,10 @@ class HealthCreateData
 /** Interaction entity data model. */
 class Interaction
 {
-    public string $cat_id;
+    public string $catId;
     public ?int $duration = null;
     public ?string $id = null;
-    public ?string $note = null;
+    public ?string $notes = null;
     public ?string $quality = null;
     public ?string $timestamp = null;
     public string $type;
@@ -99,10 +99,10 @@ class Interaction
 /** Request payload for Interaction#list. */
 class InteractionListMatch
 {
-    public ?string $cat_id = null;
+    public ?string $catId = null;
     public ?int $duration = null;
     public ?string $id = null;
-    public ?string $note = null;
+    public ?string $notes = null;
     public ?string $quality = null;
     public ?string $timestamp = null;
     public ?string $type = null;
@@ -111,10 +111,10 @@ class InteractionListMatch
 /** Request payload for Interaction#create. */
 class InteractionCreateData
 {
-    public string $cat_id;
+    public string $catId;
     public ?int $duration = null;
     public ?string $id = null;
-    public ?string $note = null;
+    public ?string $notes = null;
     public ?string $quality = null;
     public ?string $timestamp = null;
     public string $type;
@@ -123,10 +123,10 @@ class InteractionCreateData
 /** Training entity data model. */
 class Training
 {
-    public string $cat_id;
+    public string $catId;
     public int $duration;
     public ?string $id = null;
-    public ?string $note = null;
+    public ?string $notes = null;
     public ?bool $success = null;
     public ?string $timestamp = null;
     public string $type;
@@ -135,10 +135,10 @@ class Training
 /** Request payload for Training#list. */
 class TrainingListMatch
 {
-    public ?string $cat_id = null;
+    public ?string $catId = null;
     public ?int $duration = null;
     public ?string $id = null;
-    public ?string $note = null;
+    public ?string $notes = null;
     public ?bool $success = null;
     public ?string $timestamp = null;
     public ?string $type = null;
@@ -147,10 +147,10 @@ class TrainingListMatch
 /** Request payload for Training#create. */
 class TrainingCreateData
 {
-    public string $cat_id;
+    public string $catId;
     public int $duration;
     public ?string $id = null;
-    public ?string $note = null;
+    public ?string $notes = null;
     public ?bool $success = null;
     public ?string $timestamp = null;
     public string $type;

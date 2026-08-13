@@ -6,7 +6,7 @@ main: kit: entity: interaction: {
 
   fields: [
     {
-      name: "cat_id"
+      name: "catId"
       op: {
         list: {
           req: false
@@ -27,7 +27,7 @@ main: kit: entity: interaction: {
       type: "`$STRING`"
     }
     {
-      name: "note"
+      name: "notes"
       req: false
       type: "`$STRING`"
     }

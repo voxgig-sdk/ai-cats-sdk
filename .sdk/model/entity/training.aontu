@@ -6,7 +6,7 @@ main: kit: entity: training: {
 
   fields: [
     {
-      name: "cat_id"
+      name: "catId"
       op: {
         list: {
           req: false
@@ -33,7 +33,7 @@ main: kit: entity: training: {
       type: "`$STRING`"
     }
     {
-      name: "note"
+      name: "notes"
       req: false
       type: "`$STRING`"
     }

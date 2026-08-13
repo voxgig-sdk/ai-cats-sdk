@@ -6,12 +6,12 @@ main: kit: entity: health: {
 
   fields: [
     {
-      name: "activity_level"
+      name: "activityLevel"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "cat_id"
+      name: "catId"
       op: {
         create: {
           req: true
@@ -22,7 +22,7 @@ main: kit: entity: health: {
       type: "`$STRING`"
     }
     {
-      name: "heart_rate"
+      name: "heartRate"
       req: false
       type: "`$INTEGER`"
     }

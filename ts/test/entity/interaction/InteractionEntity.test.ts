@@ -26,8 +26,8 @@ import {
 describe('InteractionEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when AICATS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('AICATS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when AI_CATS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('AI_CATS_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = AiCatsSDK.test()
@@ -62,14 +62,14 @@ describe('InteractionEntity', async () => {
     const interaction_ref01_ent = client.Interaction()
     let interaction_ref01_data = setup.data.new.interaction['interaction_ref01']
 
-    interaction_ref01_data = await interaction_ref01_ent.create(interaction_ref01_data)
+    interaction_ref01_data = (await interaction_ref01_ent.create(interaction_ref01_data)).data()
     assert(null != interaction_ref01_data.id)
 
 
     // LIST
     const interaction_ref01_match: any = {}
 
-    const interaction_ref01_list = await interaction_ref01_ent.list(interaction_ref01_match)
+    const interaction_ref01_list = (await interaction_ref01_ent.list(interaction_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(interaction_ref01_list, { id: interaction_ref01_data.id })))
 

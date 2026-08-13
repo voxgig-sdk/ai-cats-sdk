@@ -6,7 +6,7 @@ main: kit: entity: cat_image: {
 
   fields: [
     {
-      name: "created_at"
+      name: "createdAt"
       req: false
       type: "`$STRING`"
     }

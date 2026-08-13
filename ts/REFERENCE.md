@@ -164,7 +164,7 @@ const cat = client.Cat()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
+| `createdAt` | `string` | No |  |
 | `height` | `number` | No |  |
 | `id` | `string` | No |  |
 | `url` | `string` | No |  |
@@ -218,7 +218,7 @@ const cat_image = client.CatImage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
+| `createdAt` | `string` | No |  |
 | `height` | `number` | No |  |
 | `id` | `string` | No |  |
 | `url` | `string` | No |  |
@@ -272,9 +272,9 @@ const health = client.Health()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activity_level` | `string` | No |  |
-| `cat_id` | `string` | No |  |
-| `heart_rate` | `number` | No |  |
+| `activityLevel` | `string` | No |  |
+| `catId` | `string` | No |  |
+| `heartRate` | `number` | No |  |
 | `id` | `string` | No |  |
 | `temperature` | `number` | No |  |
 | `timestamp` | `string` | No |  |
@@ -284,9 +284,9 @@ const health = client.Health()
 
 | Field | load | create |
 | --- | --- | --- |
-| `activity_level` | - | - |
-| `cat_id` | - | Yes |
-| `heart_rate` | - | - |
+| `activityLevel` | - | - |
+| `catId` | - | Yes |
+| `heartRate` | - | - |
 | `id` | - | - |
 | `temperature` | - | - |
 | `timestamp` | - | - |
@@ -349,10 +349,10 @@ const interaction = client.Interaction()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | `string` | Yes |  |
+| `catId` | `string` | Yes |  |
 | `duration` | `number` | No |  |
 | `id` | `string` | No |  |
-| `note` | `string` | No |  |
+| `notes` | `string` | No |  |
 | `quality` | `string` | No |  |
 | `timestamp` | `string` | No |  |
 | `type` | `string` | Yes |  |
@@ -361,10 +361,10 @@ const interaction = client.Interaction()
 
 | Field | list | create |
 | --- | --- | --- |
-| `cat_id` | Yes | - |
+| `catId` | Yes | - |
 | `duration` | - | - |
 | `id` | - | - |
-| `note` | - | - |
+| `notes` | - | - |
 | `quality` | - | - |
 | `timestamp` | - | - |
 | `type` | Yes | - |
@@ -377,7 +377,7 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Interaction().create({
-  cat_id: 'example_cat_id',
+  catId: 'example_catId',
   type: 'example_type',
 })
 ```
@@ -428,10 +428,10 @@ const training = client.Training()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cat_id` | `string` | Yes |  |
+| `catId` | `string` | Yes |  |
 | `duration` | `number` | Yes |  |
 | `id` | `string` | No |  |
-| `note` | `string` | No |  |
+| `notes` | `string` | No |  |
 | `success` | `boolean` | No |  |
 | `timestamp` | `string` | No |  |
 | `type` | `string` | Yes |  |
@@ -440,10 +440,10 @@ const training = client.Training()
 
 | Field | list | create |
 | --- | --- | --- |
-| `cat_id` | Yes | - |
+| `catId` | Yes | - |
 | `duration` | Yes | - |
 | `id` | - | - |
-| `note` | - | - |
+| `notes` | - | - |
 | `success` | - | - |
 | `timestamp` | - | - |
 | `type` | Yes | - |
@@ -456,7 +456,7 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Training().create({
-  cat_id: 'example_cat_id',
+  catId: 'example_catId',
   duration: 1,
   type: 'example_type',
 })
