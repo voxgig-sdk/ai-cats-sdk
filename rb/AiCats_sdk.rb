@@ -28,7 +28,7 @@ class AiCatsSDK
     utility = AiCatsUtility.new
     @_utility = utility
 
-    config = AiCatsConfig.make_config
+    config = AiCatsConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

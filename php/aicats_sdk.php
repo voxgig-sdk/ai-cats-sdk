@@ -40,7 +40,7 @@ class AiCatsSDK
         $utility = new AiCatsUtility();
         $this->_utility = $utility;
 
-        $config = AiCatsConfig::make_config();
+        $config = AiCatsConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,
