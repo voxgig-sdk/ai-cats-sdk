@@ -109,11 +109,11 @@ cat = client.Cat
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `createdAt` | `String` | No |  |
-| `height` | `Integer` | No |  |
-| `id` | `String` | No |  |
-| `url` | `String` | No |  |
-| `width` | `Integer` | No |  |
+| `createdAt` | `String` | No | Timestamp when the image was generated |
+| `height` | `Integer` | No | Height of the image in pixels |
+| `id` | `String` | No | Unique identifier for the cat image |
+| `url` | `String` | No | URL of the AI-generated cat image |
+| `width` | `Integer` | No | Width of the image in pixels |
 
 ### Operations
 
@@ -165,11 +165,11 @@ cat_image = client.CatImage
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `createdAt` | `String` | No |  |
-| `height` | `Integer` | No |  |
-| `id` | `String` | No |  |
-| `url` | `String` | No |  |
-| `width` | `Integer` | No |  |
+| `createdAt` | `String` | No | Timestamp when the image was generated |
+| `height` | `Integer` | No | Height of the image in pixels |
+| `id` | `String` | No | Unique identifier for the cat image |
+| `url` | `String` | No | URL of the AI-generated cat image |
+| `width` | `Integer` | No | Width of the image in pixels |
 
 ### Operations
 
@@ -221,13 +221,13 @@ health = client.Health
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activityLevel` | `String` | No |  |
-| `catId` | `String` | No |  |
-| `heartRate` | `Integer` | No |  |
-| `id` | `String` | No |  |
-| `temperature` | `Float` | No |  |
-| `timestamp` | `String` | No |  |
-| `weight` | `Float` | No |  |
+| `activityLevel` | `String` | No | Activity level of the cat |
+| `catId` | `String` | No | ID of the cat |
+| `heartRate` | `Integer` | No | Heart rate in beats per minute |
+| `id` | `String` | No | Unique identifier for the health record |
+| `temperature` | `Float` | No | Body temperature in Celsius |
+| `timestamp` | `String` | No | When the health data was recorded |
+| `weight` | `Float` | No | Weight of the cat in kg |
 
 ### Field Usage by Operation
 
@@ -300,13 +300,13 @@ interaction = client.Interaction
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `catId` | `String` | Yes |  |
-| `duration` | `Integer` | No |  |
-| `id` | `String` | No |  |
-| `notes` | `String` | No |  |
-| `quality` | `String` | No |  |
-| `timestamp` | `String` | No |  |
-| `type` | `String` | Yes |  |
+| `catId` | `String` | Yes | ID of the cat |
+| `duration` | `Integer` | No | Duration of the interaction in minutes |
+| `id` | `String` | No | Unique identifier for the interaction |
+| `notes` | `String` | No | Additional notes about the interaction |
+| `quality` | `String` | No | Quality rating of the interaction |
+| `timestamp` | `String` | No | When the interaction occurred |
+| `type` | `String` | Yes | Type of interaction |
 
 ### Field Usage by Operation
 
@@ -381,13 +381,13 @@ training = client.Training
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `catId` | `String` | Yes |  |
-| `duration` | `Integer` | Yes |  |
-| `id` | `String` | No |  |
-| `notes` | `String` | No |  |
-| `success` | `Boolean` | No |  |
-| `timestamp` | `String` | No |  |
-| `type` | `String` | Yes |  |
+| `catId` | `String` | Yes | ID of the cat |
+| `duration` | `Integer` | Yes | Duration of the session in minutes |
+| `id` | `String` | No | Unique identifier for the training session |
+| `notes` | `String` | No | Additional notes about the training session |
+| `success` | `Boolean` | No | Whether the training was successful |
+| `timestamp` | `String` | No | When the training session occurred |
+| `type` | `String` | Yes | Type of training session |
 
 ### Field Usage by Operation
 

@@ -251,11 +251,11 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `createdAt` |  |
-| `height` |  |
-| `id` |  |
-| `url` |  |
-| `width` |  |
+| `createdAt` | Timestamp when the image was generated |
+| `height` | Height of the image in pixels |
+| `id` | Unique identifier for the cat image |
+| `url` | URL of the AI-generated cat image |
+| `width` | Width of the image in pixels |
 
 Operations: Load.
 
@@ -265,11 +265,11 @@ API path: `/cats/{id}`
 
 | Field | Description |
 | --- | --- |
-| `createdAt` |  |
-| `height` |  |
-| `id` |  |
-| `url` |  |
-| `width` |  |
+| `createdAt` | Timestamp when the image was generated |
+| `height` | Height of the image in pixels |
+| `id` | Unique identifier for the cat image |
+| `url` | URL of the AI-generated cat image |
+| `width` | Width of the image in pixels |
 
 Operations: Load.
 
@@ -279,13 +279,13 @@ API path: `/cats/random`
 
 | Field | Description |
 | --- | --- |
-| `activityLevel` |  |
-| `catId` |  |
-| `heartRate` |  |
-| `id` |  |
-| `temperature` |  |
-| `timestamp` |  |
-| `weight` |  |
+| `activityLevel` | Activity level of the cat |
+| `catId` | ID of the cat |
+| `heartRate` | Heart rate in beats per minute |
+| `id` | Unique identifier for the health record |
+| `temperature` | Body temperature in Celsius |
+| `timestamp` | When the health data was recorded |
+| `weight` | Weight of the cat in kg |
 
 Operations: Create, Load.
 
@@ -295,13 +295,13 @@ API path: `/cats/health`
 
 | Field | Description |
 | --- | --- |
-| `catId` |  |
-| `duration` |  |
-| `id` |  |
-| `notes` |  |
-| `quality` |  |
-| `timestamp` |  |
-| `type` |  |
+| `catId` | ID of the cat |
+| `duration` | Duration of the interaction in minutes |
+| `id` | Unique identifier for the interaction |
+| `notes` | Additional notes about the interaction |
+| `quality` | Quality rating of the interaction |
+| `timestamp` | When the interaction occurred |
+| `type` | Type of interaction |
 
 Operations: Create, List.
 
@@ -311,13 +311,13 @@ API path: `/interactions`
 
 | Field | Description |
 | --- | --- |
-| `catId` |  |
-| `duration` |  |
-| `id` |  |
-| `notes` |  |
-| `success` |  |
-| `timestamp` |  |
-| `type` |  |
+| `catId` | ID of the cat |
+| `duration` | Duration of the session in minutes |
+| `id` | Unique identifier for the training session |
+| `notes` | Additional notes about the training session |
+| `success` | Whether the training was successful |
+| `timestamp` | When the training session occurred |
+| `type` | Type of training session |
 
 Operations: Create, List.
 
@@ -342,11 +342,11 @@ Create an instance: `$cat = $client->Cat();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `createdAt` | `string` |  |
-| `height` | `int` |  |
-| `id` | `string` |  |
-| `url` | `string` |  |
-| `width` | `int` |  |
+| `createdAt` | `string` | Timestamp when the image was generated |
+| `height` | `int` | Height of the image in pixels |
+| `id` | `string` | Unique identifier for the cat image |
+| `url` | `string` | URL of the AI-generated cat image |
+| `width` | `int` | Width of the image in pixels |
 
 #### Example: Load
 
@@ -370,11 +370,11 @@ Create an instance: `$cat_image = $client->CatImage();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `createdAt` | `string` |  |
-| `height` | `int` |  |
-| `id` | `string` |  |
-| `url` | `string` |  |
-| `width` | `int` |  |
+| `createdAt` | `string` | Timestamp when the image was generated |
+| `height` | `int` | Height of the image in pixels |
+| `id` | `string` | Unique identifier for the cat image |
+| `url` | `string` | URL of the AI-generated cat image |
+| `width` | `int` | Width of the image in pixels |
 
 #### Example: Load
 
@@ -399,13 +399,13 @@ Create an instance: `$health = $client->Health();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `activityLevel` | `string` |  |
-| `catId` | `string` |  |
-| `heartRate` | `int` |  |
-| `id` | `string` |  |
-| `temperature` | `float` |  |
-| `timestamp` | `string` |  |
-| `weight` | `float` |  |
+| `activityLevel` | `string` | Activity level of the cat |
+| `catId` | `string` | ID of the cat |
+| `heartRate` | `int` | Heart rate in beats per minute |
+| `id` | `string` | Unique identifier for the health record |
+| `temperature` | `float` | Body temperature in Celsius |
+| `timestamp` | `string` | When the health data was recorded |
+| `weight` | `float` | Weight of the cat in kg |
 
 #### Example: Load
 
@@ -437,13 +437,13 @@ Create an instance: `$interaction = $client->Interaction();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `catId` | `string` |  |
-| `duration` | `int` |  |
-| `id` | `string` |  |
-| `notes` | `string` |  |
-| `quality` | `string` |  |
-| `timestamp` | `string` |  |
-| `type` | `string` |  |
+| `catId` | `string` | ID of the cat |
+| `duration` | `int` | Duration of the interaction in minutes |
+| `id` | `string` | Unique identifier for the interaction |
+| `notes` | `string` | Additional notes about the interaction |
+| `quality` | `string` | Quality rating of the interaction |
+| `timestamp` | `string` | When the interaction occurred |
+| `type` | `string` | Type of interaction |
 
 #### Example: List
 
@@ -477,13 +477,13 @@ Create an instance: `$training = $client->Training();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `catId` | `string` |  |
-| `duration` | `int` |  |
-| `id` | `string` |  |
-| `notes` | `string` |  |
-| `success` | `bool` |  |
-| `timestamp` | `string` |  |
-| `type` | `string` |  |
+| `catId` | `string` | ID of the cat |
+| `duration` | `int` | Duration of the session in minutes |
+| `id` | `string` | Unique identifier for the training session |
+| `notes` | `string` | Additional notes about the training session |
+| `success` | `bool` | Whether the training was successful |
+| `timestamp` | `string` | When the training session occurred |
+| `type` | `string` | Type of training session |
 
 #### Example: List
 

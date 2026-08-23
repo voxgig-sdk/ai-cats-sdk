@@ -1,0 +1,68 @@
+# Entity: cat_image
+
+main: kit: entity: cat_image: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "createdAt"
+      req: false
+      short: "Timestamp when the image was generated"
+      type: "`$STRING`"
+    }
+    {
+      name: "height"
+      req: false
+      short: "Height of the image in pixels"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "id"
+      req: false
+      short: "Unique identifier for the cat image"
+      type: "`$STRING`"
+    }
+    {
+      name: "url"
+      req: false
+      short: "URL of the AI-generated cat image"
+      type: "`$STRING`"
+    }
+    {
+      name: "width"
+      req: false
+      short: "Width of the image in pixels"
+      type: "`$INTEGER`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "cat_image"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/cats/random"
+          parts: [
+            "cats"
+            "random"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

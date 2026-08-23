@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'AiCats',
+        slug: "ai-cats",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -68,22 +79,27 @@ class Config {
       "fields": [
         {
           "name": "createdAt",
+          "short": "Timestamp when the image was generated",
           "type": "`$STRING`"
         },
         {
           "name": "height",
+          "short": "Height of the image in pixels",
           "type": "`$INTEGER`"
         },
         {
           "name": "id",
+          "short": "Unique identifier for the cat image",
           "type": "`$STRING`"
         },
         {
           "name": "url",
+          "short": "URL of the AI-generated cat image",
           "type": "`$STRING`"
         },
         {
           "name": "width",
+          "short": "Width of the image in pixels",
           "type": "`$INTEGER`"
         }
       ],
@@ -133,22 +149,27 @@ class Config {
       "fields": [
         {
           "name": "createdAt",
+          "short": "Timestamp when the image was generated",
           "type": "`$STRING`"
         },
         {
           "name": "height",
+          "short": "Height of the image in pixels",
           "type": "`$INTEGER`"
         },
         {
           "name": "id",
+          "short": "Unique identifier for the cat image",
           "type": "`$STRING`"
         },
         {
           "name": "url",
+          "short": "URL of the AI-generated cat image",
           "type": "`$STRING`"
         },
         {
           "name": "width",
+          "short": "Width of the image in pixels",
           "type": "`$INTEGER`"
         }
       ],
@@ -184,6 +205,7 @@ class Config {
       "fields": [
         {
           "name": "activityLevel",
+          "short": "Activity level of the cat",
           "type": "`$STRING`"
         },
         {
@@ -194,22 +216,27 @@ class Config {
               "type": "`$STRING`"
             }
           },
+          "short": "ID of the cat",
           "type": "`$STRING`"
         },
         {
           "name": "heartRate",
+          "short": "Heart rate in beats per minute",
           "type": "`$INTEGER`"
         },
         {
           "name": "id",
+          "short": "Unique identifier for the health record",
           "type": "`$STRING`"
         },
         {
           "name": "temperature",
+          "short": "Body temperature in Celsius",
           "type": "`$NUMBER`"
         },
         {
           "name": "timestamp",
+          "short": "When the health data was recorded",
           "type": "`$STRING`"
         },
         {
@@ -220,6 +247,7 @@ class Config {
               "type": "`$NUMBER`"
             }
           },
+          "short": "Weight of the cat in kg",
           "type": "`$NUMBER`"
         }
       ],
@@ -295,26 +323,32 @@ class Config {
             }
           },
           "req": true,
+          "short": "ID of the cat",
           "type": "`$STRING`"
         },
         {
           "name": "duration",
+          "short": "Duration of the interaction in minutes",
           "type": "`$INTEGER`"
         },
         {
           "name": "id",
+          "short": "Unique identifier for the interaction",
           "type": "`$STRING`"
         },
         {
           "name": "notes",
+          "short": "Additional notes about the interaction",
           "type": "`$STRING`"
         },
         {
           "name": "quality",
+          "short": "Quality rating of the interaction",
           "type": "`$STRING`"
         },
         {
           "name": "timestamp",
+          "short": "When the interaction occurred",
           "type": "`$STRING`"
         },
         {
@@ -325,6 +359,7 @@ class Config {
             }
           },
           "req": true,
+          "short": "Type of interaction",
           "type": "`$STRING`"
         }
       ],
@@ -412,6 +447,7 @@ class Config {
             }
           },
           "req": true,
+          "short": "ID of the cat",
           "type": "`$STRING`"
         },
         {
@@ -422,22 +458,27 @@ class Config {
             }
           },
           "req": true,
+          "short": "Duration of the session in minutes",
           "type": "`$INTEGER`"
         },
         {
           "name": "id",
+          "short": "Unique identifier for the training session",
           "type": "`$STRING`"
         },
         {
           "name": "notes",
+          "short": "Additional notes about the training session",
           "type": "`$STRING`"
         },
         {
           "name": "success",
+          "short": "Whether the training was successful",
           "type": "`$BOOLEAN`"
         },
         {
           "name": "timestamp",
+          "short": "When the training session occurred",
           "type": "`$STRING`"
         },
         {
@@ -448,6 +489,7 @@ class Config {
             }
           },
           "req": true,
+          "short": "Type of training session",
           "type": "`$STRING`"
         }
       ],

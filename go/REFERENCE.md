@@ -114,11 +114,11 @@ fmt.Println(cat.GetName()) // "cat"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `createdAt` | `string` | No |  |
-| `height` | `int` | No |  |
-| `id` | `string` | No |  |
-| `url` | `string` | No |  |
-| `width` | `int` | No |  |
+| `createdAt` | `string` | No | Timestamp when the image was generated |
+| `height` | `int` | No | Height of the image in pixels |
+| `id` | `string` | No | Unique identifier for the cat image |
+| `url` | `string` | No | URL of the AI-generated cat image |
+| `width` | `int` | No | Width of the image in pixels |
 
 ### Operations
 
@@ -169,11 +169,11 @@ fmt.Println(catImage.GetName()) // "cat_image"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `createdAt` | `string` | No |  |
-| `height` | `int` | No |  |
-| `id` | `string` | No |  |
-| `url` | `string` | No |  |
-| `width` | `int` | No |  |
+| `createdAt` | `string` | No | Timestamp when the image was generated |
+| `height` | `int` | No | Height of the image in pixels |
+| `id` | `string` | No | Unique identifier for the cat image |
+| `url` | `string` | No | URL of the AI-generated cat image |
+| `width` | `int` | No | Width of the image in pixels |
 
 ### Operations
 
@@ -224,13 +224,13 @@ fmt.Println(health.GetName()) // "health"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activityLevel` | `string` | No |  |
-| `catId` | `string` | No |  |
-| `heartRate` | `int` | No |  |
-| `id` | `string` | No |  |
-| `temperature` | `float64` | No |  |
-| `timestamp` | `string` | No |  |
-| `weight` | `float64` | No |  |
+| `activityLevel` | `string` | No | Activity level of the cat |
+| `catId` | `string` | No | ID of the cat |
+| `heartRate` | `int` | No | Heart rate in beats per minute |
+| `id` | `string` | No | Unique identifier for the health record |
+| `temperature` | `float64` | No | Body temperature in Celsius |
+| `timestamp` | `string` | No | When the health data was recorded |
+| `weight` | `float64` | No | Weight of the cat in kg |
 
 ### Field Usage by Operation
 
@@ -306,13 +306,13 @@ fmt.Println(interaction.GetName()) // "interaction"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `catId` | `string` | Yes |  |
-| `duration` | `int` | No |  |
-| `id` | `string` | No |  |
-| `notes` | `string` | No |  |
-| `quality` | `string` | No |  |
-| `timestamp` | `string` | No |  |
-| `type` | `string` | Yes |  |
+| `catId` | `string` | Yes | ID of the cat |
+| `duration` | `int` | No | Duration of the interaction in minutes |
+| `id` | `string` | No | Unique identifier for the interaction |
+| `notes` | `string` | No | Additional notes about the interaction |
+| `quality` | `string` | No | Quality rating of the interaction |
+| `timestamp` | `string` | No | When the interaction occurred |
+| `type` | `string` | Yes | Type of interaction |
 
 ### Field Usage by Operation
 
@@ -390,13 +390,13 @@ fmt.Println(training.GetName()) // "training"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `catId` | `string` | Yes |  |
-| `duration` | `int` | Yes |  |
-| `id` | `string` | No |  |
-| `notes` | `string` | No |  |
-| `success` | `bool` | No |  |
-| `timestamp` | `string` | No |  |
-| `type` | `string` | Yes |  |
+| `catId` | `string` | Yes | ID of the cat |
+| `duration` | `int` | Yes | Duration of the session in minutes |
+| `id` | `string` | No | Unique identifier for the training session |
+| `notes` | `string` | No | Additional notes about the training session |
+| `success` | `bool` | No | Whether the training was successful |
+| `timestamp` | `string` | No | When the training session occurred |
+| `type` | `string` | Yes | Type of training session |
 
 ### Field Usage by Operation
 

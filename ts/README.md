@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -293,11 +293,11 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `createdAt` |  |
-| `height` |  |
-| `id` |  |
-| `url` |  |
-| `width` |  |
+| `createdAt` | Timestamp when the image was generated |
+| `height` | Height of the image in pixels |
+| `id` | Unique identifier for the cat image |
+| `url` | URL of the AI-generated cat image |
+| `width` | Width of the image in pixels |
 
 Operations: load.
 
@@ -307,11 +307,11 @@ API path: `/cats/{id}`
 
 | Field | Description |
 | --- | --- |
-| `createdAt` |  |
-| `height` |  |
-| `id` |  |
-| `url` |  |
-| `width` |  |
+| `createdAt` | Timestamp when the image was generated |
+| `height` | Height of the image in pixels |
+| `id` | Unique identifier for the cat image |
+| `url` | URL of the AI-generated cat image |
+| `width` | Width of the image in pixels |
 
 Operations: load.
 
@@ -321,13 +321,13 @@ API path: `/cats/random`
 
 | Field | Description |
 | --- | --- |
-| `activityLevel` |  |
-| `catId` |  |
-| `heartRate` |  |
-| `id` |  |
-| `temperature` |  |
-| `timestamp` |  |
-| `weight` |  |
+| `activityLevel` | Activity level of the cat |
+| `catId` | ID of the cat |
+| `heartRate` | Heart rate in beats per minute |
+| `id` | Unique identifier for the health record |
+| `temperature` | Body temperature in Celsius |
+| `timestamp` | When the health data was recorded |
+| `weight` | Weight of the cat in kg |
 
 Operations: create, load.
 
@@ -337,13 +337,13 @@ API path: `/cats/health`
 
 | Field | Description |
 | --- | --- |
-| `catId` |  |
-| `duration` |  |
-| `id` |  |
-| `notes` |  |
-| `quality` |  |
-| `timestamp` |  |
-| `type` |  |
+| `catId` | ID of the cat |
+| `duration` | Duration of the interaction in minutes |
+| `id` | Unique identifier for the interaction |
+| `notes` | Additional notes about the interaction |
+| `quality` | Quality rating of the interaction |
+| `timestamp` | When the interaction occurred |
+| `type` | Type of interaction |
 
 Operations: create, list.
 
@@ -353,13 +353,13 @@ API path: `/interactions`
 
 | Field | Description |
 | --- | --- |
-| `catId` |  |
-| `duration` |  |
-| `id` |  |
-| `notes` |  |
-| `success` |  |
-| `timestamp` |  |
-| `type` |  |
+| `catId` | ID of the cat |
+| `duration` | Duration of the session in minutes |
+| `id` | Unique identifier for the training session |
+| `notes` | Additional notes about the training session |
+| `success` | Whether the training was successful |
+| `timestamp` | When the training session occurred |
+| `type` | Type of training session |
 
 Operations: create, list.
 
@@ -384,11 +384,11 @@ Create an instance: `const cat = client.Cat()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `createdAt` | `string` |  |
-| `height` | `number` |  |
-| `id` | `string` |  |
-| `url` | `string` |  |
-| `width` | `number` |  |
+| `createdAt` | `string` | Timestamp when the image was generated |
+| `height` | `number` | Height of the image in pixels |
+| `id` | `string` | Unique identifier for the cat image |
+| `url` | `string` | URL of the AI-generated cat image |
+| `width` | `number` | Width of the image in pixels |
 
 #### Example: Load
 
@@ -411,11 +411,11 @@ Create an instance: `const cat_image = client.CatImage()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `createdAt` | `string` |  |
-| `height` | `number` |  |
-| `id` | `string` |  |
-| `url` | `string` |  |
-| `width` | `number` |  |
+| `createdAt` | `string` | Timestamp when the image was generated |
+| `height` | `number` | Height of the image in pixels |
+| `id` | `string` | Unique identifier for the cat image |
+| `url` | `string` | URL of the AI-generated cat image |
+| `width` | `number` | Width of the image in pixels |
 
 #### Example: Load
 
@@ -439,13 +439,13 @@ Create an instance: `const health = client.Health()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `activityLevel` | `string` |  |
-| `catId` | `string` |  |
-| `heartRate` | `number` |  |
-| `id` | `string` |  |
-| `temperature` | `number` |  |
-| `timestamp` | `string` |  |
-| `weight` | `number` |  |
+| `activityLevel` | `string` | Activity level of the cat |
+| `catId` | `string` | ID of the cat |
+| `heartRate` | `number` | Heart rate in beats per minute |
+| `id` | `string` | Unique identifier for the health record |
+| `temperature` | `number` | Body temperature in Celsius |
+| `timestamp` | `string` | When the health data was recorded |
+| `weight` | `number` | Weight of the cat in kg |
 
 #### Example: Load
 
@@ -476,13 +476,13 @@ Create an instance: `const interaction = client.Interaction()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `catId` | `string` |  |
-| `duration` | `number` |  |
-| `id` | `string` |  |
-| `notes` | `string` |  |
-| `quality` | `string` |  |
-| `timestamp` | `string` |  |
-| `type` | `string` |  |
+| `catId` | `string` | ID of the cat |
+| `duration` | `number` | Duration of the interaction in minutes |
+| `id` | `string` | Unique identifier for the interaction |
+| `notes` | `string` | Additional notes about the interaction |
+| `quality` | `string` | Quality rating of the interaction |
+| `timestamp` | `string` | When the interaction occurred |
+| `type` | `string` | Type of interaction |
 
 #### Example: List
 
@@ -515,13 +515,13 @@ Create an instance: `const training = client.Training()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `catId` | `string` |  |
-| `duration` | `number` |  |
-| `id` | `string` |  |
-| `notes` | `string` |  |
-| `success` | `boolean` |  |
-| `timestamp` | `string` |  |
-| `type` | `string` |  |
+| `catId` | `string` | ID of the cat |
+| `duration` | `number` | Duration of the session in minutes |
+| `id` | `string` | Unique identifier for the training session |
+| `notes` | `string` | Additional notes about the training session |
+| `success` | `boolean` | Whether the training was successful |
+| `timestamp` | `string` | When the training session occurred |
+| `type` | `string` | Type of training session |
 
 #### Example: List
 

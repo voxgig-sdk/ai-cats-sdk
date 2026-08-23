@@ -1,0 +1,138 @@
+# Entity: training
+
+main: kit: entity: training: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "catId"
+      op: {
+        list: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "ID of the cat"
+      type: "`$STRING`"
+    }
+    {
+      name: "duration"
+      op: {
+        list: {
+          req: false
+          type: "`$INTEGER`"
+        }
+      }
+      req: true
+      short: "Duration of the session in minutes"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "id"
+      req: false
+      short: "Unique identifier for the training session"
+      type: "`$STRING`"
+    }
+    {
+      name: "notes"
+      req: false
+      short: "Additional notes about the training session"
+      type: "`$STRING`"
+    }
+    {
+      name: "success"
+      req: false
+      short: "Whether the training was successful"
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "timestamp"
+      req: false
+      short: "When the training session occurred"
+      type: "`$STRING`"
+    }
+    {
+      name: "type"
+      op: {
+        list: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "Type of training session"
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "training"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/training"
+          parts: [
+            "training"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "cat_id"
+                orig: "cat_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: 10
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/training"
+          parts: [
+            "training"
+          ]
+          select: {
+            exist: [
+              "cat_id"
+              "limit"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

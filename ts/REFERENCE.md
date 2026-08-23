@@ -164,11 +164,11 @@ const cat = client.Cat()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `createdAt` | `string` | No |  |
-| `height` | `number` | No |  |
-| `id` | `string` | No |  |
-| `url` | `string` | No |  |
-| `width` | `number` | No |  |
+| `createdAt` | `string` | No | Timestamp when the image was generated |
+| `height` | `number` | No | Height of the image in pixels |
+| `id` | `string` | No | Unique identifier for the cat image |
+| `url` | `string` | No | URL of the AI-generated cat image |
+| `width` | `number` | No | Width of the image in pixels |
 
 ### Operations
 
@@ -218,11 +218,11 @@ const cat_image = client.CatImage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `createdAt` | `string` | No |  |
-| `height` | `number` | No |  |
-| `id` | `string` | No |  |
-| `url` | `string` | No |  |
-| `width` | `number` | No |  |
+| `createdAt` | `string` | No | Timestamp when the image was generated |
+| `height` | `number` | No | Height of the image in pixels |
+| `id` | `string` | No | Unique identifier for the cat image |
+| `url` | `string` | No | URL of the AI-generated cat image |
+| `width` | `number` | No | Width of the image in pixels |
 
 ### Operations
 
@@ -272,13 +272,13 @@ const health = client.Health()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `activityLevel` | `string` | No |  |
-| `catId` | `string` | No |  |
-| `heartRate` | `number` | No |  |
-| `id` | `string` | No |  |
-| `temperature` | `number` | No |  |
-| `timestamp` | `string` | No |  |
-| `weight` | `number` | No |  |
+| `activityLevel` | `string` | No | Activity level of the cat |
+| `catId` | `string` | No | ID of the cat |
+| `heartRate` | `number` | No | Heart rate in beats per minute |
+| `id` | `string` | No | Unique identifier for the health record |
+| `temperature` | `number` | No | Body temperature in Celsius |
+| `timestamp` | `string` | No | When the health data was recorded |
+| `weight` | `number` | No | Weight of the cat in kg |
 
 ### Field Usage by Operation
 
@@ -349,13 +349,13 @@ const interaction = client.Interaction()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `catId` | `string` | Yes |  |
-| `duration` | `number` | No |  |
-| `id` | `string` | No |  |
-| `notes` | `string` | No |  |
-| `quality` | `string` | No |  |
-| `timestamp` | `string` | No |  |
-| `type` | `string` | Yes |  |
+| `catId` | `string` | Yes | ID of the cat |
+| `duration` | `number` | No | Duration of the interaction in minutes |
+| `id` | `string` | No | Unique identifier for the interaction |
+| `notes` | `string` | No | Additional notes about the interaction |
+| `quality` | `string` | No | Quality rating of the interaction |
+| `timestamp` | `string` | No | When the interaction occurred |
+| `type` | `string` | Yes | Type of interaction |
 
 ### Field Usage by Operation
 
@@ -428,13 +428,13 @@ const training = client.Training()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `catId` | `string` | Yes |  |
-| `duration` | `number` | Yes |  |
-| `id` | `string` | No |  |
-| `notes` | `string` | No |  |
-| `success` | `boolean` | No |  |
-| `timestamp` | `string` | No |  |
-| `type` | `string` | Yes |  |
+| `catId` | `string` | Yes | ID of the cat |
+| `duration` | `number` | Yes | Duration of the session in minutes |
+| `id` | `string` | No | Unique identifier for the training session |
+| `notes` | `string` | No | Additional notes about the training session |
+| `success` | `boolean` | No | Whether the training was successful |
+| `timestamp` | `string` | No | When the training session occurred |
+| `type` | `string` | Yes | Type of training session |
 
 ### Field Usage by Operation
 

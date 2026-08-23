@@ -241,11 +241,11 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `createdAt` |  |
-| `height` |  |
-| `id` |  |
-| `url` |  |
-| `width` |  |
+| `createdAt` | Timestamp when the image was generated |
+| `height` | Height of the image in pixels |
+| `id` | Unique identifier for the cat image |
+| `url` | URL of the AI-generated cat image |
+| `width` | Width of the image in pixels |
 
 Operations: Load.
 
@@ -255,11 +255,11 @@ API path: `/cats/{id}`
 
 | Field | Description |
 | --- | --- |
-| `createdAt` |  |
-| `height` |  |
-| `id` |  |
-| `url` |  |
-| `width` |  |
+| `createdAt` | Timestamp when the image was generated |
+| `height` | Height of the image in pixels |
+| `id` | Unique identifier for the cat image |
+| `url` | URL of the AI-generated cat image |
+| `width` | Width of the image in pixels |
 
 Operations: Load.
 
@@ -269,13 +269,13 @@ API path: `/cats/random`
 
 | Field | Description |
 | --- | --- |
-| `activityLevel` |  |
-| `catId` |  |
-| `heartRate` |  |
-| `id` |  |
-| `temperature` |  |
-| `timestamp` |  |
-| `weight` |  |
+| `activityLevel` | Activity level of the cat |
+| `catId` | ID of the cat |
+| `heartRate` | Heart rate in beats per minute |
+| `id` | Unique identifier for the health record |
+| `temperature` | Body temperature in Celsius |
+| `timestamp` | When the health data was recorded |
+| `weight` | Weight of the cat in kg |
 
 Operations: Create, Load.
 
@@ -285,13 +285,13 @@ API path: `/cats/health`
 
 | Field | Description |
 | --- | --- |
-| `catId` |  |
-| `duration` |  |
-| `id` |  |
-| `notes` |  |
-| `quality` |  |
-| `timestamp` |  |
-| `type` |  |
+| `catId` | ID of the cat |
+| `duration` | Duration of the interaction in minutes |
+| `id` | Unique identifier for the interaction |
+| `notes` | Additional notes about the interaction |
+| `quality` | Quality rating of the interaction |
+| `timestamp` | When the interaction occurred |
+| `type` | Type of interaction |
 
 Operations: Create, List.
 
@@ -301,13 +301,13 @@ API path: `/interactions`
 
 | Field | Description |
 | --- | --- |
-| `catId` |  |
-| `duration` |  |
-| `id` |  |
-| `notes` |  |
-| `success` |  |
-| `timestamp` |  |
-| `type` |  |
+| `catId` | ID of the cat |
+| `duration` | Duration of the session in minutes |
+| `id` | Unique identifier for the training session |
+| `notes` | Additional notes about the training session |
+| `success` | Whether the training was successful |
+| `timestamp` | When the training session occurred |
+| `type` | Type of training session |
 
 Operations: Create, List.
 
@@ -332,11 +332,11 @@ Create an instance: `cat = client.Cat`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `createdAt` | `String` |  |
-| `height` | `Integer` |  |
-| `id` | `String` |  |
-| `url` | `String` |  |
-| `width` | `Integer` |  |
+| `createdAt` | `String` | Timestamp when the image was generated |
+| `height` | `Integer` | Height of the image in pixels |
+| `id` | `String` | Unique identifier for the cat image |
+| `url` | `String` | URL of the AI-generated cat image |
+| `width` | `Integer` | Width of the image in pixels |
 
 #### Example: Load
 
@@ -360,11 +360,11 @@ Create an instance: `cat_image = client.CatImage`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `createdAt` | `String` |  |
-| `height` | `Integer` |  |
-| `id` | `String` |  |
-| `url` | `String` |  |
-| `width` | `Integer` |  |
+| `createdAt` | `String` | Timestamp when the image was generated |
+| `height` | `Integer` | Height of the image in pixels |
+| `id` | `String` | Unique identifier for the cat image |
+| `url` | `String` | URL of the AI-generated cat image |
+| `width` | `Integer` | Width of the image in pixels |
 
 #### Example: Load
 
@@ -389,13 +389,13 @@ Create an instance: `health = client.Health`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `activityLevel` | `String` |  |
-| `catId` | `String` |  |
-| `heartRate` | `Integer` |  |
-| `id` | `String` |  |
-| `temperature` | `Float` |  |
-| `timestamp` | `String` |  |
-| `weight` | `Float` |  |
+| `activityLevel` | `String` | Activity level of the cat |
+| `catId` | `String` | ID of the cat |
+| `heartRate` | `Integer` | Heart rate in beats per minute |
+| `id` | `String` | Unique identifier for the health record |
+| `temperature` | `Float` | Body temperature in Celsius |
+| `timestamp` | `String` | When the health data was recorded |
+| `weight` | `Float` | Weight of the cat in kg |
 
 #### Example: Load
 
@@ -427,13 +427,13 @@ Create an instance: `interaction = client.Interaction`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `catId` | `String` |  |
-| `duration` | `Integer` |  |
-| `id` | `String` |  |
-| `notes` | `String` |  |
-| `quality` | `String` |  |
-| `timestamp` | `String` |  |
-| `type` | `String` |  |
+| `catId` | `String` | ID of the cat |
+| `duration` | `Integer` | Duration of the interaction in minutes |
+| `id` | `String` | Unique identifier for the interaction |
+| `notes` | `String` | Additional notes about the interaction |
+| `quality` | `String` | Quality rating of the interaction |
+| `timestamp` | `String` | When the interaction occurred |
+| `type` | `String` | Type of interaction |
 
 #### Example: List
 
@@ -467,13 +467,13 @@ Create an instance: `training = client.Training`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `catId` | `String` |  |
-| `duration` | `Integer` |  |
-| `id` | `String` |  |
-| `notes` | `String` |  |
-| `success` | `Boolean` |  |
-| `timestamp` | `String` |  |
-| `type` | `String` |  |
+| `catId` | `String` | ID of the cat |
+| `duration` | `Integer` | Duration of the session in minutes |
+| `id` | `String` | Unique identifier for the training session |
+| `notes` | `String` | Additional notes about the training session |
+| `success` | `Boolean` | Whether the training was successful |
+| `timestamp` | `String` | When the training session occurred |
+| `type` | `String` | Type of training session |
 
 #### Example: List
 
