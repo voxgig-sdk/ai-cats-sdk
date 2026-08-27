@@ -63,13 +63,7 @@ class Health
 /** Request payload for Health#load. */
 class HealthLoadMatch
 {
-    public ?string $activityLevel = null;
-    public ?string $catId = null;
-    public ?int $heartRate = null;
-    public string $id;
-    public ?float $temperature = null;
-    public ?string $timestamp = null;
-    public ?float $weight = null;
+    public ?string $cat_id = null;
 }
 
 /** Request payload for Health#create. */
@@ -99,13 +93,9 @@ class Interaction
 /** Request payload for Interaction#list. */
 class InteractionListMatch
 {
-    public ?string $catId = null;
-    public ?int $duration = null;
-    public ?string $id = null;
-    public ?string $notes = null;
-    public ?string $quality = null;
-    public ?string $timestamp = null;
-    public ?string $type = null;
+    public ?string $cat_id = null;
+    public ?string $end_date = null;
+    public ?string $start_date = null;
 }
 
 /** Request payload for Interaction#create. */
@@ -135,13 +125,8 @@ class Training
 /** Request payload for Training#list. */
 class TrainingListMatch
 {
-    public ?string $catId = null;
-    public ?int $duration = null;
-    public ?string $id = null;
-    public ?string $notes = null;
-    public ?bool $success = null;
-    public ?string $timestamp = null;
-    public ?string $type = null;
+    public ?string $cat_id = null;
+    public ?int $limit = null;
 }
 
 /** Request payload for Training#create. */

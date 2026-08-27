@@ -40,13 +40,7 @@
 ---@field weight? number
 
 ---@class HealthLoadMatch
----@field activityLevel? string
----@field catId? string
----@field heartRate? number
----@field id string
----@field temperature? number
----@field timestamp? string
----@field weight? number
+---@field cat_id? string
 
 ---@class HealthCreateData
 ---@field activityLevel? string
@@ -67,13 +61,9 @@
 ---@field type string
 
 ---@class InteractionListMatch
----@field catId? string
----@field duration? number
----@field id? string
----@field notes? string
----@field quality? string
----@field timestamp? string
----@field type? string
+---@field cat_id? string
+---@field end_date? string
+---@field start_date? string
 
 ---@class InteractionCreateData
 ---@field catId string
@@ -94,13 +84,8 @@
 ---@field type string
 
 ---@class TrainingListMatch
----@field catId? string
----@field duration? number
----@field id? string
----@field notes? string
----@field success? boolean
----@field timestamp? string
----@field type? string
+---@field cat_id? string
+---@field limit? number
 
 ---@class TrainingCreateData
 ---@field catId string

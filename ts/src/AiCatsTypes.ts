@@ -44,13 +44,7 @@ export interface Health {
 }
 
 export interface HealthLoadMatch {
-  activityLevel?: string
-  catId?: string
-  heartRate?: number
-  id: string
-  temperature?: number
-  timestamp?: string
-  weight?: number
+  cat_id?: string
 }
 
 export interface HealthCreateData {
@@ -74,13 +68,9 @@ export interface Interaction {
 }
 
 export interface InteractionListMatch {
-  catId?: string
-  duration?: number
-  id?: string
-  notes?: string
-  quality?: string
-  timestamp?: string
-  type?: string
+  cat_id?: string
+  end_date?: string
+  start_date?: string
 }
 
 export interface InteractionCreateData {
@@ -104,13 +94,8 @@ export interface Training {
 }
 
 export interface TrainingListMatch {
-  catId?: string
-  duration?: number
-  id?: string
-  notes?: string
-  success?: boolean
-  timestamp?: string
-  type?: string
+  cat_id?: string
+  limit?: number
 }
 
 export interface TrainingCreateData {

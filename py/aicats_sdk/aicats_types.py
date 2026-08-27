@@ -57,17 +57,8 @@ class Health(TypedDict, total=False):
     weight: float
 
 
-class HealthLoadMatchRequired(TypedDict):
-    id: str
-
-
-class HealthLoadMatch(HealthLoadMatchRequired, total=False):
-    activityLevel: str
-    catId: str
-    heartRate: int
-    temperature: float
-    timestamp: str
-    weight: float
+class HealthLoadMatch(TypedDict, total=False):
+    cat_id: str
 
 
 class HealthCreateData(TypedDict, total=False):
@@ -94,13 +85,9 @@ class Interaction(InteractionRequired, total=False):
 
 
 class InteractionListMatch(TypedDict, total=False):
-    catId: str
-    duration: int
-    id: str
-    notes: str
-    quality: str
-    timestamp: str
-    type: str
+    cat_id: str
+    end_date: str
+    start_date: str
 
 
 class InteractionCreateDataRequired(TypedDict):
@@ -130,13 +117,8 @@ class Training(TrainingRequired, total=False):
 
 
 class TrainingListMatch(TypedDict, total=False):
-    catId: str
-    duration: int
-    id: str
-    notes: str
-    success: bool
-    timestamp: str
-    type: str
+    cat_id: str
+    limit: int
 
 
 class TrainingCreateDataRequired(TypedDict):

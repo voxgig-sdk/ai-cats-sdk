@@ -57,13 +57,7 @@ type Health struct {
 
 // HealthLoadMatch is the typed request payload for Health.LoadTyped.
 type HealthLoadMatch struct {
-	ActivityLevel *string `json:"activityLevel,omitempty"`
-	CatId *string `json:"catId,omitempty"`
-	HeartRate *int `json:"heartRate,omitempty"`
-	Id string `json:"id"`
-	Temperature *float64 `json:"temperature,omitempty"`
-	Timestamp *string `json:"timestamp,omitempty"`
-	Weight *float64 `json:"weight,omitempty"`
+	CatId *string `json:"cat_id,omitempty"`
 }
 
 // HealthCreateData is the typed request payload for Health.CreateTyped.
@@ -90,13 +84,9 @@ type Interaction struct {
 
 // InteractionListMatch is the typed request payload for Interaction.ListTyped.
 type InteractionListMatch struct {
-	CatId *string `json:"catId,omitempty"`
-	Duration *int `json:"duration,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Notes *string `json:"notes,omitempty"`
-	Quality *string `json:"quality,omitempty"`
-	Timestamp *string `json:"timestamp,omitempty"`
-	Type *string `json:"type,omitempty"`
+	CatId *string `json:"cat_id,omitempty"`
+	EndDate *string `json:"end_date,omitempty"`
+	StartDate *string `json:"start_date,omitempty"`
 }
 
 // InteractionCreateData is the typed request payload for Interaction.CreateTyped.
@@ -123,13 +113,8 @@ type Training struct {
 
 // TrainingListMatch is the typed request payload for Training.ListTyped.
 type TrainingListMatch struct {
-	CatId *string `json:"catId,omitempty"`
-	Duration *int `json:"duration,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Notes *string `json:"notes,omitempty"`
-	Success *bool `json:"success,omitempty"`
-	Timestamp *string `json:"timestamp,omitempty"`
-	Type *string `json:"type,omitempty"`
+	CatId *string `json:"cat_id,omitempty"`
+	Limit *int `json:"limit,omitempty"`
 }
 
 // TrainingCreateData is the typed request payload for Training.CreateTyped.

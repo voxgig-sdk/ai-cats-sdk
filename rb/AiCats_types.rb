@@ -127,34 +127,10 @@ Health = Struct.new(
 
 # Request payload for Health#load.
 #
-# @!attribute [rw] activityLevel
+# @!attribute [rw] cat_id
 #   @return [String, nil]
-#
-# @!attribute [rw] catId
-#   @return [String, nil]
-#
-# @!attribute [rw] heartRate
-#   @return [Integer, nil]
-#
-# @!attribute [rw] id
-#   @return [String]
-#
-# @!attribute [rw] temperature
-#   @return [Float, nil]
-#
-# @!attribute [rw] timestamp
-#   @return [String, nil]
-#
-# @!attribute [rw] weight
-#   @return [Float, nil]
 HealthLoadMatch = Struct.new(
-  :activityLevel,
-  :catId,
-  :heartRate,
-  :id,
-  :temperature,
-  :timestamp,
-  :weight,
+  :cat_id,
   keyword_init: true
 )
 
@@ -226,34 +202,18 @@ Interaction = Struct.new(
 
 # Request payload for Interaction#list.
 #
-# @!attribute [rw] catId
+# @!attribute [rw] cat_id
 #   @return [String, nil]
 #
-# @!attribute [rw] duration
-#   @return [Integer, nil]
-#
-# @!attribute [rw] id
+# @!attribute [rw] end_date
 #   @return [String, nil]
 #
-# @!attribute [rw] notes
-#   @return [String, nil]
-#
-# @!attribute [rw] quality
-#   @return [String, nil]
-#
-# @!attribute [rw] timestamp
-#   @return [String, nil]
-#
-# @!attribute [rw] type
+# @!attribute [rw] start_date
 #   @return [String, nil]
 InteractionListMatch = Struct.new(
-  :catId,
-  :duration,
-  :id,
-  :notes,
-  :quality,
-  :timestamp,
-  :type,
+  :cat_id,
+  :end_date,
+  :start_date,
   keyword_init: true
 )
 
@@ -325,34 +285,14 @@ Training = Struct.new(
 
 # Request payload for Training#list.
 #
-# @!attribute [rw] catId
+# @!attribute [rw] cat_id
 #   @return [String, nil]
 #
-# @!attribute [rw] duration
+# @!attribute [rw] limit
 #   @return [Integer, nil]
-#
-# @!attribute [rw] id
-#   @return [String, nil]
-#
-# @!attribute [rw] notes
-#   @return [String, nil]
-#
-# @!attribute [rw] success
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] timestamp
-#   @return [String, nil]
-#
-# @!attribute [rw] type
-#   @return [String, nil]
 TrainingListMatch = Struct.new(
-  :catId,
-  :duration,
-  :id,
-  :notes,
-  :success,
-  :timestamp,
-  :type,
+  :cat_id,
+  :limit,
   keyword_init: true
 )
 
