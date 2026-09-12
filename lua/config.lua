@@ -36,6 +36,7 @@ local function make_config()
       ["cat"] = {
         ["fields"] = {
           {
+            ["format"] = "date-time",
             ["name"] = "createdAt",
             ["short"] = "Timestamp when the image was generated",
             ["type"] = "`$STRING`",
@@ -51,6 +52,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "url",
             ["short"] = "URL of the AI-generated cat image",
             ["type"] = "`$STRING`",
@@ -60,6 +62,10 @@ local function make_config()
             ["short"] = "Width of the image in pixels",
             ["type"] = "`$INTEGER`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "cat",
         ["op"] = {
@@ -82,9 +88,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/cats/{id}",
-                ["parts"] = {
-                  "cats",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "cats",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -94,6 +104,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "cats",
+                  "{id}",
                 },
               },
             },
@@ -106,6 +120,7 @@ local function make_config()
       ["cat_image"] = {
         ["fields"] = {
           {
+            ["format"] = "date-time",
             ["name"] = "createdAt",
             ["short"] = "Timestamp when the image was generated",
             ["type"] = "`$STRING`",
@@ -121,6 +136,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "url",
             ["short"] = "URL of the AI-generated cat image",
             ["type"] = "`$STRING`",
@@ -130,6 +146,10 @@ local function make_config()
             ["short"] = "Width of the image in pixels",
             ["type"] = "`$INTEGER`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "cat_image",
         ["op"] = {
@@ -142,14 +162,22 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/cats/random",
-                ["parts"] = {
-                  "cats",
-                  "random",
+                ["segments"] = {
+                  {
+                    ["lit"] = "cats",
+                  },
+                  {
+                    ["lit"] = "random",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "cats",
+                  "random",
                 },
               },
             },
@@ -188,16 +216,19 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "float",
             ["name"] = "temperature",
             ["short"] = "Body temperature in Celsius",
             ["type"] = "`$NUMBER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "timestamp",
             ["short"] = "When the health data was recorded",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "float",
             ["name"] = "weight",
             ["op"] = {
               ["create"] = {
@@ -208,6 +239,10 @@ local function make_config()
             ["short"] = "Weight of the cat in kg",
             ["type"] = "`$NUMBER`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "health",
         ["op"] = {
@@ -220,14 +255,22 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/cats/health",
-                ["parts"] = {
-                  "cats",
-                  "health",
+                ["segments"] = {
+                  {
+                    ["lit"] = "cats",
+                  },
+                  {
+                    ["lit"] = "health",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "cats",
+                  "health",
                 },
               },
             },
@@ -250,9 +293,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/cats/health",
-                ["parts"] = {
-                  "cats",
-                  "health",
+                ["segments"] = {
+                  {
+                    ["lit"] = "cats",
+                  },
+                  {
+                    ["lit"] = "health",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -262,6 +309,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "cats",
+                  "health",
                 },
               },
             },
@@ -305,6 +356,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "timestamp",
             ["short"] = "When the interaction occurred",
             ["type"] = "`$STRING`",
@@ -321,6 +373,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "interaction",
         ["op"] = {
           ["create"] = {
@@ -332,13 +388,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/interactions",
-                ["parts"] = {
-                  "interactions",
+                ["segments"] = {
+                  {
+                    ["lit"] = "interactions",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "interactions",
                 },
               },
             },
@@ -373,8 +434,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/interactions",
-                ["parts"] = {
-                  "interactions",
+                ["segments"] = {
+                  {
+                    ["lit"] = "interactions",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -386,6 +449,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "interactions",
                 },
               },
             },
@@ -435,6 +501,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "timestamp",
             ["short"] = "When the training session occurred",
             ["type"] = "`$STRING`",
@@ -451,6 +518,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "training",
         ["op"] = {
           ["create"] = {
@@ -462,13 +533,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/training",
-                ["parts"] = {
-                  "training",
+                ["segments"] = {
+                  {
+                    ["lit"] = "training",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "training",
                 },
               },
             },
@@ -498,8 +574,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/training",
-                ["parts"] = {
-                  "training",
+                ["segments"] = {
+                  {
+                    ["lit"] = "training",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -510,6 +588,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "training",
                 },
               },
             },

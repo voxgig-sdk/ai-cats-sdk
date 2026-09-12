@@ -42,6 +42,7 @@ main: kit: entity: interaction: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "timestamp"
       req: false
       short: "When the interaction occurred"
@@ -74,8 +75,10 @@ main: kit: entity: interaction: {
         {
           method: "POST"
           orig: "/interactions"
-          parts: [
-            "interactions"
+          segments: [
+            {
+              lit: "interactions"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -115,8 +118,10 @@ main: kit: entity: interaction: {
           }
           method: "GET"
           orig: "/interactions"
-          parts: [
-            "interactions"
+          segments: [
+            {
+              lit: "interactions"
+            }
           ]
           select: {
             exist: [

@@ -1,6 +1,14 @@
 # AiCats SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -57,6 +65,7 @@ def make_config():
       "cat": {
         "fields": [
           {
+            "format": "date-time",
             "name": "createdAt",
             "short": "Timestamp when the image was generated",
             "type": "`$STRING`",
@@ -72,6 +81,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uri",
             "name": "url",
             "short": "URL of the AI-generated cat image",
             "type": "`$STRING`",
@@ -82,6 +92,10 @@ def make_config():
             "type": "`$INTEGER`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "cat",
         "op": {
           "load": {
@@ -103,9 +117,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/cats/{id}",
-                "parts": [
-                  "cats",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "cats",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -116,6 +134,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "cats",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -127,6 +149,7 @@ def make_config():
       "cat_image": {
         "fields": [
           {
+            "format": "date-time",
             "name": "createdAt",
             "short": "Timestamp when the image was generated",
             "type": "`$STRING`",
@@ -142,6 +165,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uri",
             "name": "url",
             "short": "URL of the AI-generated cat image",
             "type": "`$STRING`",
@@ -152,6 +176,10 @@ def make_config():
             "type": "`$INTEGER`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "cat_image",
         "op": {
           "load": {
@@ -163,15 +191,23 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/cats/random",
-                "parts": [
-                  "cats",
-                  "random",
+                "segments": [
+                  {
+                    "lit": "cats",
+                  },
+                  {
+                    "lit": "random",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "cats",
+                  "random",
+                ],
               },
             ],
           },
@@ -209,16 +245,19 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "float",
             "name": "temperature",
             "short": "Body temperature in Celsius",
             "type": "`$NUMBER`",
           },
           {
+            "format": "date-time",
             "name": "timestamp",
             "short": "When the health data was recorded",
             "type": "`$STRING`",
           },
           {
+            "format": "float",
             "name": "weight",
             "op": {
               "create": {
@@ -230,6 +269,10 @@ def make_config():
             "type": "`$NUMBER`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "health",
         "op": {
           "create": {
@@ -241,15 +284,23 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/cats/health",
-                "parts": [
-                  "cats",
-                  "health",
+                "segments": [
+                  {
+                    "lit": "cats",
+                  },
+                  {
+                    "lit": "health",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "cats",
+                  "health",
+                ],
               },
             ],
           },
@@ -271,9 +322,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/cats/health",
-                "parts": [
-                  "cats",
-                  "health",
+                "segments": [
+                  {
+                    "lit": "cats",
+                  },
+                  {
+                    "lit": "health",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -284,6 +339,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "cats",
+                  "health",
+                ],
               },
             ],
           },
@@ -326,6 +385,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "timestamp",
             "short": "When the interaction occurred",
             "type": "`$STRING`",
@@ -342,6 +402,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "interaction",
         "op": {
           "create": {
@@ -353,14 +417,19 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/interactions",
-                "parts": [
-                  "interactions",
+                "segments": [
+                  {
+                    "lit": "interactions",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "interactions",
+                ],
               },
             ],
           },
@@ -394,8 +463,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/interactions",
-                "parts": [
-                  "interactions",
+                "segments": [
+                  {
+                    "lit": "interactions",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -408,6 +479,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "interactions",
+                ],
               },
             ],
           },
@@ -456,6 +530,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "timestamp",
             "short": "When the training session occurred",
             "type": "`$STRING`",
@@ -472,6 +547,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "training",
         "op": {
           "create": {
@@ -483,14 +562,19 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/training",
-                "parts": [
-                  "training",
+                "segments": [
+                  {
+                    "lit": "training",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "training",
+                ],
               },
             ],
           },
@@ -519,8 +603,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/training",
-                "parts": [
-                  "training",
+                "segments": [
+                  {
+                    "lit": "training",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -532,6 +618,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "training",
+                ],
               },
             ],
           },

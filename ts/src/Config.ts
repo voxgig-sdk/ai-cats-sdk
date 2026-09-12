@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -79,6 +90,7 @@ class Config {
     "cat": {
       "fields": [
         {
+          "format": "date-time",
           "name": "createdAt",
           "short": "Timestamp when the image was generated",
           "type": "`$STRING`"
@@ -94,6 +106,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uri",
           "name": "url",
           "short": "URL of the AI-generated cat image",
           "type": "`$STRING`"
@@ -104,6 +117,10 @@ class Config {
           "type": "`$INTEGER`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "cat",
       "op": {
         "load": {
@@ -125,9 +142,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/cats/{id}",
-              "parts": [
-                "cats",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "cats"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -137,7 +158,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "cats",
+                "{id}"
+              ]
             }
           ]
         }
@@ -149,6 +174,7 @@ class Config {
     "cat_image": {
       "fields": [
         {
+          "format": "date-time",
           "name": "createdAt",
           "short": "Timestamp when the image was generated",
           "type": "`$STRING`"
@@ -164,6 +190,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uri",
           "name": "url",
           "short": "URL of the AI-generated cat image",
           "type": "`$STRING`"
@@ -174,6 +201,10 @@ class Config {
           "type": "`$INTEGER`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "cat_image",
       "op": {
         "load": {
@@ -185,15 +216,23 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/cats/random",
-              "parts": [
-                "cats",
-                "random"
+              "segments": [
+                {
+                  "lit": "cats"
+                },
+                {
+                  "lit": "random"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "cats",
+                "random"
+              ]
             }
           ]
         }
@@ -231,16 +270,19 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "float",
           "name": "temperature",
           "short": "Body temperature in Celsius",
           "type": "`$NUMBER`"
         },
         {
+          "format": "date-time",
           "name": "timestamp",
           "short": "When the health data was recorded",
           "type": "`$STRING`"
         },
         {
+          "format": "float",
           "name": "weight",
           "op": {
             "create": {
@@ -252,6 +294,10 @@ class Config {
           "type": "`$NUMBER`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "health",
       "op": {
         "create": {
@@ -263,15 +309,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/cats/health",
-              "parts": [
-                "cats",
-                "health"
+              "segments": [
+                {
+                  "lit": "cats"
+                },
+                {
+                  "lit": "health"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "cats",
+                "health"
+              ]
             }
           ]
         },
@@ -293,9 +347,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/cats/health",
-              "parts": [
-                "cats",
-                "health"
+              "segments": [
+                {
+                  "lit": "cats"
+                },
+                {
+                  "lit": "health"
+                }
               ],
               "select": {
                 "exist": [
@@ -305,7 +363,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "cats",
+                "health"
+              ]
             }
           ]
         }
@@ -348,6 +410,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "timestamp",
           "short": "When the interaction occurred",
           "type": "`$STRING`"
@@ -364,6 +427,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "interaction",
       "op": {
         "create": {
@@ -375,14 +442,19 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/interactions",
-              "parts": [
-                "interactions"
+              "segments": [
+                {
+                  "lit": "interactions"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "interactions"
+              ]
             }
           ]
         },
@@ -416,8 +488,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/interactions",
-              "parts": [
-                "interactions"
+              "segments": [
+                {
+                  "lit": "interactions"
+                }
               ],
               "select": {
                 "exist": [
@@ -429,7 +503,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "interactions"
+              ]
             }
           ]
         }
@@ -478,6 +555,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "timestamp",
           "short": "When the training session occurred",
           "type": "`$STRING`"
@@ -494,6 +572,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "training",
       "op": {
         "create": {
@@ -505,14 +587,19 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/training",
-              "parts": [
-                "training"
+              "segments": [
+                {
+                  "lit": "training"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "training"
+              ]
             }
           ]
         },
@@ -541,8 +628,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/training",
-              "parts": [
-                "training"
+              "segments": [
+                {
+                  "lit": "training"
+                }
               ],
               "select": {
                 "exist": [
@@ -553,7 +642,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "training"
+              ]
             }
           ]
         }
@@ -569,6 +661,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

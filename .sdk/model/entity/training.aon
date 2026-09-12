@@ -48,6 +48,7 @@ main: kit: entity: training: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "date-time"
       name: "timestamp"
       req: false
       short: "When the training session occurred"
@@ -80,8 +81,10 @@ main: kit: entity: training: {
         {
           method: "POST"
           orig: "/training"
-          parts: [
-            "training"
+          segments: [
+            {
+              lit: "training"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -115,8 +118,10 @@ main: kit: entity: training: {
           }
           method: "GET"
           orig: "/training"
-          parts: [
-            "training"
+          segments: [
+            {
+              lit: "training"
+            }
           ]
           select: {
             exist: [

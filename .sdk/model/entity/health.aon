@@ -36,18 +36,21 @@ main: kit: entity: health: {
       type: "`$STRING`"
     }
     {
+      format: "float"
       name: "temperature"
       req: false
       short: "Body temperature in Celsius"
       type: "`$NUMBER`"
     }
     {
+      format: "date-time"
       name: "timestamp"
       req: false
       short: "When the health data was recorded"
       type: "`$STRING`"
     }
     {
+      format: "float"
       name: "weight"
       op: {
         create: {
@@ -74,9 +77,13 @@ main: kit: entity: health: {
         {
           method: "POST"
           orig: "/cats/health"
-          parts: [
-            "cats"
-            "health"
+          segments: [
+            {
+              lit: "cats"
+            }
+            {
+              lit: "health"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -102,9 +109,13 @@ main: kit: entity: health: {
           }
           method: "GET"
           orig: "/cats/health"
-          parts: [
-            "cats"
-            "health"
+          segments: [
+            {
+              lit: "cats"
+            }
+            {
+              lit: "health"
+            }
           ]
           select: {
             exist: [

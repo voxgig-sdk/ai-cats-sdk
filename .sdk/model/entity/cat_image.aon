@@ -6,6 +6,7 @@ main: kit: entity: cat_image: {
 
   fields: [
     {
+      format: "date-time"
       name: "createdAt"
       req: false
       short: "Timestamp when the image was generated"
@@ -24,6 +25,7 @@ main: kit: entity: cat_image: {
       type: "`$STRING`"
     }
     {
+      format: "uri"
       name: "url"
       req: false
       short: "URL of the AI-generated cat image"
@@ -50,9 +52,13 @@ main: kit: entity: cat_image: {
         {
           method: "GET"
           orig: "/cats/random"
-          parts: [
-            "cats"
-            "random"
+          segments: [
+            {
+              lit: "cats"
+            }
+            {
+              lit: "random"
+            }
           ]
           transform: {
             req: "`reqdata`"
