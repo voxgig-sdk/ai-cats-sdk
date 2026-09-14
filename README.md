@@ -105,7 +105,7 @@ local results, err = client:Training():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/ai-cats` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/releases) |
+| TypeScript | `@voxgig-sdk/ai-cats-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/releases) |
 | Python | `voxgig-sdk-ai-cats` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/releases) |
 | PHP | `voxgig-sdk/ai-cats` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/ai-cats-sdk/go` | `go get github.com/voxgig-sdk/ai-cats-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Training():list()
 ### TypeScript
 
 ```ts
-import { AiCatsSDK } from '@voxgig-sdk/ai-cats'
+import { AiCatsSDK } from '@voxgig-sdk/ai-cats-sdk'
 
 const client = new AiCatsSDK()
 

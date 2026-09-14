@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { AiCatsSDK } from '@voxgig-sdk/ai-cats'
+import { AiCatsSDK } from '@voxgig-sdk/ai-cats-sdk'
 
 const client = new AiCatsSDK()
 ```
@@ -622,7 +622,7 @@ ai-cats/
 Import the SDK from the package root:
 
 ```ts
-import { AiCatsSDK } from '@voxgig-sdk/ai-cats'
+import { AiCatsSDK } from '@voxgig-sdk/ai-cats-sdk'
 ```
 
 ### Entity state
