@@ -50,6 +50,12 @@ main: kit: entity: cat_image: {
       name: "load"
       points: [
         {
+          contract: {
+            id: "GET /cats/random"
+            json: "{\"operationId\":\"getRandomCat\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"createdAt\":{\"description\":\"Timestamp when the image was generated\",\"format\":\"date-time\",\"type\":\"string\"},\"height\":{\"description\":\"Height of the image in pixels\",\"type\":\"integer\"},\"id\":{\"description\":\"Unique identifier for the cat image\",\"type\":\"string\"},\"url\":{\"description\":\"URL of the AI-generated cat image\",\"format\":\"uri\",\"type\":\"string\"},\"width\":{\"description\":\"Width of the image in pixels\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful response with cat image\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"message\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/cats/random"
           segments: [

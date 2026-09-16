@@ -79,6 +79,12 @@ main: kit: entity: training: {
       name: "create"
       points: [
         {
+          contract: {
+            id: "POST /training"
+            json: "{\"operationId\":\"createTrainingSession\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"catId\":{\"description\":\"ID of the cat\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration of the session in minutes\",\"type\":\"integer\"},\"notes\":{\"description\":\"Additional notes about the training session\",\"type\":\"string\"},\"success\":{\"description\":\"Whether the training was successful\",\"type\":\"boolean\"},\"type\":{\"description\":\"Type of training session\",\"type\":\"string\"}},\"required\":[\"catId\",\"type\",\"duration\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"catId\":{\"description\":\"ID of the cat\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration of the session in minutes\",\"type\":\"integer\"},\"id\":{\"description\":\"Unique identifier for the training session\",\"type\":\"string\"},\"notes\":{\"description\":\"Additional notes about the training session\",\"type\":\"string\"},\"success\":{\"description\":\"Whether the training was successful\",\"type\":\"boolean\"},\"timestamp\":{\"description\":\"When the training session occurred\",\"format\":\"date-time\",\"type\":\"string\"},\"type\":{\"description\":\"Type of training session\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Training session successfully created\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"message\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid input\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "POST"
           orig: "/training"
           segments: [
@@ -115,6 +121,12 @@ main: kit: entity: training: {
                 type: "`$INTEGER`"
               }
             ]
+          }
+          contract: {
+            id: "GET /training"
+            json: "{\"operationId\":\"getTrainingSessions\",\"parameters\":[{\"description\":\"Filter by cat ID\",\"in\":\"query\",\"name\":\"catId\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Number of results to return\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":10,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"catId\":{\"description\":\"ID of the cat\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration of the session in minutes\",\"type\":\"integer\"},\"id\":{\"description\":\"Unique identifier for the training session\",\"type\":\"string\"},\"notes\":{\"description\":\"Additional notes about the training session\",\"type\":\"string\"},\"success\":{\"description\":\"Whether the training was successful\",\"type\":\"boolean\"},\"timestamp\":{\"description\":\"When the training session occurred\",\"format\":\"date-time\",\"type\":\"string\"},\"type\":{\"description\":\"Type of training session\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with training sessions\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/training"

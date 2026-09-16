@@ -1,12 +1,18 @@
 # AiCats SDK feature factory
 
 from aicats_sdk.feature.base_feature import AiCatsBaseFeature
+from aicats_sdk.feature.ratelimit_feature import AiCatsRatelimitFeature
+from aicats_sdk.feature.retry_feature import AiCatsRetryFeature
 from aicats_sdk.feature.test_feature import AiCatsTestFeature
+from aicats_sdk.feature.timeout_feature import AiCatsTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: AiCatsBaseFeature(),
+    "ratelimit": lambda: AiCatsRatelimitFeature(),
+    "retry": lambda: AiCatsRetryFeature(),
     "test": lambda: AiCatsTestFeature(),
+    "timeout": lambda: AiCatsTimeoutFeature(),
 }
 
 

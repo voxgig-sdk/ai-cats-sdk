@@ -3,24 +3,24 @@
     "cat": {
       "CAT00": {
         "createdAt": "s32",
-        "height": "s33",
+        "height": 51,
         "id": "CAT00",
         "url": "s35",
-        "width": "s36"
+        "width": 54
       },
       "CAT01": {
         "createdAt": "s64",
-        "height": "s65",
+        "height": 101,
         "id": "CAT01",
         "url": "s67",
-        "width": "s68"
+        "width": 104
       },
       "CAT02": {
         "createdAt": "s96",
-        "height": "s97",
+        "height": 151,
         "id": "CAT02",
         "url": "s99",
-        "width": "s9a"
+        "width": 154
       }
     }
   },
@@ -28,9 +28,86 @@
     "cat": {
       "cat_ref01": {
         "createdAt": "sc8",
-        "height": "sc9",
+        "height": 201,
         "url": "scb",
-        "width": "scc"
+        "width": 204
+      }
+    }
+  },
+  "requests": {
+    "GET /cats/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getCatById",
+        "parameters": [
+          {
+            "description": "Unique identifier of the cat",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "createdAt": {
+                      "description": "Timestamp when the image was generated",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "height": {
+                      "description": "Height of the image in pixels",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the cat image",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "URL of the AI-generated cat image",
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "width": {
+                      "description": "Width of the image in pixels",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with cat image"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "Error code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error message",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Cat not found"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }

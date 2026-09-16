@@ -73,6 +73,12 @@ main: kit: entity: interaction: {
       name: "create"
       points: [
         {
+          contract: {
+            id: "POST /interactions"
+            json: "{\"operationId\":\"recordInteraction\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"catId\":{\"description\":\"ID of the cat\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration of the interaction in minutes\",\"type\":\"integer\"},\"notes\":{\"description\":\"Additional notes about the interaction\",\"type\":\"string\"},\"quality\":{\"description\":\"Quality rating of the interaction\",\"enum\":[\"poor\",\"fair\",\"good\",\"excellent\"],\"type\":\"string\"},\"type\":{\"description\":\"Type of interaction\",\"enum\":[\"play\",\"feeding\",\"grooming\",\"medical\"],\"type\":\"string\"}},\"required\":[\"catId\",\"type\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"catId\":{\"description\":\"ID of the cat\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration of the interaction in minutes\",\"type\":\"integer\"},\"id\":{\"description\":\"Unique identifier for the interaction\",\"type\":\"string\"},\"notes\":{\"description\":\"Additional notes about the interaction\",\"type\":\"string\"},\"quality\":{\"description\":\"Quality rating of the interaction\",\"enum\":[\"poor\",\"fair\",\"good\",\"excellent\"],\"type\":\"string\"},\"timestamp\":{\"description\":\"When the interaction occurred\",\"format\":\"date-time\",\"type\":\"string\"},\"type\":{\"description\":\"Type of interaction\",\"enum\":[\"play\",\"feeding\",\"grooming\",\"medical\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Interaction successfully recorded\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"message\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid input\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "POST"
           orig: "/interactions"
           segments: [
@@ -115,6 +121,12 @@ main: kit: entity: interaction: {
                 type: "`$STRING`"
               }
             ]
+          }
+          contract: {
+            id: "GET /interactions"
+            json: "{\"operationId\":\"getInteractions\",\"parameters\":[{\"description\":\"Filter by cat ID\",\"in\":\"query\",\"name\":\"catId\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Start date for filtering interactions\",\"in\":\"query\",\"name\":\"startDate\",\"required\":false,\"schema\":{\"format\":\"date-time\",\"type\":\"string\"}},{\"description\":\"End date for filtering interactions\",\"in\":\"query\",\"name\":\"endDate\",\"required\":false,\"schema\":{\"format\":\"date-time\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"catId\":{\"description\":\"ID of the cat\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration of the interaction in minutes\",\"type\":\"integer\"},\"id\":{\"description\":\"Unique identifier for the interaction\",\"type\":\"string\"},\"notes\":{\"description\":\"Additional notes about the interaction\",\"type\":\"string\"},\"quality\":{\"description\":\"Quality rating of the interaction\",\"enum\":[\"poor\",\"fair\",\"good\",\"excellent\"],\"type\":\"string\"},\"timestamp\":{\"description\":\"When the interaction occurred\",\"format\":\"date-time\",\"type\":\"string\"},\"type\":{\"description\":\"Type of interaction\",\"enum\":[\"play\",\"feeding\",\"grooming\",\"medical\"],\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with interaction data\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/interactions"

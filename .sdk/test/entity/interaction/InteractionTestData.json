@@ -3,7 +3,7 @@
     "interaction": {
       "INTERACTION00": {
         "catId": "s46",
-        "duration": "s47",
+        "duration": 71,
         "id": "INTERACTION00",
         "notes": "s49",
         "quality": "s4a",
@@ -12,7 +12,7 @@
       },
       "INTERACTION01": {
         "catId": "s8c",
-        "duration": "s8d",
+        "duration": 141,
         "id": "INTERACTION01",
         "notes": "s8f",
         "quality": "s90",
@@ -21,7 +21,7 @@
       },
       "INTERACTION02": {
         "catId": "sd2",
-        "duration": "sd3",
+        "duration": 211,
         "id": "INTERACTION02",
         "notes": "sd5",
         "quality": "sd6",
@@ -34,11 +34,242 @@
     "interaction": {
       "interaction_ref01": {
         "catId": "s118",
-        "duration": "s119",
+        "duration": 281,
         "notes": "s11b",
         "quality": "s11c",
         "timestamp": "s11d",
         "type": "s11e"
+      }
+    }
+  },
+  "requests": {
+    "POST /interactions": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "recordInteraction",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "catId": {
+                    "description": "ID of the cat",
+                    "type": "string"
+                  },
+                  "duration": {
+                    "description": "Duration of the interaction in minutes",
+                    "type": "integer"
+                  },
+                  "notes": {
+                    "description": "Additional notes about the interaction",
+                    "type": "string"
+                  },
+                  "quality": {
+                    "description": "Quality rating of the interaction",
+                    "enum": [
+                      "poor",
+                      "fair",
+                      "good",
+                      "excellent"
+                    ],
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Type of interaction",
+                    "enum": [
+                      "play",
+                      "feeding",
+                      "grooming",
+                      "medical"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "catId",
+                  "type"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "catId": {
+                      "description": "ID of the cat",
+                      "type": "string"
+                    },
+                    "duration": {
+                      "description": "Duration of the interaction in minutes",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the interaction",
+                      "type": "string"
+                    },
+                    "notes": {
+                      "description": "Additional notes about the interaction",
+                      "type": "string"
+                    },
+                    "quality": {
+                      "description": "Quality rating of the interaction",
+                      "enum": [
+                        "poor",
+                        "fair",
+                        "good",
+                        "excellent"
+                      ],
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "description": "When the interaction occurred",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Type of interaction",
+                      "enum": [
+                        "play",
+                        "feeding",
+                        "grooming",
+                        "medical"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Interaction successfully recorded"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "Error code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error message",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Invalid input"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /interactions": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getInteractions",
+        "parameters": [
+          {
+            "description": "Filter by cat ID",
+            "in": "query",
+            "name": "catId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start date for filtering interactions",
+            "in": "query",
+            "name": "startDate",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "End date for filtering interactions",
+            "in": "query",
+            "name": "endDate",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "catId": {
+                        "description": "ID of the cat",
+                        "type": "string"
+                      },
+                      "duration": {
+                        "description": "Duration of the interaction in minutes",
+                        "type": "integer"
+                      },
+                      "id": {
+                        "description": "Unique identifier for the interaction",
+                        "type": "string"
+                      },
+                      "notes": {
+                        "description": "Additional notes about the interaction",
+                        "type": "string"
+                      },
+                      "quality": {
+                        "description": "Quality rating of the interaction",
+                        "enum": [
+                          "poor",
+                          "fair",
+                          "good",
+                          "excellent"
+                        ],
+                        "type": "string"
+                      },
+                      "timestamp": {
+                        "description": "When the interaction occurred",
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "Type of interaction",
+                        "enum": [
+                          "play",
+                          "feeding",
+                          "grooming",
+                          "medical"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response with interaction data"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }

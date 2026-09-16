@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { AiCatsSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('TrainingEntity', async () => {
 
     const live = 'TRUE' === process.env.AI_CATS_TEST_LIVE
     for (const op of ['create', 'list']) {
-      if (maybeSkipControl(t, 'entityOp', 'training.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'training.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set AI_CATS_TEST_TRAINING_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"catId","op":{"list":{"req":false,"type":"`$STRING`"}},"req":true,"short":"ID of the cat","type":"`$STRING`","index$":0},{"active":true,"name":"duration","op":{"list":{"req":false,"type":"`$INTEGER`"}},"req":true,"short":"Duration of the session in minutes","type":"`$INTEGER`","index$":1},{"active":true,"name":"id","req":false,"short":"Unique identifier for the training session","type":"`$STRING`","index$":2},{"active":true,"name":"notes","req":false,"short":"Additional notes about the training session","type":"`$STRING`","index$":3},{"active":true,"name":"success","req":false,"short":"Whether the training was successful","type":"`$BOOLEAN`","index$":4},{"active":true,"format":"date-time","name":"timestamp","req":false,"short":"When the training session occurred","type":"`$STRING`","index$":5},{"active":true,"name":"type","op":{"list":{"req":false,"type":"`$STRING`"}},"req":true,"short":"Type of training session","type":"`$STRING`","index$":6}],"id":{"field":"id","name":"id"},"name":"training","op":{"create":{"input":"data","name":"create","points":[{"active":true,"args":{},"contract":{"id":"POST /training","json":"{\"operationId\":\"createTrainingSession\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"catId\":{\"description\":\"ID of the cat\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration of the session in minutes\",\"type\":\"integer\"},\"notes\":{\"description\":\"Additional notes about the training session\",\"type\":\"string\"},\"success\":{\"description\":\"Whether the training was successful\",\"type\":\"boolean\"},\"type\":{\"description\":\"Type of training session\",\"type\":\"string\"}},\"required\":[\"catId\",\"type\",\"duration\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"catId\":{\"description\":\"ID of the cat\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration of the session in minutes\",\"type\":\"integer\"},\"id\":{\"description\":\"Unique identifier for the training session\",\"type\":\"string\"},\"notes\":{\"description\":\"Additional notes about the training session\",\"type\":\"string\"},\"success\":{\"description\":\"Whether the training was successful\",\"type\":\"boolean\"},\"timestamp\":{\"description\":\"When the training session occurred\",\"format\":\"date-time\",\"type\":\"string\"},\"type\":{\"description\":\"Type of training session\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Training session successfully created\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"message\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid input\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"POST","orig":"/training","segments":[{"lit":"training"}],"select":{},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"list":{"input":"data","name":"list","points":[{"active":true,"args":{"query":[{"active":true,"kind":"query","name":"cat_id","orig":"cat_id","reqd":false,"type":"`$STRING`","index$":0},{"active":true,"example":10,"kind":"query","name":"limit","orig":"limit","reqd":false,"type":"`$INTEGER`","index$":1}]},"contract":{"id":"GET /training","json":"{\"operationId\":\"getTrainingSessions\",\"parameters\":[{\"description\":\"Filter by cat ID\",\"in\":\"query\",\"name\":\"catId\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Number of results to return\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":10,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"catId\":{\"description\":\"ID of the cat\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration of the session in minutes\",\"type\":\"integer\"},\"id\":{\"description\":\"Unique identifier for the training session\",\"type\":\"string\"},\"notes\":{\"description\":\"Additional notes about the training session\",\"type\":\"string\"},\"success\":{\"description\":\"Whether the training was successful\",\"type\":\"boolean\"},\"timestamp\":{\"description\":\"When the training session occurred\",\"format\":\"date-time\",\"type\":\"string\"},\"type\":{\"description\":\"Type of training session\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with training sessions\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/training","segments":[{"lit":"training"}],"select":{"exist":["cat_id","limit"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"training","name__orig":"training","Name":"Training","name_":"training","name-":"training","NAME":"TRAINING","index$":4}, {"active":true,"entity":"training","key$":"BasicTrainingFlow","kind":"basic","name":"BasicTrainingFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"training_ref01"},"match":{},"op":"create","spec":[],"valid":[],"index$":0},{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"training_ref01"}}],"index$":1}]}, 'Training')
     }
     const client = setup.client
     const struct = setup.struct
@@ -117,13 +116,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['AI_CATS_TEST_TRAINING_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'AI_CATS_TEST_TRAINING_ENTID': idmap,
     'AI_CATS_TEST_LIVE': 'FALSE',
@@ -134,7 +126,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.AI_CATS_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['AI_CATS_TEST_TRAINING_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new AiCatsSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -146,7 +144,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -159,7 +158,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.AI_CATS_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

@@ -4,7 +4,7 @@
       "HEALTH00": {
         "activityLevel": "s46",
         "catId": "s47",
-        "heartRate": "s48",
+        "heartRate": 72,
         "id": "HEALTH00",
         "temperature": 74,
         "timestamp": "s4b",
@@ -13,7 +13,7 @@
       "HEALTH01": {
         "activityLevel": "s8c",
         "catId": "s8d",
-        "heartRate": "s8e",
+        "heartRate": 142,
         "id": "HEALTH01",
         "temperature": 144,
         "timestamp": "s91",
@@ -22,7 +22,7 @@
       "HEALTH02": {
         "activityLevel": "sd2",
         "catId": "sd3",
-        "heartRate": "sd4",
+        "heartRate": 212,
         "id": "HEALTH02",
         "temperature": 214,
         "timestamp": "sd7",
@@ -35,10 +35,203 @@
       "health_ref01": {
         "activityLevel": "s118",
         "catId": "s119",
-        "heartRate": "s11a",
+        "heartRate": 282,
         "temperature": 284,
         "timestamp": "s11d",
         "weight": 286
+      }
+    }
+  },
+  "requests": {
+    "POST /cats/health": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "recordCatHealth",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "activityLevel": {
+                    "description": "Activity level of the cat",
+                    "enum": [
+                      "low",
+                      "moderate",
+                      "high"
+                    ],
+                    "type": "string"
+                  },
+                  "catId": {
+                    "description": "ID of the cat",
+                    "type": "string"
+                  },
+                  "heartRate": {
+                    "description": "Heart rate in beats per minute",
+                    "type": "integer"
+                  },
+                  "temperature": {
+                    "description": "Body temperature in Celsius",
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "weight": {
+                    "description": "Weight of the cat in kg",
+                    "format": "float",
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "catId",
+                  "weight"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "activityLevel": {
+                      "description": "Activity level of the cat",
+                      "enum": [
+                        "low",
+                        "moderate",
+                        "high"
+                      ],
+                      "type": "string"
+                    },
+                    "catId": {
+                      "description": "ID of the cat",
+                      "type": "string"
+                    },
+                    "heartRate": {
+                      "description": "Heart rate in beats per minute",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the health record",
+                      "type": "string"
+                    },
+                    "temperature": {
+                      "description": "Body temperature in Celsius",
+                      "format": "float",
+                      "type": "number"
+                    },
+                    "timestamp": {
+                      "description": "When the health data was recorded",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "weight": {
+                      "description": "Weight of the cat in kg",
+                      "format": "float",
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Health data successfully recorded"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "Error code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error message",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Invalid input"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /cats/health": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getCatHealth",
+        "parameters": [
+          {
+            "description": "Optional cat ID to filter health data",
+            "in": "query",
+            "name": "catId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "activityLevel": {
+                      "description": "Activity level of the cat",
+                      "enum": [
+                        "low",
+                        "moderate",
+                        "high"
+                      ],
+                      "type": "string"
+                    },
+                    "catId": {
+                      "description": "ID of the cat",
+                      "type": "string"
+                    },
+                    "heartRate": {
+                      "description": "Heart rate in beats per minute",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the health record",
+                      "type": "string"
+                    },
+                    "temperature": {
+                      "description": "Body temperature in Celsius",
+                      "format": "float",
+                      "type": "number"
+                    },
+                    "timestamp": {
+                      "description": "When the health data was recorded",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "weight": {
+                      "description": "Weight of the cat in kg",
+                      "format": "float",
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with health data"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }

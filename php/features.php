@@ -4,7 +4,10 @@ declare(strict_types=1);
 // AiCats SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class AiCatsFeatures
@@ -14,8 +17,14 @@ class AiCatsFeatures
         switch ($name) {
             case "base":
                 return new AiCatsBaseFeature();
+            case "ratelimit":
+                return new AiCatsRatelimitFeature();
+            case "retry":
+                return new AiCatsRetryFeature();
             case "test":
                 return new AiCatsTestFeature();
+            case "timeout":
+                return new AiCatsTimeoutFeature();
             default:
                 return new AiCatsBaseFeature();
         }
@@ -31,7 +40,10 @@ class AiCatsFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

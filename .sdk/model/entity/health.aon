@@ -75,6 +75,12 @@ main: kit: entity: health: {
       name: "create"
       points: [
         {
+          contract: {
+            id: "POST /cats/health"
+            json: "{\"operationId\":\"recordCatHealth\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"activityLevel\":{\"description\":\"Activity level of the cat\",\"enum\":[\"low\",\"moderate\",\"high\"],\"type\":\"string\"},\"catId\":{\"description\":\"ID of the cat\",\"type\":\"string\"},\"heartRate\":{\"description\":\"Heart rate in beats per minute\",\"type\":\"integer\"},\"temperature\":{\"description\":\"Body temperature in Celsius\",\"format\":\"float\",\"type\":\"number\"},\"weight\":{\"description\":\"Weight of the cat in kg\",\"format\":\"float\",\"type\":\"number\"}},\"required\":[\"catId\",\"weight\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"activityLevel\":{\"description\":\"Activity level of the cat\",\"enum\":[\"low\",\"moderate\",\"high\"],\"type\":\"string\"},\"catId\":{\"description\":\"ID of the cat\",\"type\":\"string\"},\"heartRate\":{\"description\":\"Heart rate in beats per minute\",\"type\":\"integer\"},\"id\":{\"description\":\"Unique identifier for the health record\",\"type\":\"string\"},\"temperature\":{\"description\":\"Body temperature in Celsius\",\"format\":\"float\",\"type\":\"number\"},\"timestamp\":{\"description\":\"When the health data was recorded\",\"format\":\"date-time\",\"type\":\"string\"},\"weight\":{\"description\":\"Weight of the cat in kg\",\"format\":\"float\",\"type\":\"number\"}},\"type\":\"object\"}}},\"description\":\"Health data successfully recorded\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"message\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid input\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "POST"
           orig: "/cats/health"
           segments: [
@@ -106,6 +112,12 @@ main: kit: entity: health: {
                 type: "`$STRING`"
               }
             ]
+          }
+          contract: {
+            id: "GET /cats/health"
+            json: "{\"operationId\":\"getCatHealth\",\"parameters\":[{\"description\":\"Optional cat ID to filter health data\",\"in\":\"query\",\"name\":\"catId\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"activityLevel\":{\"description\":\"Activity level of the cat\",\"enum\":[\"low\",\"moderate\",\"high\"],\"type\":\"string\"},\"catId\":{\"description\":\"ID of the cat\",\"type\":\"string\"},\"heartRate\":{\"description\":\"Heart rate in beats per minute\",\"type\":\"integer\"},\"id\":{\"description\":\"Unique identifier for the health record\",\"type\":\"string\"},\"temperature\":{\"description\":\"Body temperature in Celsius\",\"format\":\"float\",\"type\":\"number\"},\"timestamp\":{\"description\":\"When the health data was recorded\",\"format\":\"date-time\",\"type\":\"string\"},\"weight\":{\"description\":\"Weight of the cat in kg\",\"format\":\"float\",\"type\":\"number\"}},\"type\":\"object\"}}},\"description\":\"Successful response with health data\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/cats/health"
