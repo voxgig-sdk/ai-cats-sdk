@@ -105,12 +105,12 @@ local results, err = client:Training():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/ai-cats-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/releases) |
-| Python | `voxgig-sdk-ai-cats` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/releases) |
-| PHP | `voxgig-sdk/ai-cats` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/releases) |
+| TypeScript | `@voxgig-sdk/ai-cats-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/tags) |
+| Python | `voxgig-sdk-ai-cats` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/tags) |
+| PHP | `voxgig-sdk/ai-cats` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/ai-cats-sdk/go` | `go get github.com/voxgig-sdk/ai-cats-sdk/go@latest` |
-| Ruby | `voxgig-sdk-ai-cats` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/releases) |
-| Lua | `voxgig-sdk-ai-cats` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/releases) |
+| Ruby | `voxgig-sdk-ai-cats` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/tags) |
+| Lua | `voxgig-sdk-ai-cats` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ai-cats-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/ai-cats-sdk/go-cli` | `go install github.com/voxgig-sdk/ai-cats-sdk/go-cli/cmd/ai-cats@latest` |
 | Go MCP server | `github.com/voxgig-sdk/ai-cats-sdk/go-mcp` | `go get github.com/voxgig-sdk/ai-cats-sdk/go-mcp@latest` |
 

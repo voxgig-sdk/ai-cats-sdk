@@ -127,21 +127,21 @@ class Config {
 
     entity: {
       
-      cat: {
-      },
-
-      cat_image: {
-      },
-
-      health: {
-      },
-
-      interaction: {
-      },
-
-      training: {
-      },
-
+        cat: {
+        },
+  
+        cat_image: {
+        },
+  
+        health: {
+        },
+  
+        interaction: {
+        },
+  
+        training: {
+        },
+  
     }
   }
 
