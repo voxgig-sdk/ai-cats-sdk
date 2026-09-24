@@ -1,7 +1,7 @@
 // Typed models for the AiCats SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,11 +14,6 @@ import (
 
 // Cat is the typed data model for the cat entity.
 type Cat struct {
-	CreatedAt *string `json:"createdAt,omitempty"`
-	Height *int `json:"height,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Url *string `json:"url,omitempty"`
-	Width *int `json:"width,omitempty"`
 }
 
 // CatLoadMatch is the typed request payload for Cat.LoadTyped.
@@ -28,11 +23,6 @@ type CatLoadMatch struct {
 
 // CatImage is the typed data model for the cat_image entity.
 type CatImage struct {
-	CreatedAt *string `json:"createdAt,omitempty"`
-	Height *int `json:"height,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Url *string `json:"url,omitempty"`
-	Width *int `json:"width,omitempty"`
 }
 
 // CatImageLoadMatch is the typed request payload for CatImage.LoadTyped.
@@ -46,13 +36,6 @@ type CatImageLoadMatch struct {
 
 // Health is the typed data model for the health entity.
 type Health struct {
-	ActivityLevel *string `json:"activityLevel,omitempty"`
-	CatId *string `json:"catId,omitempty"`
-	HeartRate *int `json:"heartRate,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Temperature *float64 `json:"temperature,omitempty"`
-	Timestamp *string `json:"timestamp,omitempty"`
-	Weight *float64 `json:"weight,omitempty"`
 }
 
 // HealthLoadMatch is the typed request payload for Health.LoadTyped.
@@ -73,13 +56,6 @@ type HealthCreateData struct {
 
 // Interaction is the typed data model for the interaction entity.
 type Interaction struct {
-	CatId string `json:"catId"`
-	Duration *int `json:"duration,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Notes *string `json:"notes,omitempty"`
-	Quality *string `json:"quality,omitempty"`
-	Timestamp *string `json:"timestamp,omitempty"`
-	Type string `json:"type"`
 }
 
 // InteractionListMatch is the typed request payload for Interaction.ListTyped.
@@ -102,13 +78,6 @@ type InteractionCreateData struct {
 
 // Training is the typed data model for the training entity.
 type Training struct {
-	CatId string `json:"catId"`
-	Duration int `json:"duration"`
-	Id *string `json:"id,omitempty"`
-	Notes *string `json:"notes,omitempty"`
-	Success *bool `json:"success,omitempty"`
-	Timestamp *string `json:"timestamp,omitempty"`
-	Type string `json:"type"`
 }
 
 // TrainingListMatch is the typed request payload for Training.ListTyped.

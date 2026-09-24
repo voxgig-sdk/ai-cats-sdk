@@ -94,31 +94,36 @@ func MakeConfig() map[string]any {
 			"cat": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"format": "date-time",
 						"name": "createdAt",
-						"short": "Timestamp when the image was generated",
+						"title": "Created At",
 						"type": "`$STRING`",
+						"short": "Timestamp when the image was generated",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "height",
-						"short": "Height of the image in pixels",
+						"title": "Height",
 						"type": "`$INTEGER`",
+						"short": "Height of the image in pixels",
 					},
 					map[string]any{
 						"name": "id",
-						"short": "Unique identifier for the cat image",
+						"title": "Id",
 						"type": "`$STRING`",
+						"short": "Unique identifier for the cat image",
 					},
 					map[string]any{
-						"format": "uri",
 						"name": "url",
-						"short": "URL of the AI-generated cat image",
+						"title": "Url",
 						"type": "`$STRING`",
+						"short": "URL of the AI-generated cat image",
+						"format": "uri",
 					},
 					map[string]any{
 						"name": "width",
-						"short": "Width of the image in pixels",
+						"title": "Width",
 						"type": "`$INTEGER`",
+						"short": "Width of the image in pixels",
 					},
 				},
 				"id": map[string]any{
@@ -132,17 +137,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/cats/{id}",
@@ -154,18 +148,30 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
-									},
+								"parts": []any{
+									"cats",
+									"{id}",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"cats",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -178,31 +184,36 @@ func MakeConfig() map[string]any {
 			"cat_image": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"format": "date-time",
 						"name": "createdAt",
-						"short": "Timestamp when the image was generated",
+						"title": "Created At",
 						"type": "`$STRING`",
+						"short": "Timestamp when the image was generated",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "height",
-						"short": "Height of the image in pixels",
+						"title": "Height",
 						"type": "`$INTEGER`",
+						"short": "Height of the image in pixels",
 					},
 					map[string]any{
 						"name": "id",
-						"short": "Unique identifier for the cat image",
+						"title": "Id",
 						"type": "`$STRING`",
+						"short": "Unique identifier for the cat image",
 					},
 					map[string]any{
-						"format": "uri",
 						"name": "url",
-						"short": "URL of the AI-generated cat image",
+						"title": "Url",
 						"type": "`$STRING`",
+						"short": "URL of the AI-generated cat image",
+						"format": "uri",
 					},
 					map[string]any{
 						"name": "width",
-						"short": "Width of the image in pixels",
+						"title": "Width",
 						"type": "`$INTEGER`",
+						"short": "Width of the image in pixels",
 					},
 				},
 				"id": map[string]any{
@@ -216,7 +227,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/cats/random",
@@ -228,15 +238,17 @@ func MakeConfig() map[string]any {
 										"lit": "random",
 									},
 								},
-								"select": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"cats",
 									"random",
 								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -249,11 +261,14 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "activityLevel",
-						"short": "Activity level of the cat",
+						"title": "Activity Level",
 						"type": "`$STRING`",
+						"short": "Activity level of the cat",
 					},
 					map[string]any{
 						"name": "catId",
+						"title": "Cat Id",
+						"type": "`$STRING`",
 						"op": map[string]any{
 							"create": map[string]any{
 								"req": true,
@@ -261,33 +276,37 @@ func MakeConfig() map[string]any {
 							},
 						},
 						"short": "ID of the cat",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "heartRate",
-						"short": "Heart rate in beats per minute",
+						"title": "Heart Rate",
 						"type": "`$INTEGER`",
+						"short": "Heart rate in beats per minute",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
+						"type": "`$STRING`",
 						"short": "Unique identifier for the health record",
-						"type": "`$STRING`",
 					},
 					map[string]any{
-						"format": "float",
 						"name": "temperature",
-						"short": "Body temperature in Celsius",
+						"title": "Temperature",
 						"type": "`$NUMBER`",
-					},
-					map[string]any{
-						"format": "date-time",
-						"name": "timestamp",
-						"short": "When the health data was recorded",
-						"type": "`$STRING`",
-					},
-					map[string]any{
+						"short": "Body temperature in Celsius",
 						"format": "float",
+					},
+					map[string]any{
+						"name": "timestamp",
+						"title": "Timestamp",
+						"type": "`$STRING`",
+						"short": "When the health data was recorded",
+						"format": "date-time",
+					},
+					map[string]any{
 						"name": "weight",
+						"title": "Weight",
+						"type": "`$NUMBER`",
 						"op": map[string]any{
 							"create": map[string]any{
 								"req": true,
@@ -295,7 +314,7 @@ func MakeConfig() map[string]any {
 							},
 						},
 						"short": "Weight of the cat in kg",
-						"type": "`$NUMBER`",
+						"format": "float",
 					},
 				},
 				"id": map[string]any{
@@ -309,7 +328,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/cats/health",
@@ -321,15 +339,17 @@ func MakeConfig() map[string]any {
 										"lit": "health",
 									},
 								},
-								"select": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"cats",
 									"health",
 								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -338,16 +358,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "cat_id",
-											"orig": "cat_id",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/cats/health",
@@ -359,18 +369,29 @@ func MakeConfig() map[string]any {
 										"lit": "health",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"cat_id",
-									},
+								"parts": []any{
+									"cats",
+									"health",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"cats",
-									"health",
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "cat_id",
+											"orig": "cat_id",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"cat_id",
+									},
 								},
 							},
 						},
@@ -384,51 +405,58 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "catId",
+						"title": "Cat Id",
+						"type": "`$STRING`",
+						"req": true,
 						"op": map[string]any{
 							"list": map[string]any{
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
 						"short": "ID of the cat",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "duration",
-						"short": "Duration of the interaction in minutes",
+						"title": "Duration",
 						"type": "`$INTEGER`",
+						"short": "Duration of the interaction in minutes",
 					},
 					map[string]any{
 						"name": "id",
-						"short": "Unique identifier for the interaction",
+						"title": "Id",
 						"type": "`$STRING`",
+						"short": "Unique identifier for the interaction",
 					},
 					map[string]any{
 						"name": "notes",
-						"short": "Additional notes about the interaction",
+						"title": "Notes",
 						"type": "`$STRING`",
+						"short": "Additional notes about the interaction",
 					},
 					map[string]any{
 						"name": "quality",
-						"short": "Quality rating of the interaction",
+						"title": "Quality",
 						"type": "`$STRING`",
+						"short": "Quality rating of the interaction",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "timestamp",
-						"short": "When the interaction occurred",
+						"title": "Timestamp",
 						"type": "`$STRING`",
+						"short": "When the interaction occurred",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "type",
+						"title": "Type",
+						"type": "`$STRING`",
+						"req": true,
 						"op": map[string]any{
 							"list": map[string]any{
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
 						"short": "Type of interaction",
-						"type": "`$STRING`",
 					},
 				},
 				"id": map[string]any{
@@ -442,7 +470,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/interactions",
@@ -451,14 +478,16 @@ func MakeConfig() map[string]any {
 										"lit": "interactions",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"interactions",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"interactions",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -467,28 +496,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "cat_id",
-											"orig": "cat_id",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "end_date",
-											"orig": "end_date",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "start_date",
-											"orig": "start_date",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/interactions",
@@ -497,19 +504,42 @@ func MakeConfig() map[string]any {
 										"lit": "interactions",
 									},
 								},
+								"parts": []any{
+									"interactions",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "cat_id",
+											"orig": "cat_id",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "end_date",
+											"orig": "end_date",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "start_date",
+											"orig": "start_date",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"cat_id",
 										"end_date",
 										"start_date",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"interactions",
 								},
 							},
 						},
@@ -523,57 +553,64 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "catId",
+						"title": "Cat Id",
+						"type": "`$STRING`",
+						"req": true,
 						"op": map[string]any{
 							"list": map[string]any{
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
 						"short": "ID of the cat",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "duration",
+						"title": "Duration",
+						"type": "`$INTEGER`",
+						"req": true,
 						"op": map[string]any{
 							"list": map[string]any{
 								"type": "`$INTEGER`",
 							},
 						},
-						"req": true,
 						"short": "Duration of the session in minutes",
-						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "id",
-						"short": "Unique identifier for the training session",
+						"title": "Id",
 						"type": "`$STRING`",
+						"short": "Unique identifier for the training session",
 					},
 					map[string]any{
 						"name": "notes",
-						"short": "Additional notes about the training session",
+						"title": "Notes",
 						"type": "`$STRING`",
+						"short": "Additional notes about the training session",
 					},
 					map[string]any{
 						"name": "success",
-						"short": "Whether the training was successful",
+						"title": "Success",
 						"type": "`$BOOLEAN`",
+						"short": "Whether the training was successful",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "timestamp",
-						"short": "When the training session occurred",
+						"title": "Timestamp",
 						"type": "`$STRING`",
+						"short": "When the training session occurred",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "type",
+						"title": "Type",
+						"type": "`$STRING`",
+						"req": true,
 						"op": map[string]any{
 							"list": map[string]any{
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
 						"short": "Type of training session",
-						"type": "`$STRING`",
 					},
 				},
 				"id": map[string]any{
@@ -587,7 +624,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/training",
@@ -596,14 +632,16 @@ func MakeConfig() map[string]any {
 										"lit": "training",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"training",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"training",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -612,23 +650,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "cat_id",
-											"orig": "cat_id",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": 10,
-											"kind": "query",
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/training",
@@ -637,18 +658,36 @@ func MakeConfig() map[string]any {
 										"lit": "training",
 									},
 								},
+								"parts": []any{
+									"training",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "cat_id",
+											"orig": "cat_id",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 10,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"cat_id",
 										"limit",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"training",
 								},
 							},
 						},

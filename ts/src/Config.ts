@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -150,31 +143,36 @@ class Config {
     "cat": {
       "fields": [
         {
-          "format": "date-time",
           "name": "createdAt",
+          "title": "Created At",
+          "type": "`$STRING`",
           "short": "Timestamp when the image was generated",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "height",
-          "short": "Height of the image in pixels",
-          "type": "`$INTEGER`"
+          "title": "Height",
+          "type": "`$INTEGER`",
+          "short": "Height of the image in pixels"
         },
         {
           "name": "id",
-          "short": "Unique identifier for the cat image",
-          "type": "`$STRING`"
+          "title": "Id",
+          "type": "`$STRING`",
+          "short": "Unique identifier for the cat image"
         },
         {
-          "format": "uri",
           "name": "url",
+          "title": "Url",
+          "type": "`$STRING`",
           "short": "URL of the AI-generated cat image",
-          "type": "`$STRING`"
+          "format": "uri"
         },
         {
           "name": "width",
-          "short": "Width of the image in pixels",
-          "type": "`$INTEGER`"
+          "title": "Width",
+          "type": "`$INTEGER`",
+          "short": "Width of the image in pixels"
         }
       ],
       "id": {
@@ -188,17 +186,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/cats/{id}",
@@ -210,19 +197,31 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
-              },
+              "parts": [
+                "cats",
+                "{id}"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "cats",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         }
@@ -234,31 +233,36 @@ class Config {
     "cat_image": {
       "fields": [
         {
-          "format": "date-time",
           "name": "createdAt",
+          "title": "Created At",
+          "type": "`$STRING`",
           "short": "Timestamp when the image was generated",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "height",
-          "short": "Height of the image in pixels",
-          "type": "`$INTEGER`"
+          "title": "Height",
+          "type": "`$INTEGER`",
+          "short": "Height of the image in pixels"
         },
         {
           "name": "id",
-          "short": "Unique identifier for the cat image",
-          "type": "`$STRING`"
+          "title": "Id",
+          "type": "`$STRING`",
+          "short": "Unique identifier for the cat image"
         },
         {
-          "format": "uri",
           "name": "url",
+          "title": "Url",
+          "type": "`$STRING`",
           "short": "URL of the AI-generated cat image",
-          "type": "`$STRING`"
+          "format": "uri"
         },
         {
           "name": "width",
-          "short": "Width of the image in pixels",
-          "type": "`$INTEGER`"
+          "title": "Width",
+          "type": "`$INTEGER`",
+          "short": "Width of the image in pixels"
         }
       ],
       "id": {
@@ -272,7 +276,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/cats/random",
@@ -284,15 +287,17 @@ class Config {
                   "lit": "random"
                 }
               ],
-              "select": {},
+              "parts": [
+                "cats",
+                "random"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "cats",
-                "random"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         }
@@ -305,45 +310,52 @@ class Config {
       "fields": [
         {
           "name": "activityLevel",
-          "short": "Activity level of the cat",
-          "type": "`$STRING`"
+          "title": "Activity Level",
+          "type": "`$STRING`",
+          "short": "Activity level of the cat"
         },
         {
           "name": "catId",
+          "title": "Cat Id",
+          "type": "`$STRING`",
           "op": {
             "create": {
               "req": true,
               "type": "`$STRING`"
             }
           },
-          "short": "ID of the cat",
-          "type": "`$STRING`"
+          "short": "ID of the cat"
         },
         {
           "name": "heartRate",
-          "short": "Heart rate in beats per minute",
-          "type": "`$INTEGER`"
+          "title": "Heart Rate",
+          "type": "`$INTEGER`",
+          "short": "Heart rate in beats per minute"
         },
         {
           "name": "id",
-          "short": "Unique identifier for the health record",
-          "type": "`$STRING`"
+          "title": "Id",
+          "type": "`$STRING`",
+          "short": "Unique identifier for the health record"
         },
         {
-          "format": "float",
           "name": "temperature",
+          "title": "Temperature",
+          "type": "`$NUMBER`",
           "short": "Body temperature in Celsius",
-          "type": "`$NUMBER`"
+          "format": "float"
         },
         {
-          "format": "date-time",
           "name": "timestamp",
+          "title": "Timestamp",
+          "type": "`$STRING`",
           "short": "When the health data was recorded",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
-          "format": "float",
           "name": "weight",
+          "title": "Weight",
+          "type": "`$NUMBER`",
           "op": {
             "create": {
               "req": true,
@@ -351,7 +363,7 @@ class Config {
             }
           },
           "short": "Weight of the cat in kg",
-          "type": "`$NUMBER`"
+          "format": "float"
         }
       ],
       "id": {
@@ -365,7 +377,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/cats/health",
@@ -377,15 +388,17 @@ class Config {
                   "lit": "health"
                 }
               ],
-              "select": {},
+              "parts": [
+                "cats",
+                "health"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "cats",
-                "health"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         },
@@ -394,16 +407,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "cat_id",
-                    "orig": "cat_id",
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/cats/health",
@@ -415,19 +418,30 @@ class Config {
                   "lit": "health"
                 }
               ],
-              "select": {
-                "exist": [
-                  "cat_id"
-                ]
-              },
+              "parts": [
+                "cats",
+                "health"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "cats",
-                "health"
-              ]
+              "args": {
+                "query": [
+                  {
+                    "name": "cat_id",
+                    "orig": "cat_id",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "cat_id"
+                ]
+              }
             }
           ]
         }
@@ -440,51 +454,58 @@ class Config {
       "fields": [
         {
           "name": "catId",
+          "title": "Cat Id",
+          "type": "`$STRING`",
+          "req": true,
           "op": {
             "list": {
               "type": "`$STRING`"
             }
           },
-          "req": true,
-          "short": "ID of the cat",
-          "type": "`$STRING`"
+          "short": "ID of the cat"
         },
         {
           "name": "duration",
-          "short": "Duration of the interaction in minutes",
-          "type": "`$INTEGER`"
+          "title": "Duration",
+          "type": "`$INTEGER`",
+          "short": "Duration of the interaction in minutes"
         },
         {
           "name": "id",
-          "short": "Unique identifier for the interaction",
-          "type": "`$STRING`"
+          "title": "Id",
+          "type": "`$STRING`",
+          "short": "Unique identifier for the interaction"
         },
         {
           "name": "notes",
-          "short": "Additional notes about the interaction",
-          "type": "`$STRING`"
+          "title": "Notes",
+          "type": "`$STRING`",
+          "short": "Additional notes about the interaction"
         },
         {
           "name": "quality",
-          "short": "Quality rating of the interaction",
-          "type": "`$STRING`"
+          "title": "Quality",
+          "type": "`$STRING`",
+          "short": "Quality rating of the interaction"
         },
         {
-          "format": "date-time",
           "name": "timestamp",
+          "title": "Timestamp",
+          "type": "`$STRING`",
           "short": "When the interaction occurred",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "type",
+          "title": "Type",
+          "type": "`$STRING`",
+          "req": true,
           "op": {
             "list": {
               "type": "`$STRING`"
             }
           },
-          "req": true,
-          "short": "Type of interaction",
-          "type": "`$STRING`"
+          "short": "Type of interaction"
         }
       ],
       "id": {
@@ -498,7 +519,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/interactions",
@@ -507,14 +527,16 @@ class Config {
                   "lit": "interactions"
                 }
               ],
-              "select": {},
+              "parts": [
+                "interactions"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "interactions"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         },
@@ -523,28 +545,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "cat_id",
-                    "orig": "cat_id",
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "end_date",
-                    "orig": "end_date",
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "start_date",
-                    "orig": "start_date",
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/interactions",
@@ -553,20 +553,43 @@ class Config {
                   "lit": "interactions"
                 }
               ],
+              "parts": [
+                "interactions"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "cat_id",
+                    "orig": "cat_id",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "end_date",
+                    "orig": "end_date",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "start_date",
+                    "orig": "start_date",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "cat_id",
                   "end_date",
                   "start_date"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "interactions"
-              ]
+              }
             }
           ]
         }
@@ -579,57 +602,64 @@ class Config {
       "fields": [
         {
           "name": "catId",
+          "title": "Cat Id",
+          "type": "`$STRING`",
+          "req": true,
           "op": {
             "list": {
               "type": "`$STRING`"
             }
           },
-          "req": true,
-          "short": "ID of the cat",
-          "type": "`$STRING`"
+          "short": "ID of the cat"
         },
         {
           "name": "duration",
+          "title": "Duration",
+          "type": "`$INTEGER`",
+          "req": true,
           "op": {
             "list": {
               "type": "`$INTEGER`"
             }
           },
-          "req": true,
-          "short": "Duration of the session in minutes",
-          "type": "`$INTEGER`"
+          "short": "Duration of the session in minutes"
         },
         {
           "name": "id",
-          "short": "Unique identifier for the training session",
-          "type": "`$STRING`"
+          "title": "Id",
+          "type": "`$STRING`",
+          "short": "Unique identifier for the training session"
         },
         {
           "name": "notes",
-          "short": "Additional notes about the training session",
-          "type": "`$STRING`"
+          "title": "Notes",
+          "type": "`$STRING`",
+          "short": "Additional notes about the training session"
         },
         {
           "name": "success",
-          "short": "Whether the training was successful",
-          "type": "`$BOOLEAN`"
+          "title": "Success",
+          "type": "`$BOOLEAN`",
+          "short": "Whether the training was successful"
         },
         {
-          "format": "date-time",
           "name": "timestamp",
+          "title": "Timestamp",
+          "type": "`$STRING`",
           "short": "When the training session occurred",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "type",
+          "title": "Type",
+          "type": "`$STRING`",
+          "req": true,
           "op": {
             "list": {
               "type": "`$STRING`"
             }
           },
-          "req": true,
-          "short": "Type of training session",
-          "type": "`$STRING`"
+          "short": "Type of training session"
         }
       ],
       "id": {
@@ -643,7 +673,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/training",
@@ -652,14 +681,16 @@ class Config {
                   "lit": "training"
                 }
               ],
-              "select": {},
+              "parts": [
+                "training"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "training"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         },
@@ -668,23 +699,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "cat_id",
-                    "orig": "cat_id",
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "example": 10,
-                    "kind": "query",
-                    "name": "limit",
-                    "orig": "limit",
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/training",
@@ -693,19 +707,37 @@ class Config {
                   "lit": "training"
                 }
               ],
+              "parts": [
+                "training"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "cat_id",
+                    "orig": "cat_id",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "limit",
+                    "orig": "limit",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "example": 10
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "cat_id",
                   "limit"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "training"
-              ]
+              }
             }
           ]
         }

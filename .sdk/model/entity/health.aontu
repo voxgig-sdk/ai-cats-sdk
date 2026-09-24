@@ -1,0 +1,153 @@
+# Entity: health
+
+main: kit: entity: health: {
+
+  alias: field: {}
+
+  fields: {
+    activityLevel: {
+      h: "Activity Level"
+      n: "activityLevel"
+      r: false
+      sh: "Activity level of the cat"
+      t: "`$STRING`"
+    }
+    catId: {
+      h: "Cat Id"
+      n: "catId"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "ID of the cat"
+      t: "`$STRING`"
+    }
+    heartRate: {
+      h: "Heart Rate"
+      n: "heartRate"
+      r: false
+      sh: "Heart rate in beats per minute"
+      t: "`$INTEGER`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Unique identifier for the health record"
+      t: "`$STRING`"
+    }
+    temperature: {
+      fo: "float"
+      h: "Temperature"
+      n: "temperature"
+      r: false
+      sh: "Body temperature in Celsius"
+      t: "`$NUMBER`"
+    }
+    timestamp: {
+      fo: "date-time"
+      h: "Timestamp"
+      n: "timestamp"
+      r: false
+      sh: "When the health data was recorded"
+      t: "`$STRING`"
+    }
+    weight: {
+      fo: "float"
+      h: "Weight"
+      n: "weight"
+      op: {
+        create: {
+          req: true
+          type: "`$NUMBER`"
+        }
+      }
+      r: false
+      sh: "Weight of the cat in kg"
+      t: "`$NUMBER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "health"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /cats/health"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/cats/health"
+          s: [
+            {
+              lit: "cats"
+            }
+            {
+              lit: "health"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /cats/health"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "cat_id"
+                or: "cat_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/cats/health"
+          q: {
+            exist: [
+              "cat_id"
+            ]
+          }
+          s: [
+            {
+              lit: "cats"
+            }
+            {
+              lit: "health"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

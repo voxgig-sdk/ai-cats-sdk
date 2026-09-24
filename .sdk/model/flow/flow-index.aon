@@ -1,7 +1,0 @@
-# Flows
-
-@"./BasicCatFlow.aon"
-@"./BasicCatImageFlow.aon"
-@"./BasicHealthFlow.aon"
-@"./BasicInteractionFlow.aon"
-@"./BasicTrainingFlow.aon"

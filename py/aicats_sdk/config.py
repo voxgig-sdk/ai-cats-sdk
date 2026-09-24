@@ -119,31 +119,36 @@ def make_config():
       "cat": {
         "fields": [
           {
-            "format": "date-time",
             "name": "createdAt",
-            "short": "Timestamp when the image was generated",
+            "title": "Created At",
             "type": "`$STRING`",
+            "short": "Timestamp when the image was generated",
+            "format": "date-time",
           },
           {
             "name": "height",
-            "short": "Height of the image in pixels",
+            "title": "Height",
             "type": "`$INTEGER`",
+            "short": "Height of the image in pixels",
           },
           {
             "name": "id",
-            "short": "Unique identifier for the cat image",
+            "title": "Id",
             "type": "`$STRING`",
+            "short": "Unique identifier for the cat image",
           },
           {
-            "format": "uri",
             "name": "url",
-            "short": "URL of the AI-generated cat image",
+            "title": "Url",
             "type": "`$STRING`",
+            "short": "URL of the AI-generated cat image",
+            "format": "uri",
           },
           {
             "name": "width",
-            "short": "Width of the image in pixels",
+            "title": "Width",
             "type": "`$INTEGER`",
+            "short": "Width of the image in pixels",
           },
         ],
         "id": {
@@ -157,17 +162,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/cats/{id}",
@@ -179,19 +173,31 @@ def make_config():
                     "var": "id",
                   },
                 ],
+                "parts": [
+                  "cats",
+                  "{id}",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "id",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "cats",
-                  "{id}",
-                ],
               },
             ],
           },
@@ -203,31 +209,36 @@ def make_config():
       "cat_image": {
         "fields": [
           {
-            "format": "date-time",
             "name": "createdAt",
-            "short": "Timestamp when the image was generated",
+            "title": "Created At",
             "type": "`$STRING`",
+            "short": "Timestamp when the image was generated",
+            "format": "date-time",
           },
           {
             "name": "height",
-            "short": "Height of the image in pixels",
+            "title": "Height",
             "type": "`$INTEGER`",
+            "short": "Height of the image in pixels",
           },
           {
             "name": "id",
-            "short": "Unique identifier for the cat image",
+            "title": "Id",
             "type": "`$STRING`",
+            "short": "Unique identifier for the cat image",
           },
           {
-            "format": "uri",
             "name": "url",
-            "short": "URL of the AI-generated cat image",
+            "title": "Url",
             "type": "`$STRING`",
+            "short": "URL of the AI-generated cat image",
+            "format": "uri",
           },
           {
             "name": "width",
-            "short": "Width of the image in pixels",
+            "title": "Width",
             "type": "`$INTEGER`",
+            "short": "Width of the image in pixels",
           },
         ],
         "id": {
@@ -241,7 +252,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/cats/random",
@@ -253,15 +263,17 @@ def make_config():
                     "lit": "random",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "cats",
                   "random",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -274,11 +286,14 @@ def make_config():
         "fields": [
           {
             "name": "activityLevel",
-            "short": "Activity level of the cat",
+            "title": "Activity Level",
             "type": "`$STRING`",
+            "short": "Activity level of the cat",
           },
           {
             "name": "catId",
+            "title": "Cat Id",
+            "type": "`$STRING`",
             "op": {
               "create": {
                 "req": True,
@@ -286,33 +301,37 @@ def make_config():
               },
             },
             "short": "ID of the cat",
-            "type": "`$STRING`",
           },
           {
             "name": "heartRate",
-            "short": "Heart rate in beats per minute",
+            "title": "Heart Rate",
             "type": "`$INTEGER`",
+            "short": "Heart rate in beats per minute",
           },
           {
             "name": "id",
+            "title": "Id",
+            "type": "`$STRING`",
             "short": "Unique identifier for the health record",
-            "type": "`$STRING`",
           },
           {
-            "format": "float",
             "name": "temperature",
-            "short": "Body temperature in Celsius",
+            "title": "Temperature",
             "type": "`$NUMBER`",
-          },
-          {
-            "format": "date-time",
-            "name": "timestamp",
-            "short": "When the health data was recorded",
-            "type": "`$STRING`",
-          },
-          {
+            "short": "Body temperature in Celsius",
             "format": "float",
+          },
+          {
+            "name": "timestamp",
+            "title": "Timestamp",
+            "type": "`$STRING`",
+            "short": "When the health data was recorded",
+            "format": "date-time",
+          },
+          {
             "name": "weight",
+            "title": "Weight",
+            "type": "`$NUMBER`",
             "op": {
               "create": {
                 "req": True,
@@ -320,7 +339,7 @@ def make_config():
               },
             },
             "short": "Weight of the cat in kg",
-            "type": "`$NUMBER`",
+            "format": "float",
           },
         ],
         "id": {
@@ -334,7 +353,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/cats/health",
@@ -346,15 +364,17 @@ def make_config():
                     "lit": "health",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "cats",
                   "health",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -363,16 +383,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "cat_id",
-                      "orig": "cat_id",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/cats/health",
@@ -384,19 +394,30 @@ def make_config():
                     "lit": "health",
                   },
                 ],
+                "parts": [
+                  "cats",
+                  "health",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "cat_id",
+                      "orig": "cat_id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "cat_id",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "cats",
-                  "health",
-                ],
               },
             ],
           },
@@ -409,51 +430,58 @@ def make_config():
         "fields": [
           {
             "name": "catId",
+            "title": "Cat Id",
+            "type": "`$STRING`",
+            "req": True,
             "op": {
               "list": {
                 "type": "`$STRING`",
               },
             },
-            "req": True,
             "short": "ID of the cat",
-            "type": "`$STRING`",
           },
           {
             "name": "duration",
-            "short": "Duration of the interaction in minutes",
+            "title": "Duration",
             "type": "`$INTEGER`",
+            "short": "Duration of the interaction in minutes",
           },
           {
             "name": "id",
-            "short": "Unique identifier for the interaction",
+            "title": "Id",
             "type": "`$STRING`",
+            "short": "Unique identifier for the interaction",
           },
           {
             "name": "notes",
-            "short": "Additional notes about the interaction",
+            "title": "Notes",
             "type": "`$STRING`",
+            "short": "Additional notes about the interaction",
           },
           {
             "name": "quality",
-            "short": "Quality rating of the interaction",
+            "title": "Quality",
             "type": "`$STRING`",
+            "short": "Quality rating of the interaction",
           },
           {
-            "format": "date-time",
             "name": "timestamp",
-            "short": "When the interaction occurred",
+            "title": "Timestamp",
             "type": "`$STRING`",
+            "short": "When the interaction occurred",
+            "format": "date-time",
           },
           {
             "name": "type",
+            "title": "Type",
+            "type": "`$STRING`",
+            "req": True,
             "op": {
               "list": {
                 "type": "`$STRING`",
               },
             },
-            "req": True,
             "short": "Type of interaction",
-            "type": "`$STRING`",
           },
         ],
         "id": {
@@ -467,7 +495,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/interactions",
@@ -476,14 +503,16 @@ def make_config():
                     "lit": "interactions",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "interactions",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "interactions",
-                ],
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -492,28 +521,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "cat_id",
-                      "orig": "cat_id",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "end_date",
-                      "orig": "end_date",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "start_date",
-                      "orig": "start_date",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/interactions",
@@ -522,6 +529,36 @@ def make_config():
                     "lit": "interactions",
                   },
                 ],
+                "parts": [
+                  "interactions",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "cat_id",
+                      "orig": "cat_id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                    {
+                      "name": "end_date",
+                      "orig": "end_date",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                    {
+                      "name": "start_date",
+                      "orig": "start_date",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "cat_id",
@@ -529,13 +566,6 @@ def make_config():
                     "start_date",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "interactions",
-                ],
               },
             ],
           },
@@ -548,57 +578,64 @@ def make_config():
         "fields": [
           {
             "name": "catId",
+            "title": "Cat Id",
+            "type": "`$STRING`",
+            "req": True,
             "op": {
               "list": {
                 "type": "`$STRING`",
               },
             },
-            "req": True,
             "short": "ID of the cat",
-            "type": "`$STRING`",
           },
           {
             "name": "duration",
+            "title": "Duration",
+            "type": "`$INTEGER`",
+            "req": True,
             "op": {
               "list": {
                 "type": "`$INTEGER`",
               },
             },
-            "req": True,
             "short": "Duration of the session in minutes",
-            "type": "`$INTEGER`",
           },
           {
             "name": "id",
-            "short": "Unique identifier for the training session",
+            "title": "Id",
             "type": "`$STRING`",
+            "short": "Unique identifier for the training session",
           },
           {
             "name": "notes",
-            "short": "Additional notes about the training session",
+            "title": "Notes",
             "type": "`$STRING`",
+            "short": "Additional notes about the training session",
           },
           {
             "name": "success",
-            "short": "Whether the training was successful",
+            "title": "Success",
             "type": "`$BOOLEAN`",
+            "short": "Whether the training was successful",
           },
           {
-            "format": "date-time",
             "name": "timestamp",
-            "short": "When the training session occurred",
+            "title": "Timestamp",
             "type": "`$STRING`",
+            "short": "When the training session occurred",
+            "format": "date-time",
           },
           {
             "name": "type",
+            "title": "Type",
+            "type": "`$STRING`",
+            "req": True,
             "op": {
               "list": {
                 "type": "`$STRING`",
               },
             },
-            "req": True,
             "short": "Type of training session",
-            "type": "`$STRING`",
           },
         ],
         "id": {
@@ -612,7 +649,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/training",
@@ -621,14 +657,16 @@ def make_config():
                     "lit": "training",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "training",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "training",
-                ],
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -637,23 +675,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "cat_id",
-                      "orig": "cat_id",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": 10,
-                      "kind": "query",
-                      "name": "limit",
-                      "orig": "limit",
-                      "type": "`$INTEGER`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/training",
@@ -662,19 +683,37 @@ def make_config():
                     "lit": "training",
                   },
                 ],
+                "parts": [
+                  "training",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "cat_id",
+                      "orig": "cat_id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                    {
+                      "name": "limit",
+                      "orig": "limit",
+                      "type": "`$INTEGER`",
+                      "kind": "query",
+                      "example": 10,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "cat_id",
                     "limit",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "training",
-                ],
               },
             ],
           },

@@ -1,0 +1,32 @@
+# BasicCatFlow
+
+main: kit: flow: BasicCatFlow:
+{
+  entity: "cat",
+  kind: "basic",
+  name: "BasicCatFlow",
+  step: [
+    {
+      i: {
+        ref: "cat_ref01",
+        srcdatavar: "cat_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "cat01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-cat_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCatFlow"
+}
